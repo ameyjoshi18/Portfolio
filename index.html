@@ -497,7 +497,7 @@ html.cur-on .btn{transition:border-color .3s,background .3s,box-shadow .3s}
     <h2 class="reveal">Let&rsquo;s make your systems talk.</h2>
     <a class="btn solid reveal" href="mailto:ameyjoshi1881@gmail.com">ameyjoshi1881@gmail.com</a>
     <!-- EDIT: replace linkedin.com/in/ameyjoshi with your real LinkedIn URL -->
-    <p class="contact-links mono reveal"><a href="https://www.linkedin.com/in/ameyjoshi180696" target="_blank" rel="noopener">LINKEDIN ↗</a></p>
+    <p class="contact-links mono reveal"><a href="https://www.linkedin.com/in/ameyjoshi180696/" target="_blank" rel="noopener">LINKEDIN ↗</a></p>
   </div>
   <p class="fine mono">Navi Mumbai, India · ameyjoshi.in · © 2026</p>
 </section>
@@ -1117,6 +1117,29 @@ html.cur-on .btn{transition:border-color .3s,background .3s,box-shadow .3s}
        .to(docEl, { '--acc': C.indigo, ease: 'none', duration: 0.14 }, 0.46)
        .to(field, { alpha: 0, ease: 'none', duration: 0.3 }, 0.55)
        .to('#glow', { opacity: 0, ease: 'none', duration: 0.2 }, 0.40);
+
+    /* watchdog: fast scrolls can interrupt the scrub mid-reversal and
+       strand the theme. Whenever the resolve zone is fully exited in
+       either direction, force the exact end-state. */
+    ScrollTrigger.create({
+      trigger: '#resolve', start: 'top bottom', end: 'bottom top',
+      onLeaveBack: function(){
+        rtl.progress(0);
+        gsap.set(docEl, { '--bg': '#141B38', '--ink': C.white, '--acc': C.mint });
+        gsap.set('.wA', { opacity: 1, y: 0 });
+        gsap.set('.wB', { opacity: 0, y: 34 });
+        field.alpha = 1;
+        gsap.set('#glow', { opacity: 1 });
+      },
+      onLeave: function(){
+        rtl.progress(1);
+        gsap.set(docEl, { '--bg': C.white, '--ink': C.black, '--acc': C.indigo });
+        gsap.set('.wA', { opacity: 0 });
+        gsap.set('.wB', { opacity: 1, y: 0 });
+        field.alpha = 0;
+        gsap.set('#glow', { opacity: 0 });
+      }
+    });
   } else {
     ScrollTrigger.create({
       trigger: '#resolve', start: 'top 40%',
