@@ -217,7 +217,6 @@ h1{font-weight:700;font-size:clamp(58px,13vw,158px);line-height:.94;margin:18px 
 #kName:focus{border-color:color-mix(in srgb,var(--acc) 60%,transparent)}
 #kName::placeholder{color:var(--dim)}
 .k-send{width:100%;justify-content:center}
-.kiosk.sent .k-amts,.kiosk.sent #kName,.kiosk.sent .k-send{display:none}
 .k-done{display:none;font-size:10px;letter-spacing:.22em;color:var(--acc);margin:4px 0 0}
 .kiosk.sent .k-done{display:block}
 .k-skip{margin:14px 0 0;font-size:10px;letter-spacing:.18em}
@@ -264,29 +263,6 @@ h1{font-weight:700;font-size:clamp(58px,13vw,158px);line-height:.94;margin:18px 
 .r-brand{text-align:center;font-size:10.5px;letter-spacing:.24em;color:var(--ink);margin:12px 0 0}
 #contact h2{max-width:24ch}
 #contact .eyebrow{margin-bottom:16px}
-
-/* ---------- illustrated scenes ---------- */
-#hero .wrap{position:relative;z-index:2}
-.hero-art{position:absolute;top:0;right:0;height:100%;width:min(46vw,620px);z-index:0;display:none;pointer-events:none}
-.hero-art img{width:100%;height:100%;object-fit:cover;object-position:center top;-webkit-mask-image:linear-gradient(to left,#000 55%,transparent 97%);mask-image:linear-gradient(to left,#000 55%,transparent 97%)}
-.hero-art::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,var(--bg) 0,transparent 24%)}
-@media(min-width:900px){.hero-art{display:block}}
-.arrival-art{position:absolute;right:clamp(16px,6vw,90px);bottom:8svh;width:min(300px,28vw);border-radius:18px;overflow:hidden;opacity:0;transform:translateY(30px) scale(1.04);box-shadow:0 30px 80px -24px rgba(4,8,18,.6);display:none;pointer-events:none}
-.arrival-art img{width:100%;display:block}
-@media(min-width:960px){.arrival-art{display:block}.dawn{left:40%;width:min(430px,44vw)}}
-.rm .arrival-art{opacity:1;transform:none}
-.home-art{width:min(560px,92vw);margin:34px auto 0;border-radius:18px;overflow:hidden;border:1px solid var(--line)}
-.home-art img{width:100%;display:block}
-@media(max-width:899px){
-  .hero-art{display:block;width:100%;opacity:.5}
-  .hero-art img{object-position:68% top}
-}
-@media(max-width:959px){
-  .arrival-art{display:block;position:static;right:auto;bottom:auto;width:min(240px,64vw);margin:26px auto 0;box-shadow:0 20px 50px -18px rgba(4,8,18,.6)}
-}
-@media(max-width:959px) and (max-height:700px){
-  .arrival-art{display:none}
-}
 
 /* ---------- custom cursor (desktop only, JS adds .cur-on) ---------- */
 #cur,#curRing{position:fixed;top:0;left:0;border-radius:50%;pointer-events:none;z-index:92;opacity:0}
@@ -384,7 +360,6 @@ html.cur-on .btn{transition:border-color .3s,background .3s,box-shadow .3s}
 
 <!-- ===== hero: the system in chaos ===== -->
 <section id="hero">
-  <div class="hero-art" aria-hidden="true"><img src="s1-handoff.jpg" alt="" onerror="this.parentNode.style.display='none'"></div>
   <div class="wrap">
     <p class="eyebrow mono reveal-h">Business Analyst · Banking &amp; Fintech · Navi Mumbai, IN</p>
     <h1 aria-label="Amey Joshi">
@@ -406,7 +381,7 @@ html.cur-on .btn{transition:border-color .3s,background .3s,box-shadow .3s}
       </div>
       <input id="kName" maxlength="16" placeholder="WHO'S IT FOR? (OPTIONAL)" autocomplete="off">
       <button class="btn solid k-send" id="kSend" type="button">Send it home <span class="arr">→</span></button>
-      <p class="k-done mono">SENT ✓ — SCROLL TO FOLLOW YOUR MONEY</p>
+      <p class="k-done mono" id="kDone">SENT ✓ — SCROLL TO FOLLOW YOUR MONEY</p>
       <p class="k-skip mono"><a href="#expertise" id="skipStory">in a hurry? skip the story →</a></p>
     </div>
   </div>
@@ -604,7 +579,6 @@ html.cur-on .btn{transition:border-color .3s,background .3s,box-shadow .3s}
         <path class="dw dchk" d="M452 86 L458 92 L470 78"/>
       </svg>
     </div>
-    <div class="arrival-art" aria-hidden="true"><img src="s4-buzz.jpg" alt="" onerror="this.parentNode.style.display='none'"></div>
   </div>
 </section>
 
@@ -617,7 +591,6 @@ html.cur-on .btn{transition:border-color .3s,background .3s,box-shadow .3s}
     <h2 class="reveal">Your systems have stories like this. Let&rsquo;s make sure they end well.</h2>
     <a class="btn solid reveal" href="mailto:ameyjoshi1881@gmail.com">ameyjoshi1881@gmail.com</a>
     <p class="contact-links mono reveal"><a href="https://www.linkedin.com/in/ameyjoshi180696" target="_blank" rel="noopener">LINKEDIN ↗</a></p>
-    <div class="home-art reveal"><img src="s5-home.jpg" alt="Morning at home — chai beside a glowing phone" onerror="this.parentNode.style.display='none'"></div>
     <div class="receipt reveal" id="receipt">
       <p class="r-hd mono">— TRANSACTION RECEIPT —</p>
       <p class="r-line mono"><span>AMOUNT</span><b>₹<span class="rcAmt">2,000</span></b></p>
@@ -1603,11 +1576,10 @@ html.cur-on .btn{transition:border-color .3s,background .3s,box-shadow .3s}
     var ka = document.getElementById('kAmt');
     if (ka) ka.textContent = TX.amt;
   }
-  function txStart(){
+  function storyStart(){
     if (TX.sent) return;
     TX.sent = true;
     txSpread();
-    if (kioskEl) kioskEl.classList.add('sent');
     if (hud) hud.classList.add('on');
     setStatus('INITIATED ✓', true);
   }
@@ -1622,11 +1594,17 @@ html.cur-on .btn{transition:border-color .3s,background .3s,box-shadow .3s}
   var kSend = document.getElementById('kSend'), kName = document.getElementById('kName');
   if (kSend) kSend.addEventListener('click', function(){
     TX.name = kName ? kName.value.trim().slice(0, 16) : '';
+    storyStart();
+    txSpread();
+    if (kioskEl) kioskEl.classList.add('sent');
+    var kd = document.getElementById('kDone');
+    if (kd) kd.textContent = 'SENT ✓ ₹' + TX.amt + (TX.name ? ' → ' + TX.name.toUpperCase() : '') + ' — FOLLOW IT ↓';
+    kSend.innerHTML = 'Send again <span class="arr">→</span>';
     if (!RM) gsap.fromTo('.k-note', { scale: 1, opacity: 1 }, { scale: 0.92, opacity: 0.5, yoyo: true, repeat: 1, duration: 0.28 });
-    txStart();
+    setStatus('INITIATED ✓', true);
   });
-  /* if they just scroll, the story starts on its own */
-  ScrollTrigger.create({ trigger: '#about', start: 'top 92%', once: true, onEnter: txStart });
+  /* if they just scroll, the clock starts on its own — the kiosk stays usable */
+  ScrollTrigger.create({ trigger: '#about', start: 'top 92%', once: true, onEnter: storyStart });
 
   /* the clock: scroll position -> seconds, anchored to the beats */
   var T_AT = [['#hero', 0], ['#about', 0.4], ['#expertise', 1.2], ['#experience', 2.5], ['#resolve', 3.4], ['#contact', 4]];
@@ -1744,26 +1722,6 @@ html.cur-on .btn{transition:border-color .3s,background .3s,box-shadow .3s}
       onEnter: function(els){
         gsap.to(els, { opacity: 1, y: 0, stagger: 0.13, duration: 0.5, ease: 'power2.out' });
       }
-    });
-  }
-
-  /* illustrated scenes: hero parallax + the arrival card */
-  var heroArt = document.querySelector('.hero-art img');
-  if (heroArt && !RM) {
-    gsap.to(heroArt, {
-      yPercent: 8, ease: 'none',
-      scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true }
-    });
-    if (window.matchMedia('(hover:hover)').matches) {
-      var hqx = gsap.quickTo(heroArt, 'x', { duration: 0.6, ease: 'power2.out' });
-      addEventListener('pointermove', function(e){ hqx((e.clientX / innerWidth - 0.5) * -14); });
-    }
-  }
-  var arrArt = document.querySelector('.arrival-art');
-  if (arrArt && !RM) {
-    gsap.to(arrArt, {
-      opacity: 1, y: 0, scale: 1, ease: 'none',
-      scrollTrigger: { trigger: '#resolve', start: '35% bottom', end: '70% bottom', scrub: 0.4 }
     });
   }
 
