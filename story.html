@@ -1,0 +1,869 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Line — the story of Amey Joshi</title>
+<meta name="description" content="One career, told as a night train journey in 3D. From LAN cafés in Kodoli to the payment rails of a national bank — ride the line.">
+<meta property="og:title" content="The Line — one career, nine stops">
+<meta property="og:description" content="A cinematic 3D night journey. From LAN cafés in Kodoli to the payment rails of a national bank. Board here.">
+<meta property="og:url" content="https://ameyjoshi.in/story">
+<meta name="theme-color" content="#0A1428">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230A1428'/%3E%3Ccircle cx='32' cy='32' r='12' fill='%23F4A62A'/%3E%3C/svg%3E">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@300,500,600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+:root{--night:#0A1428;--cream:#F7F1E1;--gold:#F4A62A;--rose:#EA6E7F;--ink:#F7F1E1;
+--line:color-mix(in srgb,var(--ink) 16%,transparent);--dim:color-mix(in srgb,var(--ink) 55%,transparent)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--night);color:var(--ink);font-family:'Satoshi',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:clip}
+.mono{font-family:'JetBrains Mono',monospace}
+h1,h2,h3{font-family:'Clash Display',sans-serif;font-weight:600;line-height:1.05}
+a{color:inherit}
+::selection{background:var(--gold);color:var(--night)}
+
+#gl{position:fixed;inset:0;z-index:0;transition:opacity .8s}
+#gl.off{opacity:0;pointer-events:none}
+#grain{position:fixed;inset:-60px;z-index:3;pointer-events:none;opacity:.5;mix-blend-mode:overlay;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E")}
+#vig{position:fixed;inset:0;z-index:2;pointer-events:none;background:radial-gradient(ellipse at 50% 55%,transparent 55%,rgba(4,8,18,.5) 100%)}
+
+header{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;justify-content:space-between;align-items:center;padding:20px clamp(18px,4vw,44px)}
+.wm{font-family:'Clash Display',sans-serif;font-size:17px;text-decoration:none}
+.wm b{font-weight:700}.wm i{font-style:normal;font-weight:300}.wm .dot{color:var(--gold)}
+.hbtns{display:flex;gap:10px}
+.pill{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;color:var(--dim);border:1px solid var(--line);border-radius:99px;padding:8px 14px;background:color-mix(in srgb,var(--night) 60%,transparent);cursor:pointer;text-decoration:none}
+.pill:hover,.pill.on{color:var(--ink);border-color:var(--gold)}
+
+#yr{position:fixed;left:18px;bottom:26px;z-index:40;display:flex;gap:10px;align-items:center;padding:9px 14px;border:1px solid var(--line);border-radius:99px;background:color-mix(in srgb,var(--night) 70%,transparent);font-size:10.5px;letter-spacing:.16em;opacity:0;transition:opacity .6s}
+#yr.on{opacity:1}
+#yr .d{width:6px;height:6px;border-radius:50%;background:var(--gold)}
+#prog{position:fixed;left:0;right:0;bottom:0;height:3px;z-index:40;background:color-mix(in srgb,var(--ink) 10%,transparent)}
+#progF{height:100%;width:0;background:var(--gold)}
+#prog .tick{position:absolute;top:-2px;width:1px;height:7px;background:color-mix(in srgb,var(--ink) 35%,transparent)}
+
+/* floating chapter text */
+.ch{position:fixed;z-index:10;left:clamp(20px,6vw,90px);bottom:16vh;max-width:min(620px,84vw);opacity:0;transform:translateY(24px);pointer-events:none}
+.ch.right{left:auto;right:clamp(20px,6vw,90px);text-align:right}
+.ch .eb{font-size:10px;letter-spacing:.3em;color:var(--gold);margin-bottom:14px}
+.ch h2{font-size:clamp(30px,4.6vw,64px);letter-spacing:-.01em;text-shadow:0 4px 40px rgba(4,8,18,.6)}
+.ch p{font-size:clamp(14.5px,1.35vw,18px);line-height:1.7;color:color-mix(in srgb,var(--ink) 88%,transparent);margin-top:14px;text-shadow:0 2px 20px rgba(4,8,18,.7)}
+.ch em{color:var(--gold);font-style:italic}
+.ch .acts{margin-top:24px;display:flex;gap:10px;flex-wrap:wrap;pointer-events:auto}
+.ch.right .acts{justify-content:flex-end}
+.btn{display:inline-flex;align-items:center;gap:9px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-decoration:none;padding:13px 20px;border:1px solid var(--line);border-radius:99px;color:var(--ink);background:color-mix(in srgb,var(--night) 55%,transparent);transition:border-color .3s}
+.btn:hover{border-color:var(--gold)}
+.btn.solid{background:var(--gold);color:var(--night);border-color:var(--gold);font-weight:500}
+#hint{position:fixed;left:50%;bottom:34px;transform:translateX(-50%);z-index:40;font-size:9.5px;letter-spacing:.34em;color:var(--dim);transition:opacity .5s}
+
+#spacer{height:1250vh}
+html.no3d #spacer,html.rm #spacer{height:0}
+html.no3d #gl,html.rm #gl,html.no3d .ch,html.rm .ch,html.no3d #yr,html.rm #yr,html.no3d #hint,html.rm #hint,html.no3d #prog,html.rm #prog{display:none}
+
+/* longform */
+#full{position:relative;z-index:5;background:var(--cream);color:var(--night)}
+#full .wrap{max-width:720px;margin:0 auto;padding:110px clamp(22px,6vw,44px) 90px}
+#full .kicker{font-size:10px;letter-spacing:.3em;color:#8a6d2f;margin-bottom:18px}
+#full h2{font-size:clamp(30px,4.5vw,52px);margin-bottom:10px}
+#full h3{font-size:clamp(20px,2.4vw,27px);margin:54px 0 6px}
+#full .era{font-size:10px;letter-spacing:.26em;color:#8a7c5e;margin-bottom:14px}
+#full p{font-size:17px;line-height:1.85;color:#2c2a24;margin:0 0 16px}
+#full .q{font-family:'Clash Display',sans-serif;font-weight:600;font-size:clamp(19px,2.1vw,24px);line-height:1.35;color:var(--night);margin:20px 0 18px;border-left:3px solid var(--gold);padding-left:18px}
+#full hr{border:none;border-top:1px dashed #d8cdb4;margin:44px 0}
+#full .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:44px}
+#full .btn{background:none;color:var(--night);border-color:#d0c4a8}
+#full .btn.solid{background:var(--gold);border-color:var(--gold)}
+.fine{font-size:10px;letter-spacing:.24em;color:#9b8e70;margin-top:60px;text-align:center}
+</style>
+</head>
+<body>
+
+<canvas id="gl"></canvas>
+<div id="vig"></div><div id="grain"></div>
+
+<header>
+  <a class="wm" href="/"><b>AMEY</b><span class="dot">·</span><i>JOSHI</i></a>
+  <div class="hbtns">
+    <button class="pill" id="snd" type="button">SOUND OFF</button>
+    <a class="pill" href="/">FRONT PAGE ↗</a>
+  </div>
+</header>
+<div id="yr" class="mono"><span class="d"></span><span id="yrT">YEAR 2004</span></div>
+<p id="hint" class="mono">SCROLL TO BOARD</p>
+<div id="prog"><div id="progF"></div></div>
+
+<!-- floating chapters -->
+<div class="ch" data-a="0.000" data-b="0.062"><p class="eb mono">NIGHT SERVICE · PLATFORM ZERO</p>
+  <h2>THE LINE</h2>
+  <p>Every career looks like a straight line on a resume.<br>Here's the actual route — one night, nine stops.</p></div>
+
+<div class="ch right" data-a="0.075" data-b="0.155"><p class="eb mono">STATION 01 · KODOLI · THE 2000s</p>
+  <h2>Curiosity with a keyboard.</h2>
+  <p>Games got me first. Then the machines running them.<br>LAN nights, Counter-Strike, one question that stayed:<br><em>how does all of this actually work?</em></p></div>
+
+<div class="ch" data-a="0.170" data-b="0.245"><p class="eb mono">STATION 02 · BHARATI VIDYAPEETH · BCA</p>
+  <h2>We didn't want jobs.<br>We wanted a company.</h2>
+  <p>My co-founder and I built project after project — until our final-year build was deployed by the college itself. Real people, using our software.</p></div>
+
+<div class="ch right" data-a="0.260" data-b="0.345"><p class="eb mono">STATION 03 · ZENOX TECHNOLOGIES · 2018–19</p>
+  <h2>Year one: zero clients.<br>So we built anyway.</h2>
+  <p>A rented apartment for an office. Word of mouth did the rest — one client became two, became twenty.<br><em>Never say "we can't." Learn it first. Then build it.</em></p></div>
+
+<div class="ch" data-a="0.360" data-b="0.425"><p class="eb mono">🔴 RED SIGNAL · 2020</p>
+  <h2>Then COVID.</h2>
+  <p>Our clients were small businesses. The projects vanished overnight.<br>We cut costs. We held.</p></div>
+
+<div class="ch right" data-a="0.440" data-b="0.510"><p class="eb mono">STATION 04 · RB ESPORTS · FEB 2021 · STILL RUNNING</p>
+  <h2>We bet on what we loved.</h2>
+  <p>Our own gaming café — the best in the city, we believed.<br><em>Packed from day one.</em></p></div>
+
+<div class="ch" data-a="0.525" data-b="0.595"><p class="eb mono">🔴 RED SIGNAL · THE SECOND LOCKDOWN</p>
+  <h2>Five months of locked doors.<br>On borrowed money.</h2>
+  <p>Quitting would have been easier. We paid, we waited, we reopened bigger.<br><em>Two red signals in two years. The train held both times.</em></p></div>
+
+<div class="ch right" data-a="0.610" data-b="0.690"><p class="eb mono">INTERCHANGE · LATE 2023</p>
+  <h2>I changed lines.</h2>
+  <p>Across every project, one pattern: I was the one asking <em>why</em> — standing between the business problem and the technical answer.<br>There's a name for that job. Business Analysis wasn't a career change. It was finally naming what I'd been doing all along.</p></div>
+
+<div class="ch" data-a="0.705" data-b="0.775"><p class="eb mono">STATION 05 · IDFC FIRST BANK · 2024</p>
+  <h2>Banking was another world.</h2>
+  <p>Software here passes through compliance, security, audit, and regulators before a customer ever touches it. NRI-PIS, ASBA, Demat, APIs.<br><em>Consulting taught me to build. Banking taught me to build responsibly.</em></p></div>
+
+<div class="ch right" data-a="0.790" data-b="0.880"><p class="eb mono">STATION 06 · FINO PAYMENTS BANK · 2025 →</p>
+  <h2>Replacing the tracks<br>under a moving train.</h2>
+  <p>Migrating a live bank's core — FIS to Finacle. Hundreds of people in sync, months of planning, a handful of execution windows. Exhausting. I loved every bit.<br><em>Great systems are built by teams that trust each other under pressure.</em></p></div>
+
+<div class="ch" data-a="0.895" data-b="0.985"><p class="eb mono">NEXT STOP · —</p>
+  <h2>I'm not chasing a designation.<br>I'm chasing scale.</h2>
+  <p>Startup speed. Enterprise thinking. One day — products that outlive me.<br><em>The train is still moving.</em></p>
+  <div class="acts">
+    <a class="btn solid" href="mailto:ameyjoshi1881@gmail.com">Get in touch →</a>
+    <a class="btn" href="#full">Read the full story ↓</a>
+  </div></div>
+
+<div id="spacer"></div>
+
+<!-- THE FULL STORY -->
+<article id="full">
+  <div class="wrap">
+    <p class="kicker mono">THE LINE · THE FULL STORY</p>
+    <h2>One career, nine stops.</h2>
+    <p class="era mono">AS TOLD BY AMEY JOSHI</p>
+
+    <h3>Kodoli</h3><p class="era mono">THE 2000s</p>
+    <p>Every line starts somewhere small. Mine starts in Kodoli, a town near Kolhapur, in front of a computer I didn't yet understand. Games got me first. Then the machines running them. Weekends meant LAN cables across the floor and Counter-Strike and Dota tournaments — and a question that wouldn't leave me alone: how does all of this actually work?</p>
+    <p class="q">Nobody called it a career. It was curiosity with a keyboard.</p>
+
+    <h3>Bharati Vidyapeeth</h3><p class="era mono">BCA YEARS</p>
+    <p>College gave the curiosity a partner — my co-founder, still one of the best programmers I've ever worked with. We built project after project, trading skills like cards. Our final-year project refused to stay a project: an Office Automation System our college actually deployed. Real people, depending on something we built.</p>
+    <p class="q">We didn't want jobs. We wanted a company.</p>
+
+    <h3>Zenox Technologies</h3><p class="era mono">2018–19 → 2024 · KOLHAPUR</p>
+    <p>Right after graduation we rented a small apartment, called it an office, and registered Zenox Technologies. Year one: no clients. So we built anyway — websites, plugins, browser extensions, tools nobody had asked for — until word of mouth did what advertising couldn't. One client became two. Two became ten.</p>
+    <p class="q">Our rule: never say "we can't." Learn it first. Then build it.</p>
+
+    <h3>Red signal — 2020</h3><p class="era mono">HELD BETWEEN STATIONS</p>
+    <p>Then COVID. Our clients were small businesses — the projects vanished overnight. We cut costs, held on, survived. And when the first lockdown lifted, we bet on the thing we loved most. Gaming.</p>
+
+    <h3>RB Esports</h3><p class="era mono">FEB 2021 · KOLHAPUR · STILL RUNNING</p>
+    <p>Our own gaming café — everything I knew about hardware, networks, and players, poured into one room. We built what we believed was the best gaming café in the city. Packed from day one.</p>
+    <p>Then the doors closed again. Five months, on borrowed money. Quitting would have been easier. We paid, we waited, we reopened — and came back bigger: PCs, laptops, hardware. And a Zenox that had leveled up to university portals and serious platforms.</p>
+    <p class="q">Two red signals in two years. The train held both times.</p>
+
+    <h3>The Interchange</h3><p class="era mono">LATE 2023 · CHANGE HERE FOR THE BANKING LINE</p>
+    <p>By the end of 2023 the business was stable — and I'd hit the ceiling of what Kolhapur could offer me. Looking back across every project, a pattern stared back: I was always the one asking why. The one turning scattered ideas into structured products. The one standing between the business problem and the technical answer.</p>
+    <p>There's a name for that job. Discovering Business Analysis felt less like changing careers and more like finally putting a name to what I'd been doing all along.</p>
+    <p class="q">I changed lines.</p>
+
+    <h3>IDFC FIRST Bank</h3><p class="era mono">2024 · MUMBAI</p>
+    <p>Banking was another world. Here, software isn't built and shipped — it passes through business, compliance, security, audit, operations, vendors, and regulators before a customer ever touches it. On NRI-PIS, ASBA, Demat, and API integrations, I learned that precision beats speed — and that documentation is a form of respect.</p>
+    <p class="q">Consulting taught me to build. Banking taught me to build responsibly.</p>
+
+    <h3>Fino Payments Bank</h3><p class="era mono">2025 → · NAVI MUMBAI</p>
+    <p>At Fino, I learned what national scale feels like. The defining stretch: migrating the bank's core from FIS to Finacle — the closest thing technology has to replacing the tracks under a moving train. Months of planning compressed into a handful of execution windows. Hundreds of people — business, engineering, QA, infrastructure, vendors, leadership — moving in sync, solving problems in real time. It was exhausting. I loved every bit of it.</p>
+    <p class="q">Great systems aren't built by brilliant individuals. They're built by teams that trust each other under pressure.</p>
+    <p>After that: AePS, DMT, eKYC, mATM certification, 3DS migration — the systems millions of people quietly depend on, every single day.</p>
+
+    <h3>Next stop — </h3><p class="era mono">THE BOARD IS STILL FLIPPING</p>
+    <p>I'm not chasing a designation. I'm chasing scale. Zenox taught me to build from nothing. Banking taught me to build at scale. The plan is to keep both — startup speed, enterprise thinking — and one day, products that outlive me.</p>
+    <p class="q">This website is one station along the way. The train is still moving.</p>
+
+    <div class="ctas">
+      <a class="btn solid mono" href="mailto:ameyjoshi1881@gmail.com">GET IN TOUCH →</a>
+      <a class="btn mono" href="/">BACK TO THE FRONT PAGE</a>
+    </div>
+    <p class="fine mono">AMEY · JOSHI — SYSTEMS · CLARITY · FINTECH</p>
+  </div>
+</article>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://unpkg.com/lenis@1.3.4/dist/lenis.min.js"></script>
+<script>
+(function(){
+  var docEl = document.documentElement;
+  var RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (RM) { docEl.classList.add('rm'); return; }
+  if (!window.THREE || !window.gsap) { docEl.classList.add('no3d'); return; }
+
+  var cvs = document.getElementById('gl'), renderer;
+  try {
+    renderer = new THREE.WebGLRenderer({ canvas: cvs, antialias: true, powerPreference: 'high-performance' });
+  } catch (e) { docEl.classList.add('no3d'); return; }
+
+  var LITE = window.matchMedia('(max-width: 820px)').matches || (navigator.hardwareConcurrency || 8) <= 4;
+  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, LITE ? 1.4 : 2));
+  renderer.setSize(innerWidth, innerHeight);
+
+  if (window.gsap && window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
+  var lenis = null;
+  if (window.Lenis) {
+    docEl.style.scrollBehavior = 'auto';
+    lenis = new Lenis({ duration: 1.15 });
+    if (window.ScrollTrigger) lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(function(t){ lenis.raf(t * 1000); });
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  /* ---------- palette ---------- */
+  var NIGHT = new THREE.Color(0x0A1428), CREAM = new THREE.Color(0xF7F1E1),
+      GOLD = new THREE.Color(0xF4A62A), ROSE = new THREE.Color(0xEA6E7F),
+      DUSK = new THREE.Color(0x162545);
+
+  var scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(NIGHT.getHex(), 0.016);
+  renderer.setClearColor(NIGHT, 1);
+  var camera = new THREE.PerspectiveCamera(52, innerWidth / innerHeight, 0.1, 900);
+
+  var hemi = new THREE.HemisphereLight(0x24365e, 0x05080f, 0.85);
+  scene.add(hemi);
+  var moon = new THREE.DirectionalLight(0x8fa8d8, 0.5);
+  moon.position.set(-60, 120, -40);
+  scene.add(moon);
+  var trainGlow = new THREE.PointLight(0xF4A62A, 1.6, 26, 2);
+  scene.add(trainGlow);
+
+  /* ---------- helpers ---------- */
+  function glowTex(){
+    var c = document.createElement('canvas'); c.width = c.height = 64;
+    var g = c.getContext('2d');
+    var gr = g.createRadialGradient(32, 32, 2, 32, 32, 30);
+    gr.addColorStop(0, 'rgba(255,255,255,1)');
+    gr.addColorStop(0.4, 'rgba(255,255,255,.35)');
+    gr.addColorStop(1, 'rgba(255,255,255,0)');
+    g.fillStyle = gr; g.fillRect(0, 0, 64, 64);
+    return new THREE.CanvasTexture(c);
+  }
+  var GT = glowTex();
+  function glow(color, s, op){
+    var sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: GT, color: color, transparent: true, opacity: op || 0.9, blending: THREE.AdditiveBlending, depthWrite: false }));
+    sp.scale.set(s, s, 1);
+    return sp;
+  }
+  function signTex(txt, fg, bg, w){
+    var c = document.createElement('canvas'); c.width = 512; c.height = 128;
+    var g = c.getContext('2d');
+    if (bg) { g.fillStyle = bg; g.fillRect(0, 0, 512, 128); }
+    g.font = '600 54px "JetBrains Mono", monospace';
+    g.textAlign = 'center'; g.textBaseline = 'middle';
+    g.fillStyle = fg;
+    g.fillText(txt, 256, 68);
+    var t = new THREE.CanvasTexture(c);
+    var m = new THREE.Mesh(new THREE.PlaneGeometry(w, w * 0.25),
+      new THREE.MeshBasicMaterial({ map: t, transparent: true, side: THREE.DoubleSide }));
+    return m;
+  }
+  function winTex(cols, rows, density){
+    var c = document.createElement('canvas'); c.width = cols * 8; c.height = rows * 8;
+    var g = c.getContext('2d');
+    g.fillStyle = '#0c1730'; g.fillRect(0, 0, c.width, c.height);
+    for (var y = 0; y < rows; y++) for (var x = 0; x < cols; x++) {
+      if (Math.random() < density) {
+        g.fillStyle = Math.random() < 0.85 ? '#F4A62A' : '#F7F1E1';
+        g.globalAlpha = 0.5 + Math.random() * 0.5;
+        g.fillRect(x * 8 + 2, y * 8 + 2, 4, 5);
+      }
+    }
+    g.globalAlpha = 1;
+    var t = new THREE.CanvasTexture(c);
+    t.magFilter = THREE.NearestFilter;
+    return t;
+  }
+
+  /* ---------- the track ---------- */
+  var CP = [
+    new THREE.Vector3(0, 0, 30),
+    new THREE.Vector3(0, 0, -40),
+    new THREE.Vector3(-14, 0, -160),   /* kodoli curve */
+    new THREE.Vector3(10, 0, -300),    /* college / zenox */
+    new THREE.Vector3(0, 0, -430),     /* signal 1 / cafe */
+    new THREE.Vector3(-12, 0, -560),   /* signal 2 */
+    new THREE.Vector3(-12, 0, -640),   /* interchange entry */
+    new THREE.Vector3(22, 0, -760),    /* banked onto new line */
+    new THREE.Vector3(22, 0, -900),    /* idfc/fino straight */
+    new THREE.Vector3(0, 0, -1060),
+    new THREE.Vector3(0, 0, -1180)
+  ];
+  var track = new THREE.CatmullRomCurve3(CP, false, 'catmullrom', 0.4);
+
+  function offsetCurvePts(n, dx){
+    var pts = [], i, p, t, side;
+    for (i = 0; i <= n; i++) {
+      p = track.getPointAt(i / n);
+      t = track.getTangentAt(i / n);
+      side = new THREE.Vector3().crossVectors(t, new THREE.Vector3(0, 1, 0)).normalize();
+      pts.push(new THREE.Vector3().copy(p).addScaledVector(side, dx).setY(0.12));
+    }
+    return pts;
+  }
+  var railMat = new THREE.MeshBasicMaterial({ color: 0x3a4a72 });
+  var railGoldMat = new THREE.MeshBasicMaterial({ color: 0xF4A62A });
+  function makeRail(dx, mat, u0, u1){
+    var n = 420;
+    var pts = offsetCurvePts(n, dx);
+    var i0 = Math.floor(u0 * n), i1 = Math.ceil(u1 * n);
+    var seg = pts.slice(i0, i1 + 1);
+    if (seg.length < 2) return null;
+    var cur = new THREE.CatmullRomCurve3(seg);
+    var geo = new THREE.TubeGeometry(cur, seg.length, 0.07, 5, false);
+    return new THREE.Mesh(geo, mat);
+  }
+  scene.add(makeRail(-0.75, railMat, 0, 1));
+  scene.add(makeRail(0.75, railMat, 0, 1));
+  /* golden replacement rails (fino chapter) revealed by draw range */
+  var goldL = makeRail(-0.75, railGoldMat, 0.66, 0.86),
+      goldR = makeRail(0.75, railGoldMat, 0.66, 0.86);
+  goldL.geometry.setDrawRange(0, 0); goldR.geometry.setDrawRange(0, 0);
+  goldL.position.y = 0.03; goldR.position.y = 0.03;
+  scene.add(goldL); scene.add(goldR);
+  var goldTotal = goldL.geometry.index ? goldL.geometry.index.count : goldL.geometry.attributes.position.count;
+
+  /* sleepers + catenary poles via instancing */
+  (function(){
+    var n = LITE ? 220 : 380;
+    var sg = new THREE.BoxGeometry(2.3, 0.08, 0.34);
+    var sm = new THREE.MeshBasicMaterial({ color: 0x1a2440 });
+    var inst = new THREE.InstancedMesh(sg, sm, n);
+    var m4 = new THREE.Matrix4(), q = new THREE.Quaternion(), up = new THREE.Vector3(0, 1, 0), Z = new THREE.Vector3(0, 0, 1);
+    for (var i = 0; i < n; i++) {
+      var u = i / (n - 1);
+      var p = track.getPointAt(u), t = track.getTangentAt(u);
+      q.setFromUnitVectors(Z, t);
+      m4.compose(new THREE.Vector3(p.x, 0.06, p.z), q, new THREE.Vector3(1, 1, 1));
+      inst.setMatrixAt(i, m4);
+    }
+    scene.add(inst);
+    var pn = LITE ? 26 : 44;
+    var pg = new THREE.BoxGeometry(0.16, 7, 0.16);
+    var pm = new THREE.MeshBasicMaterial({ color: 0x121c36 });
+    var poles = new THREE.InstancedMesh(pg, pm, pn);
+    for (i = 0; i < pn; i++) {
+      var u2 = i / (pn - 1);
+      var p2 = track.getPointAt(u2), t2 = track.getTangentAt(u2);
+      var side = new THREE.Vector3().crossVectors(t2, up).normalize();
+      var pos = new THREE.Vector3().copy(p2).addScaledVector(side, (i % 2 ? 3.4 : -3.4));
+      m4.compose(new THREE.Vector3(pos.x, 3.5, pos.z), new THREE.Quaternion(), new THREE.Vector3(1, 1, 1));
+      poles.setMatrixAt(i, m4);
+    }
+    scene.add(poles);
+  })();
+
+  /* the abandoned old line at the interchange (continues straight, fades) */
+  (function(){
+    var s = track.getPointAt(0.535), t = track.getTangentAt(0.535);
+    var pts = [], i;
+    for (i = 0; i < 30; i++) pts.push(new THREE.Vector3().copy(s).addScaledVector(t, i * 6).setY(0.1));
+    var g = new THREE.BufferGeometry().setFromPoints(pts);
+    var l = new THREE.Line(g, new THREE.LineBasicMaterial({ color: 0x2a3350, transparent: true, opacity: 0.5 }));
+    scene.add(l);
+  })();
+
+  /* ---------- terrain ---------- */
+  (function(){
+    var W = 640, D = 1500, SEGW = LITE ? 60 : 96, SEGD = LITE ? 140 : 220;
+    var geo = new THREE.PlaneGeometry(W, D, SEGW, SEGD);
+    geo.rotateX(-Math.PI / 2);
+    geo.translate(0, 0, -D / 2 + 80);
+    var pos = geo.attributes.position, i, x, z, h, d;
+    var col = new Float32Array(pos.count * 3);
+    var c = new THREE.Color(), base = new THREE.Color(0x0d1830), hi = new THREE.Color(0x1c2c52);
+    function noise(x, z){
+      return Math.sin(x * 0.021) * Math.cos(z * 0.017) * 6 +
+             Math.sin(x * 0.09 + z * 0.05) * 2.2 +
+             Math.sin(x * 0.006 - z * 0.004) * 10;
+    }
+    for (i = 0; i < pos.count; i++) {
+      x = pos.getX(i); z = pos.getZ(i);
+      /* keep a corridor flat near the track */
+      var tp = track.getPointAt(Math.min(1, Math.max(0, -z / 1180)));
+      d = Math.abs(x - tp.x);
+      h = Math.max(0, noise(x, z)) * THREE.MathUtils.smoothstep(d, 8, 60);
+      pos.setY(i, h - 0.4);
+      c.copy(base).lerp(hi, Math.min(1, h / 14));
+      col[i * 3] = c.r; col[i * 3 + 1] = c.g; col[i * 3 + 2] = c.b;
+    }
+    geo.setAttribute('color', new THREE.BufferAttribute(col, 3));
+    geo.computeVertexNormals();
+    var mat = new THREE.MeshLambertMaterial({ vertexColors: true, flatShading: true });
+    scene.add(new THREE.Mesh(geo, mat));
+  })();
+
+  /* ---------- sky + stars + moon ---------- */
+  var skyU = { top: { value: new THREE.Color(0x060b18) }, bot: { value: new THREE.Color(0x14224a) }, dawn: { value: 0 } };
+  (function(){
+    var mat = new THREE.ShaderMaterial({
+      side: THREE.BackSide, fog: false, depthWrite: false,
+      uniforms: skyU,
+      vertexShader: 'varying vec3 vP; void main(){ vP = position; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }',
+      fragmentShader: [
+        'varying vec3 vP; uniform vec3 top; uniform vec3 bot; uniform float dawn;',
+        'void main(){',
+        '  float h = normalize(vP).y * 0.5 + 0.5;',
+        '  vec3 nightCol = mix(bot, top, smoothstep(0.0, 0.7, h));',
+        '  vec3 dawnLow = vec3(0.957, 0.431, 0.498);',
+        '  vec3 dawnHi  = vec3(0.969, 0.945, 0.882);',
+        '  vec3 dawnCol = mix(dawnLow, dawnHi, smoothstep(0.0, 0.6, h));',
+        '  gl_FragColor = vec4(mix(nightCol, dawnCol, dawn), 1.0);',
+        '}'
+      ].join('\n')
+    });
+    var dome = new THREE.Mesh(new THREE.SphereGeometry(760, 24, 16), mat);
+    scene.add(dome);
+  })();
+  var stars;
+  (function(){
+    var n = LITE ? 500 : 1100, posA = new Float32Array(n * 3), i, th, ph, r;
+    for (i = 0; i < n; i++) {
+      th = Math.random() * Math.PI * 2; ph = Math.acos(Math.random() * 0.85);
+      r = 700;
+      posA[i * 3] = Math.sin(ph) * Math.cos(th) * r;
+      posA[i * 3 + 1] = Math.cos(ph) * r * 0.6 + 40;
+      posA[i * 3 + 2] = Math.sin(ph) * Math.sin(th) * r;
+    }
+    var g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(posA, 3));
+    stars = new THREE.Points(g, new THREE.PointsMaterial({ color: 0xcfd8ee, size: 1.6, transparent: true, opacity: 0.9, sizeAttenuation: false, fog: false }));
+    scene.add(stars);
+  })();
+  var moonSp = glow(0xdfe6f5, 60, 0.8);
+  moonSp.position.set(-160, 200, -500);
+  scene.add(moonSp);
+  var sun = glow(0xF4A62A, 140, 0);
+  sun.position.set(30, 26, -1140);
+  scene.add(sun);
+
+  /* ---------- towns / buildings ---------- */
+  function town(z0, z1, count, spreadMin, spreadMax, hMax){
+    var g = new THREE.BoxGeometry(1, 1, 1);
+    var m = new THREE.MeshLambertMaterial({ color: 0x101b38 });
+    var inst = new THREE.InstancedMesh(g, m, count);
+    var m4 = new THREE.Matrix4(), i;
+    var winPts = [];
+    for (i = 0; i < count; i++) {
+      var z = z0 - Math.random() * (z0 - z1);
+      var u = Math.min(1, Math.max(0, -z / 1180));
+      var tp = track.getPointAt(u);
+      var side = (Math.random() < 0.5 ? -1 : 1);
+      var x = tp.x + side * (spreadMin + Math.random() * (spreadMax - spreadMin));
+      var w = 2 + Math.random() * 4, h = 1.5 + Math.random() * hMax, d = 2 + Math.random() * 4;
+      m4.makeScale(w, h, d);
+      m4.setPosition(x, h / 2, z);
+      inst.setMatrixAt(i, m4);
+      var wn = 1 + (Math.random() * 3 | 0), k;
+      for (k = 0; k < wn; k++) winPts.push(x + (Math.random() - 0.5) * w, 0.6 + Math.random() * (h - 0.8), z + (Math.random() - 0.5) * d);
+    }
+    scene.add(inst);
+    var wg = new THREE.BufferGeometry();
+    wg.setAttribute('position', new THREE.BufferAttribute(new Float32Array(winPts), 3));
+    scene.add(new THREE.Points(wg, new THREE.PointsMaterial({ color: 0xF4A62A, size: 0.34, transparent: true, opacity: 0.95 })));
+  }
+  town(-70, -190, LITE ? 16 : 26, 8, 40, 3);      /* kodoli */
+  town(-200, -360, LITE ? 22 : 40, 7, 46, 5);     /* college + zenox town */
+  town(-430, -520, LITE ? 14 : 24, 8, 38, 4);     /* cafe area */
+
+  /* landmark signs in the world */
+  function landmark(u, side, y, mesh){
+    var p = track.getPointAt(u), t = track.getTangentAt(u);
+    var sv = new THREE.Vector3().crossVectors(t, new THREE.Vector3(0, 1, 0)).normalize();
+    mesh.position.copy(p).addScaledVector(sv, side).setY(y);
+    mesh.lookAt(new THREE.Vector3().copy(mesh.position).addScaledVector(sv, -10));
+    scene.add(mesh);
+    return mesh;
+  }
+  landmark(0.10, -7, 3.4, signTex('KODOLI', '#F7F1E1', '#122142', 8));
+  landmark(0.185, 7, 3.6, signTex('BHARATI VIDYAPEETH', '#F7F1E1', '#122142', 11));
+  landmark(0.27, -7, 3.6, signTex('ZENOX', '#F4A62A', '#122142', 8));
+  landmark(0.435, 7, 3.6, signTex('RB ESPORTS', '#EA6E7F', '#122142', 9));
+  var rbGlow = glow(0xEA6E7F, 12, 0.7);
+  landmark(0.435, 7.2, 3.6, rbGlow);
+  landmark(0.60, -8, 4, signTex('INTERCHANGE', '#F7F1E1', '#122142', 11));
+  landmark(0.715, 8, 4, signTex('IDFC FIRST', '#F7F1E1', '#122142', 10));
+  landmark(0.80, -8, 4, signTex('FINO', '#F4A62A', '#122142', 8));
+
+  /* city towers for banking chapters */
+  (function(){
+    var texA = winTex(10, 26, 0.5), texB = winTex(8, 20, 0.4);
+    var i, n = LITE ? 12 : 20;
+    for (i = 0; i < n; i++) {
+      var u = 0.68 + Math.random() * 0.2;
+      var p = track.getPointAt(u), t = track.getTangentAt(u);
+      var sv = new THREE.Vector3().crossVectors(t, new THREE.Vector3(0, 1, 0)).normalize();
+      var dist = 14 + Math.random() * 60;
+      var side = Math.random() < 0.5 ? -1 : 1;
+      var h = 18 + Math.random() * 42, w = 6 + Math.random() * 8;
+      var tower = new THREE.Mesh(new THREE.BoxGeometry(w, h, w),
+        new THREE.MeshBasicMaterial({ map: Math.random() < 0.5 ? texA : texB }));
+      tower.position.copy(p).addScaledVector(sv, side * dist).setY(h / 2);
+      scene.add(tower);
+    }
+  })();
+
+  /* signals */
+  function signal(u){
+    var grp = new THREE.Group();
+    var pole = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.09, 5.4, 6), new THREE.MeshBasicMaterial({ color: 0x1a2440 }));
+    pole.position.y = 2.7; grp.add(pole);
+    var head = new THREE.Mesh(new THREE.BoxGeometry(0.7, 1.5, 0.4), new THREE.MeshBasicMaterial({ color: 0x0c1428 }));
+    head.position.y = 5.4; grp.add(head);
+    var red = new THREE.Mesh(new THREE.SphereGeometry(0.2, 10, 10), new THREE.MeshBasicMaterial({ color: 0xEA6E7F }));
+    red.position.set(0, 5.75, 0.22); grp.add(red);
+    var grn = new THREE.Mesh(new THREE.SphereGeometry(0.2, 10, 10), new THREE.MeshBasicMaterial({ color: 0x123524 }));
+    grn.position.set(0, 5.05, 0.22); grp.add(grn);
+    var halo = glow(0xEA6E7F, 4, 0.85);
+    halo.position.set(0, 5.75, 0.3); grp.add(halo);
+    var p = track.getPointAt(u), t = track.getTangentAt(u);
+    var sv = new THREE.Vector3().crossVectors(t, new THREE.Vector3(0, 1, 0)).normalize();
+    grp.position.copy(p).addScaledVector(sv, -2.6);
+    scene.add(grp);
+    return { red: red, grn: grn, halo: halo, done: false };
+  }
+  var sig1 = signal(0.335), sig2 = signal(0.475);
+  function signalGo(s){
+    if (s.done) return;
+    s.done = true;
+    s.red.material.color.set(0x5c2a35);
+    s.grn.material.color.set(0x37c978);
+    s.halo.material.color.set(0x37c978);
+    ding();
+  }
+  function signalReset(s){
+    if (!s.done) return;
+    s.done = false;
+    s.red.material.color.set(0xEA6E7F);
+    s.grn.material.color.set(0x123524);
+    s.halo.material.color.set(0xEA6E7F);
+  }
+
+  /* ---------- the train ---------- */
+  var train = new THREE.Group();
+  (function(){
+    var body = new THREE.MeshLambertMaterial({ color: 0x14264c });
+    var loco = new THREE.Mesh(new THREE.BoxGeometry(1.7, 1.7, 5.6), body);
+    loco.position.y = 1.05; train.add(loco);
+    var nose = new THREE.Mesh(new THREE.CylinderGeometry(0.85, 0.85, 1.7, 12, 1, false, 0, Math.PI), body);
+    nose.rotation.set(0, 0, Math.PI / 2);
+    nose.rotation.x = Math.PI / 2;
+    nose.position.set(0, 1.05, -2.8);
+    train.add(nose);
+    var winMat = new THREE.MeshBasicMaterial({ color: 0xF4A62A });
+    var i;
+    for (i = 0; i < 2; i++) {
+      var coach = new THREE.Mesh(new THREE.BoxGeometry(1.6, 1.5, 5.2), body);
+      coach.position.set(0, 0.95, 3.4 + i * 5.7);
+      train.add(coach);
+      var strip = new THREE.Mesh(new THREE.PlaneGeometry(4.6, 0.5), winMat);
+      strip.position.set(-0.82, 1.15, 3.4 + i * 5.7);
+      strip.rotation.y = -Math.PI / 2;
+      train.add(strip);
+      var strip2 = strip.clone(); strip2.position.x = 0.82; strip2.rotation.y = Math.PI / 2;
+      train.add(strip2);
+    }
+    var ls = new THREE.Mesh(new THREE.PlaneGeometry(3.4, 0.5), winMat);
+    ls.position.set(-0.87, 1.3, -0.4); ls.rotation.y = -Math.PI / 2; train.add(ls);
+    var ls2 = ls.clone(); ls2.position.x = 0.87; ls2.rotation.y = Math.PI / 2; train.add(ls2);
+    /* headlight */
+    var head = glow(0xFFF2CE, 5, 0.95);
+    head.position.set(0, 1.1, -3.4); train.add(head);
+    var cone = new THREE.Mesh(new THREE.ConeGeometry(2.6, 14, 16, 1, true),
+      new THREE.MeshBasicMaterial({ color: 0xFFE9B8, transparent: true, opacity: 0.07, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide }));
+    cone.rotation.x = Math.PI / 2;
+    cone.position.set(0, 1.0, -10.4);
+    train.add(cone);
+    var pool = glow(0xF4A62A, 12, 0.28);
+    pool.position.set(0, 0.3, 3);
+    train.add(pool);
+  })();
+  scene.add(train);
+
+  /* ---------- rain ---------- */
+  var rain, rainOp = { v: 0 };
+  (function(){
+    var n = LITE ? 380 : 900, pos = new Float32Array(n * 6), i;
+    for (i = 0; i < n; i++) {
+      var x = (Math.random() - 0.5) * 60, y = Math.random() * 30, z = (Math.random() - 0.5) * 60;
+      pos[i * 6] = x; pos[i * 6 + 1] = y; pos[i * 6 + 2] = z;
+      pos[i * 6 + 3] = x - 0.25; pos[i * 6 + 4] = y - 1.1; pos[i * 6 + 5] = z;
+    }
+    var g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    rain = new THREE.LineSegments(g, new THREE.LineBasicMaterial({ color: 0x9fb2d8, transparent: true, opacity: 0 }));
+    scene.add(rain);
+  })();
+
+  /* sparks at the gold-rail front */
+  var sparks, sparkArr;
+  (function(){
+    var n = 90;
+    sparkArr = new Float32Array(n * 3);
+    var g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(sparkArr, 3));
+    sparks = new THREE.Points(g, new THREE.PointsMaterial({ color: 0xFFD37A, size: 0.22, transparent: true, opacity: 0 }));
+    scene.add(sparks);
+  })();
+
+  /* ---------- journey mapping ---------- */
+  /* scroll progress -> train position on track, with holds at the signals */
+  var TA = [
+    [0.00, 0.010], [0.075, 0.085], [0.17, 0.16], [0.26, 0.24],
+    [0.345, 0.325],           /* approach signal 1 */
+    [0.425, 0.325],           /* HOLD at red */
+    [0.44, 0.36], [0.51, 0.43],
+    [0.595, 0.465],           /* HOLD at signal 2 (reached at .525) */
+    [0.525, 0.465],
+    [0.61, 0.50], [0.69, 0.60], [0.775, 0.70], [0.88, 0.86], [1.0, 0.985]
+  ].sort(function(a, b){ return a[0] - b[0]; });
+  function map2(arr, p){
+    if (p <= arr[0][0]) return arr[0][1];
+    if (p >= arr[arr.length - 1][0]) return arr[arr.length - 1][1];
+    var i = 0;
+    while (i < arr.length - 1 && p > arr[i + 1][0]) i++;
+    var a = arr[i], b = arr[i + 1];
+    var t = (p - a[0]) / Math.max(0.0001, b[0] - a[0]);
+    return a[1] + (b[1] - a[1]) * t;
+  }
+  /* camera shots per chapter: [pCenter, sideOff, height, backOff, fov] */
+  var SHOTS = [
+    [0.00, -6.5, 2.6, -9, 54],
+    [0.115, -13, 4.5, 2, 50],
+    [0.205, 8.5, 2.4, 3, 52],
+    [0.30, -7.5, 3.0, 7, 54],
+    [0.39, 5.2, 1.8, -4, 46],
+    [0.475, -12, 3.6, 2, 50],
+    [0.56, 6.0, 2.2, -5, 48],
+    [0.65, 2.0, 22.0, 6, 60],   /* crane shot over the interchange */
+    [0.74, 9.5, 2.0, 4, 52],
+    [0.835, -11, 3.2, 3, 50],
+    [0.95, 0.0, 2.6, -14, 58]   /* front, into the dawn */
+  ];
+  function shot(p){
+    var i = 0;
+    while (i < SHOTS.length - 1 && p > SHOTS[i + 1][0]) i++;
+    var a = SHOTS[i], b = SHOTS[Math.min(i + 1, SHOTS.length - 1)];
+    var t = THREE.MathUtils.smoothstep((p - a[0]) / Math.max(0.0001, b[0] - a[0]), 0, 1);
+    return [
+      a[1] + (b[1] - a[1]) * t,
+      a[2] + (b[2] - a[2]) * t,
+      a[3] + (b[3] - a[3]) * t,
+      a[4] + (b[4] - a[4]) * t
+    ];
+  }
+
+  var YEARS = [[0, 2004], [0.115, 2010], [0.205, 2017], [0.30, 2019], [0.39, 2020], [0.475, 2021], [0.56, 2021], [0.65, 2023], [0.74, 2024], [0.835, 2025], [0.97, 2026]];
+
+  /* ---------- chapter text ---------- */
+  var chs = [].slice.call(document.querySelectorAll('.ch')).map(function(el){
+    return { el: el, a: parseFloat(el.getAttribute('data-a')), b: parseFloat(el.getAttribute('data-b')) };
+  });
+
+  /* ---------- sound ---------- */
+  var AC = null, sndOn = false, rumbleG, rainG, masterG;
+  function noiseBuf(ac, secs, low){
+    var buf = ac.createBuffer(1, ac.sampleRate * secs, ac.sampleRate);
+    var d = buf.getChannelData(0), last = 0, i;
+    for (i = 0; i < d.length; i++) {
+      var w = Math.random() * 2 - 1;
+      if (low) { last = (last + 0.02 * w) / 1.02; d[i] = last * 3.5; }
+      else d[i] = w;
+    }
+    return buf;
+  }
+  function sndInit(){
+    if (AC) return;
+    AC = new (window.AudioContext || window.webkitAudioContext)();
+    masterG = AC.createGain(); masterG.gain.value = 0.7; masterG.connect(AC.destination);
+    var r = AC.createBufferSource(); r.buffer = noiseBuf(AC, 3, true); r.loop = true;
+    var rf = AC.createBiquadFilter(); rf.type = 'lowpass'; rf.frequency.value = 130;
+    rumbleG = AC.createGain(); rumbleG.gain.value = 0;
+    r.connect(rf); rf.connect(rumbleG); rumbleG.connect(masterG); r.start();
+    var rn = AC.createBufferSource(); rn.buffer = noiseBuf(AC, 2, false); rn.loop = true;
+    var bp = AC.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = 2600; bp.Q.value = 0.6;
+    rainG = AC.createGain(); rainG.gain.value = 0;
+    rn.connect(bp); bp.connect(rainG); rainG.connect(masterG); rn.start();
+  }
+  function ding(){
+    if (!AC || !sndOn) return;
+    var o = AC.createOscillator(), g = AC.createGain();
+    o.type = 'sine'; o.frequency.value = 880;
+    g.gain.setValueAtTime(0.12, AC.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.0001, AC.currentTime + 0.7);
+    o.connect(g); g.connect(masterG);
+    o.start(); o.stop(AC.currentTime + 0.72);
+  }
+  var sndBtn = document.getElementById('snd');
+  sndBtn.addEventListener('click', function(){
+    sndInit();
+    sndOn = !sndOn;
+    if (AC.state === 'suspended') AC.resume();
+    masterG.gain.value = sndOn ? 0.7 : 0;
+    sndBtn.textContent = sndOn ? 'SOUND ON' : 'SOUND OFF';
+    sndBtn.classList.toggle('on', sndOn);
+  });
+
+  /* ---------- progress + render ---------- */
+  var yrT = document.getElementById('yrT'), yrEl = document.getElementById('yr');
+  var hint = document.getElementById('hint');
+  var progF = document.getElementById('progF'), progEl = document.getElementById('prog');
+  chs.forEach(function(c){
+    var t = document.createElement('span');
+    t.className = 'tick';
+    t.style.left = (c.a * 100) + '%';
+    progEl.appendChild(t);
+  });
+  var glEl = document.getElementById('gl');
+
+  var scMax = 1, p = 0, pT = 0, lastP = 0;
+  function measure(){ scMax = Math.max(1, document.getElementById('spacer').offsetHeight - innerHeight); }
+  measure();
+  yrEl.classList.add('on');
+
+  var V1 = new THREE.Vector3(), V2 = new THREE.Vector3(), V3 = new THREE.Vector3(),
+      UP = new THREE.Vector3(0, 1, 0), SIDE = new THREE.Vector3(), CAMP = new THREE.Vector3(), LOOK = new THREE.Vector3();
+  var pmx = 0, pmy = 0;
+  addEventListener('pointermove', function(e){
+    pmx = (e.clientX / innerWidth - 0.5) * 2;
+    pmy = (e.clientY / innerHeight - 0.5) * 2;
+  });
+
+  var lastFT = 0, yrLast = '';
+  function frame(ts){
+    requestAnimationFrame(frame);
+    if (document.hidden) return;
+    var dt = Math.min(0.05, (ts - lastFT) / 1000 || 0.016);
+    lastFT = ts;
+    var t3 = ts / 1000;
+
+    pT = Math.max(0, Math.min(1, (window.scrollY || 0) / scMax));
+    p += (pT - p) * Math.min(1, dt * 4.5);
+    var speed = Math.abs(p - lastP) / Math.max(dt, 0.001);
+    lastP = p;
+
+    /* train on track */
+    var tu = map2(TA, p);
+    track.getPointAt(Math.min(0.995, tu), V1);
+    track.getPointAt(Math.min(1, tu + 0.004), V2);
+    V3.copy(V2).sub(V1).normalize();
+    train.position.copy(V1).setY(0.15);
+    train.position.y += Math.sin(t3 * 3.2) * 0.02;
+    LOOK.copy(V1).addScaledVector(V3, -8);
+    train.lookAt(LOOK.setY(0.15));
+    trainGlow.position.copy(V1).setY(1.6);
+
+    /* camera */
+    var sh = shot(p);
+    SIDE.crossVectors(V3, UP).normalize();
+    CAMP.copy(V1)
+      .addScaledVector(SIDE, sh[0] + pmx * 0.9)
+      .addScaledVector(UP, sh[1] - pmy * 0.6)
+      .addScaledVector(V3, sh[2]);
+    camera.position.lerp(CAMP, Math.min(1, dt * 5));
+    LOOK.copy(V1).addScaledVector(V3, -6).setY(1.2);
+    camera.lookAt(LOOK);
+    camera.fov += ((sh[3] + Math.min(10, speed * 30)) - camera.fov) * Math.min(1, dt * 4);
+    camera.updateProjectionMatrix();
+
+    /* signals */
+    if (p > 0.408 && p < 0.44) signalGo(sig1); else if (p < 0.34) signalReset(sig1);
+    if (p > 0.578 && p < 0.61) signalGo(sig2); else if (p > 0.44 && p < 0.47) signalReset(sig2);
+
+    /* rain windows */
+    var rTarget = ((p > 0.345 && p < 0.44) || (p > 0.51 && p < 0.61)) ? 0.75 : 0;
+    rainOp.v += (rTarget - rainOp.v) * Math.min(1, dt * 3);
+    rain.material.opacity = rainOp.v;
+    if (rainOp.v > 0.02) {
+      rain.position.copy(camera.position).setY(0);
+      var rp = rain.geometry.attributes.position.array, i;
+      for (i = 0; i < rp.length; i += 6) {
+        rp[i + 1] -= dt * 26; rp[i + 4] -= dt * 26;
+        if (rp[i + 1] < 0) { var ny = 24 + Math.random() * 6; rp[i + 4] = ny - 1.1; rp[i + 1] = ny; }
+      }
+      rain.geometry.attributes.position.needsUpdate = true;
+    }
+    if (rainG) rainG.gain.value = sndOn ? rainOp.v * 0.14 : 0;
+    if (rumbleG) rumbleG.gain.value = sndOn ? Math.min(0.5, 0.05 + speed * 1.4) : 0;
+
+    /* gold rails + sparks (fino window) */
+    var gp = Math.max(0, Math.min(1, (p - 0.79) / 0.09));
+    goldL.geometry.setDrawRange(0, Math.floor(goldTotal * gp));
+    goldR.geometry.setDrawRange(0, Math.floor(goldTotal * gp));
+    if (gp > 0 && gp < 1) {
+      sparks.material.opacity = 0.9;
+      var fu = 0.66 + 0.2 * gp;
+      track.getPointAt(fu, V2);
+      for (i = 0; i < sparkArr.length; i += 3) {
+        sparkArr[i] = V2.x + (Math.random() - 0.5) * 1.6;
+        sparkArr[i + 1] = 0.2 + Math.random() * 1.4;
+        sparkArr[i + 2] = V2.z + (Math.random() - 0.5) * 1.6;
+      }
+      sparks.geometry.attributes.position.needsUpdate = true;
+    } else sparks.material.opacity = 0;
+
+    /* dawn */
+    var dawn = THREE.MathUtils.smoothstep(p, 0.885, 0.985);
+    skyU.dawn.value = dawn;
+    scene.fog.color.copy(NIGHT).lerp(CREAM, dawn);
+    renderer.setClearColor(scene.fog.color, 1);
+    scene.fog.density = 0.016 - dawn * 0.009;
+    stars.material.opacity = 0.9 * (1 - dawn);
+    moonSp.material.opacity = 0.8 * (1 - dawn);
+    sun.material.opacity = dawn * 0.95;
+    sun.position.y = 10 + dawn * 60;
+    hemi.intensity = 0.85 + dawn * 1.1;
+    hemi.color.copy(new THREE.Color(0x24365e)).lerp(new THREE.Color(0xF7E3C0), dawn);
+
+    /* chapter text */
+    chs.forEach(function(c){
+      var w = c.b - c.a;
+      var lin = (p - c.a) / w;
+      var o = 0;
+      if (lin > -0.06 && lin < 1.12) {
+        o = Math.min(THREE.MathUtils.smoothstep(lin, 0, 0.18), 1 - THREE.MathUtils.smoothstep(lin, 0.82, 1));
+      }
+      c.el.style.opacity = o;
+      c.el.style.transform = 'translateY(' + ((1 - o) * 22) + 'px)';
+    });
+
+    /* year + hud */
+    var yv = map2(YEARS, p);
+    var label = p > 0.965 ? 'YEAR —' : 'YEAR ' + Math.round(yv);
+    if (label !== yrLast) { yrLast = label; yrT.textContent = label; }
+    progF.style.width = (p * 100) + '%';
+    hint.style.opacity = p < 0.01 ? 1 : 0;
+    glEl.classList.toggle('off', p > 0.992);
+    yrEl.classList.toggle('on', p < 0.985);
+
+    renderer.render(scene, camera);
+  }
+  requestAnimationFrame(frame);
+
+  addEventListener('resize', function(){
+    renderer.setSize(innerWidth, innerHeight);
+    camera.aspect = innerWidth / innerHeight;
+    camera.updateProjectionMatrix();
+    measure();
+  });
+})();
+</script>
+</body>
+</html>
