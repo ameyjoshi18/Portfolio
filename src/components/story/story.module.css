@@ -1,0 +1,130 @@
+.story {
+  padding: 0 clamp(1.5rem, 5vw, 5rem) var(--space-18);
+}
+
+.storyHeader {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--space-3);
+  min-height: 72svh;
+  padding: var(--space-8) 0;
+  align-content: space-between;
+}
+
+.kicker,
+.chapterMeta,
+.chapterMedia figcaption {
+  font-family: var(--font-mono), monospace;
+  color: var(--steel);
+  font-size: 0.7rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.storyHeader .kicker {
+  grid-column: 1 / 4;
+}
+
+.storyHeader h1 {
+  grid-column: 4 / 13;
+  align-self: end;
+  margin-bottom: 0;
+  font-size: var(--text-hero);
+  line-height: 0.86;
+  letter-spacing: -0.055em;
+}
+
+.storyHeader > p:last-child {
+  grid-column: 7 / 12;
+  color: var(--steel);
+  font-size: var(--text-lead);
+}
+
+.chapter {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--space-3);
+  min-height: 58svh;
+  padding: var(--space-8) 0 var(--space-12);
+  border-top: 1px solid var(--graphite);
+  align-content: start;
+}
+
+.chapterMeta {
+  grid-column: 1 / 4;
+}
+
+.chapterMeta p:first-child {
+  color: var(--signal-ink);
+}
+
+.chapterCopy {
+  grid-column: 4 / 11;
+}
+
+.chapterCopy h2 {
+  margin-bottom: var(--space-3);
+  font-size: var(--text-display);
+  line-height: 0.95;
+}
+
+.chapterCopy > p {
+  max-width: 45rem;
+  color: var(--steel);
+  font-size: var(--text-lead);
+}
+
+.chapterMedia {
+  position: relative;
+  grid-column: 7 / 13;
+  aspect-ratio: 4 / 3;
+  margin: var(--space-5) 0 0;
+  overflow: hidden;
+  background: var(--graphite);
+}
+
+.chapterMedia img {
+  object-fit: cover;
+}
+
+.chapterMedia figcaption {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 1;
+  padding: 0.75rem;
+  background: var(--graphite);
+  color: var(--ivory);
+}
+
+@media (max-width: 760px) {
+  .story {
+    padding-inline: 1.25rem;
+  }
+
+  .storyHeader,
+  .chapter {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .storyHeader .kicker,
+  .storyHeader h1,
+  .storyHeader > p:last-child,
+  .chapterMeta,
+  .chapterCopy,
+  .chapterMedia {
+    grid-column: 1;
+  }
+
+  .storyHeader {
+    padding: var(--space-5) 0 var(--space-8);
+  }
+
+  .storyHeader h1 {
+    font-size: clamp(4rem, 20vw, 7rem);
+  }
+
+  .chapter {
+    padding: var(--space-5) 0 var(--space-8);
+  }
+}
