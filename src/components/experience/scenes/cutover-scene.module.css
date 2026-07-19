@@ -1,0 +1,249 @@
+.scene {
+  position: relative;
+  min-height: 100svh;
+  overflow: clip;
+  border-top: 1px solid rgb(242 238 229 / 32%);
+  background: var(--obsidian);
+  color: var(--ivory);
+}
+
+.scene[data-cutover="webgl"] {
+  min-height: 165svh;
+}
+
+.stickyFrame {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--space-3);
+  min-height: 100svh;
+  padding: var(--space-10) clamp(1.5rem, 5vw, 5rem) var(--space-6);
+  align-content: center;
+}
+
+.scene[data-cutover="webgl"] .stickyFrame {
+  position: sticky;
+  top: 0;
+}
+
+.header {
+  z-index: 3;
+  grid-column: 1 / 13;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.header > p,
+.staticCaption,
+.workstreamList span {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.header > p {
+  grid-column: 1 / 4;
+  color: rgb(242 238 229 / 62%);
+}
+
+.header h2 {
+  grid-column: 4 / 12;
+  margin: 0;
+  max-width: 12ch;
+  font-size: var(--text-display);
+  line-height: 0.9;
+}
+
+.visualStack {
+  position: relative;
+  z-index: 1;
+  grid-column: 1 / 13;
+  min-height: clamp(16rem, 36vw, 31rem);
+}
+
+.staticVisual,
+.enhancementProbe,
+.canvasHost {
+  position: absolute;
+  inset: 0;
+}
+
+.staticVisual {
+  display: grid;
+  align-items: end;
+}
+
+.staticVisual svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.scene[data-cutover="webgl"] .staticVisual svg {
+  opacity: 0.18;
+}
+
+.releaseAxis,
+.truthLine,
+.workstreamPath {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+}
+
+.releaseAxis {
+  stroke: rgb(242 238 229 / 35%);
+  stroke-width: 1;
+}
+
+.truthLine {
+  stroke: rgb(231 161 26 / 50%);
+  stroke-width: 1;
+}
+
+.workstreamPath {
+  stroke: var(--ivory);
+  stroke-width: 1.4;
+}
+
+.laneOrigin {
+  fill: var(--obsidian);
+  stroke: var(--ivory);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.releaseSignal {
+  fill: var(--signal);
+}
+
+.staticCaption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  color: rgb(242 238 229 / 55%);
+}
+
+.enhancementProbe,
+.canvasHost,
+.canvas {
+  pointer-events: none;
+}
+
+.canvasHost,
+.canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.workstreamList {
+  z-index: 3;
+  grid-column: 4 / 13;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid rgb(242 238 229 / 24%);
+  list-style: none;
+}
+
+.workstreamList li {
+  min-width: 0;
+  padding: var(--space-2) 0.8rem 0;
+  border-right: 1px solid rgb(242 238 229 / 20%);
+}
+
+.workstreamList li:first-child {
+  padding-left: 0;
+}
+
+.workstreamList li:last-child {
+  border-right: 0;
+}
+
+.workstreamList span {
+  display: block;
+  margin-bottom: var(--space-2);
+  color: var(--signal);
+}
+
+.workstreamList h3 {
+  margin: 0;
+  font-size: clamp(1rem, 1.55vw, 1.55rem);
+  overflow-wrap: anywhere;
+}
+
+.workstreamList p {
+  margin-top: 0.45rem;
+  color: rgb(242 238 229 / 58%);
+  font-size: clamp(0.72rem, 0.85vw, 0.88rem);
+  line-height: 1.45;
+}
+
+@media (max-width: 1023px), (prefers-reduced-motion: reduce) {
+  .scene,
+  .scene[data-cutover="webgl"] {
+    min-height: auto;
+  }
+
+  .scene[data-cutover="webgl"] .stickyFrame {
+    position: relative;
+  }
+
+  .scene[data-cutover="webgl"] .staticVisual svg {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 760px) {
+  .stickyFrame {
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+    min-height: auto;
+    padding: var(--space-8) 1.25rem;
+  }
+
+  .header,
+  .visualStack,
+  .workstreamList {
+    grid-column: 1;
+  }
+
+  .header {
+    grid-template-columns: 1fr;
+  }
+
+  .header > p,
+  .header h2 {
+    grid-column: 1;
+  }
+
+  .visualStack {
+    min-height: 18rem;
+  }
+
+  .staticCaption {
+    left: 0;
+    right: auto;
+  }
+
+  .workstreamList {
+    grid-template-columns: 1fr;
+  }
+
+  .workstreamList li,
+  .workstreamList li:first-child {
+    display: grid;
+    grid-template-columns: 2rem minmax(7rem, 0.5fr) 1fr;
+    gap: var(--space-2);
+    padding: var(--space-2) 0;
+    border-right: 0;
+    border-bottom: 1px solid rgb(242 238 229 / 20%);
+  }
+
+  .workstreamList span,
+  .workstreamList p {
+    margin: 0;
+  }
+}

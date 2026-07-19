@@ -1,10 +1,11 @@
 import Link from "next/link";
 
-import { cutoverWorkstreams, dmtRail } from "@/content/experience";
+import { dmtRail } from "@/content/experience";
 import { site } from "@/content/site";
 
 import { SceneMarker } from "./SceneMarker";
 import styles from "./experience.module.css";
+import { CutoverScene } from "./scenes/CutoverScene";
 import { OpeningSequence } from "./scenes/OpeningSequence";
 import { RailsScene } from "./scenes/RailsScene";
 import { TranslationScene } from "./scenes/TranslationScene";
@@ -18,24 +19,7 @@ export function Experience() {
 
       <RailsScene model={dmtRail} />
 
-      <section
-        className={`${styles.scene} ${styles.cutover}`}
-        data-scene="cutover"
-        aria-label="Cutover"
-      >
-        <header className={styles.sceneHeader}>
-          <p>04 / Cutover</p>
-          <h2>Parallel work. One release window.</h2>
-        </header>
-        <ol className={styles.workstreamList}>
-          {cutoverWorkstreams.map((stream) => (
-            <li key={stream.id}>
-              <h3>{stream.label}</h3>
-              <p>{stream.responsibility}</p>
-            </li>
-          ))}
-        </ol>
-      </section>
+      <CutoverScene />
 
       <section
         className={styles.scene}

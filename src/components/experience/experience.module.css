@@ -150,8 +150,7 @@
 }
 
 .translationList,
-.railList,
-.workstreamList {
+.railList {
   grid-column: 4 / 13;
   padding: 0;
   margin: 0;
@@ -175,15 +174,13 @@
 }
 
 .translationList h3,
-.railList h3,
-.workstreamList h3 {
+.railList h3 {
   margin: 0;
   font-size: clamp(1.4rem, 2vw, 2.2rem);
 }
 
 .translationList p,
 .railList p,
-.workstreamList p,
 .editorialNote p {
   max-width: 42rem;
   color: var(--steel);
@@ -195,29 +192,6 @@
   font-family: var(--font-display), serif;
   font-size: clamp(1.8rem, 3vw, 3.2rem);
   line-height: 1;
-}
-
-.cutover {
-  background: var(--obsidian);
-  color: var(--ivory);
-  border-top-color: rgb(242 238 229 / 35%);
-}
-
-.cutover .sceneHeader > p,
-.cutover .workstreamList p {
-  color: rgb(242 238 229 / 65%);
-}
-
-.workstreamList {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  border-top: 1px solid rgb(242 238 229 / 25%);
-}
-
-.workstreamList li {
-  min-height: 17rem;
-  padding: var(--space-3) 1rem;
-  border-right: 1px solid rgb(242 238 229 / 25%);
 }
 
 .editorialNote {
@@ -281,11 +255,10 @@
   .fragments,
   .identity,
   .sceneHeader,
-  .translationList,
-  .railList,
-  .railQuestion,
-  .workstreamList,
-  .editorialNote,
+    .translationList,
+    .railList,
+    .railQuestion,
+    .editorialNote,
   .openLine > p,
   .openLine h2,
   .openLine a,
@@ -340,13 +313,4 @@
     grid-column: 2;
   }
 
-  .workstreamList {
-    grid-template-columns: 1fr;
-  }
-
-  .workstreamList li {
-    min-height: auto;
-    border-right: 0;
-    border-bottom: 1px solid rgb(242 238 229 / 25%);
-  }
 }
