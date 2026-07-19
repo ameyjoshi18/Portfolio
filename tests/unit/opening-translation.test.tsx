@@ -1,0 +1,30 @@
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+
+import { OpeningSequence } from "@/components/experience/scenes/OpeningSequence";
+import { TranslationExplorer } from "@/components/experience/scenes/TranslationExplorer";
+
+it("keeps identity and stakeholder fragments readable before enhancement", () => {
+  render(<OpeningSequence />);
+
+  expect(
+    screen.getByRole("heading", {
+      level: 1,
+      name: /Amey Joshi.*Complexity in.*Clarity out/i,
+    }),
+  ).toBeVisible();
+  expect(screen.getAllByTestId("stakeholder-fragment")).toHaveLength(4);
+});
+
+it("lets keyboard users inspect every translation stage", async () => {
+  const user = userEvent.setup();
+  render(<TranslationExplorer />);
+
+  expect(screen.getAllByRole("button")).toHaveLength(5);
+  await user.click(screen.getByRole("button", { name: /acceptance/i }));
+  expect(screen.getByRole("button", { name: /acceptance/i })).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
+  expect(screen.getByText(/shared definition of done/i)).toBeVisible();
+});

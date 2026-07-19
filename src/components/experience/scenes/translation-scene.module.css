@@ -1,0 +1,143 @@
+.scene {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--space-3);
+  min-height: 88svh;
+  padding: var(--space-12) clamp(1.5rem, 5vw, 5rem);
+  border-top: 1px solid var(--graphite);
+  align-content: center;
+}
+
+.header {
+  grid-column: 1 / 13;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--space-3);
+  margin-bottom: var(--space-8);
+}
+
+.header > p,
+.activeStage > p,
+.stageControls button span {
+  font-family: var(--font-mono), monospace;
+  color: var(--steel);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.header > p {
+  grid-column: 1 / 4;
+}
+
+.header h2 {
+  grid-column: 4 / 12;
+  margin-bottom: 0;
+  font-size: var(--text-display);
+  line-height: 0.92;
+}
+
+.explorer {
+  grid-column: 4 / 13;
+}
+
+.stageControls {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  border-top: 1px solid var(--hairline);
+}
+
+.stageControls button {
+  min-height: 8rem;
+  padding: 1rem;
+  border: 0;
+  border-right: 1px solid var(--hairline);
+  background: transparent;
+  color: var(--graphite);
+  font-family: var(--font-display), serif;
+  font-size: clamp(1.2rem, 1.8vw, 2rem);
+  text-align: left;
+  cursor: pointer;
+}
+
+.stageControls button span {
+  display: block;
+  margin-bottom: var(--space-2);
+}
+
+.stageControls button[aria-pressed="true"] {
+  background: rgb(22 26 29 / 5%);
+}
+
+.activeRule {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 20%;
+  height: 2px;
+  background: var(--signal);
+  transform-origin: left center;
+}
+
+.activeStage {
+  display: grid;
+  grid-template-columns: minmax(8rem, 0.3fr) minmax(0, 1fr);
+  gap: var(--space-3);
+  min-height: 12rem;
+  padding: var(--space-5) 0;
+  border-top: 1px solid var(--graphite);
+}
+
+.activeStage > p {
+  color: var(--signal-ink);
+}
+
+.activeStage strong {
+  max-width: 42rem;
+  font-family: var(--font-display), serif;
+  font-size: clamp(1.8rem, 3vw, 3.4rem);
+  font-weight: 400;
+  line-height: 1;
+}
+
+@media (max-width: 760px) {
+  .scene,
+  .header {
+    grid-template-columns: 1fr;
+  }
+
+  .scene {
+    min-height: auto;
+    padding: var(--space-8) 1.25rem;
+  }
+
+  .header > p,
+  .header h2,
+  .explorer {
+    grid-column: 1;
+  }
+
+  .stageControls {
+    grid-template-columns: 1fr;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .stageControls button {
+    min-height: 5.25rem;
+    border-right: 0;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .activeRule {
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    height: 20%;
+  }
+
+  .activeStage {
+    grid-template-columns: 1fr;
+  }
+}

@@ -14,6 +14,8 @@ type NavigatorCapabilities = Navigator & {
 };
 
 function supportsWebGL(): boolean {
+  if (typeof window.WebGLRenderingContext === "undefined") return false;
+
   try {
     const canvas = document.createElement("canvas");
     return Boolean(
@@ -28,13 +30,16 @@ export function useMotionPolicy(): MotionPolicy {
   const [policy, setPolicy] = useState<MotionPolicy>(staticMotionPolicy);
 
   useEffect(() => {
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const media =
+      typeof window.matchMedia === "function"
+        ? window.matchMedia("(prefers-reduced-motion: reduce)")
+        : null;
     const capabilities = navigator as NavigatorCapabilities;
 
     const update = () => {
       setPolicy(
         resolveMotionPolicy({
-          reducedMotion: media.matches,
+          reducedMotion: media?.matches ?? false,
           saveData: Boolean(capabilities.connection?.saveData),
           viewportWidth: window.innerWidth,
           webgl: supportsWebGL(),
@@ -45,11 +50,11 @@ export function useMotionPolicy(): MotionPolicy {
     };
 
     update();
-    media.addEventListener("change", update);
+    media?.addEventListener("change", update);
     window.addEventListener("resize", update, { passive: true });
 
     return () => {
-      media.removeEventListener("change", update);
+      media?.removeEventListener("change", update);
       window.removeEventListener("resize", update);
     };
   }, []);

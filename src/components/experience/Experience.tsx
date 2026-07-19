@@ -1,65 +1,19 @@
 import Link from "next/link";
 
-import {
-  cutoverWorkstreams,
-  dmtRail,
-  stakeholderFragments,
-  translationStages,
-} from "@/content/experience";
+import { cutoverWorkstreams, dmtRail } from "@/content/experience";
 import { site } from "@/content/site";
 
 import { SceneMarker } from "./SceneMarker";
 import styles from "./experience.module.css";
+import { OpeningSequence } from "./scenes/OpeningSequence";
+import { TranslationScene } from "./scenes/TranslationScene";
 
 export function Experience() {
   return (
     <div className={styles.experience}>
       <SceneMarker />
-
-      <section
-        className={`${styles.scene} ${styles.opening}`}
-        data-scene="unresolved"
-        aria-label="Unresolved and one truth"
-      >
-        <p className={styles.sceneIndex}>01 / Unresolved</p>
-        <div className={styles.fragments}>
-          {stakeholderFragments.map((fragment) => (
-            <div className={styles.fragment} key={fragment.id}>
-              <p>{fragment.label}</p>
-              <span>{fragment.text}</span>
-            </div>
-          ))}
-        </div>
-        <div className={styles.identity}>
-          <p>{site.role}</p>
-          <h1>
-            <span>Amey Joshi</span>
-            <span>Complexity in. Clarity out.</span>
-          </h1>
-          <p>{site.positioning}</p>
-        </div>
-        <span className={styles.oneTruthLine} aria-hidden="true" />
-      </section>
-
-      <section
-        className={styles.scene}
-        data-scene="translation"
-        aria-label="Translation"
-      >
-        <header className={styles.sceneHeader}>
-          <p>02 / Translation</p>
-          <h2>One requirement. Five changes of state.</h2>
-        </header>
-        <ol className={styles.translationList}>
-          {translationStages.map((stage, index) => (
-            <li key={stage.id}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <h3>{stage.label}</h3>
-              <p>{stage.detail}</p>
-            </li>
-          ))}
-        </ol>
-      </section>
+      <OpeningSequence />
+      <TranslationScene />
 
       <section
         className={styles.scene}
