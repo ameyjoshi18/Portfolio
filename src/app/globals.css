@@ -1,6 +1,26 @@
 :root {
   --ivory: #f2eee5;
   --graphite: #161a1d;
+  --obsidian: #070a0d;
+  --signal: #e7a11a;
+  --signal-ink: #765000;
+  --steel: #525b60;
+  --fault: #963d32;
+  --hairline: rgb(22 26 29 / 18%);
+  --font-display: var(--font-instrument-serif);
+  --font-sans: var(--font-ibm-plex-sans);
+  --font-mono: var(--font-ibm-plex-mono);
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-5: 2.5rem;
+  --space-8: 4rem;
+  --space-12: 6rem;
+  --space-18: 9rem;
+  --text-hero: clamp(4rem, 10vw, 9rem);
+  --text-display: clamp(3rem, 6vw, 6rem);
+  --text-section: clamp(2rem, 4vw, 4rem);
+  --text-lead: clamp(1.125rem, 1.5vw, 1.375rem);
   color: var(--graphite);
   background: var(--ivory);
 }
@@ -18,4 +38,55 @@ body {
   margin: 0;
   background: var(--ivory);
   color: var(--graphite);
+  font-family: var(--font-sans), sans-serif;
+  line-height: 1.65;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-block-start: 0;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display), serif;
+  font-weight: 400;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.2em;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+  outline: 2px solid var(--graphite);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 2px var(--signal);
+}
+
+::selection {
+  background: var(--signal);
+  color: var(--obsidian);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
