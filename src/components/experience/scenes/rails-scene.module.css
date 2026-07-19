@@ -1,0 +1,178 @@
+.scene {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--space-3);
+  min-height: 100svh;
+  padding: var(--space-12) clamp(1.5rem, 5vw, 5rem);
+  overflow: clip;
+  border-top: 1px solid var(--graphite);
+  align-content: center;
+}
+
+.header {
+  grid-column: 1 / 13;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.header > p,
+.nodeList > li > span,
+.nodeList li div > p {
+  font-family: var(--font-mono), monospace;
+  color: var(--steel);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.header > p {
+  grid-column: 1 / 4;
+}
+
+.header h2 {
+  grid-column: 4 / 12;
+  margin-bottom: var(--space-5);
+  font-size: var(--text-display);
+  line-height: 0.92;
+}
+
+.visual {
+  grid-column: 1 / 13;
+  min-height: 24rem;
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.visual svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.basePath,
+.activePath {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.basePath {
+  stroke: var(--graphite);
+  stroke-width: 1.5;
+}
+
+.activePath {
+  stroke: var(--signal);
+  stroke-width: 3;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.nodeHalo {
+  fill: var(--ivory);
+  stroke: var(--graphite);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.nodeCore {
+  fill: var(--graphite);
+}
+
+.flowMarker {
+  fill: var(--signal);
+  stroke: var(--obsidian);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+  filter: drop-shadow(0 0 7px rgb(231 161 26 / 55%));
+}
+
+.flowMarker[data-static="true"] {
+  display: none;
+}
+
+.nodeList {
+  grid-column: 4 / 13;
+  padding: 0;
+  margin: var(--space-5) 0 0;
+  list-style: none;
+}
+
+.nodeList li {
+  display: grid;
+  grid-template-columns: 3rem minmax(10rem, 0.4fr) minmax(0, 1fr);
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+  border-top: 1px solid var(--hairline);
+}
+
+.nodeList li div > p {
+  margin-bottom: 0.25rem;
+  color: var(--signal-ink);
+}
+
+.nodeList h3 {
+  margin-bottom: 0;
+  font-size: clamp(1.4rem, 2vw, 2.2rem);
+}
+
+.nodeList li > p {
+  max-width: 38rem;
+  color: var(--steel);
+}
+
+.question {
+  grid-column: 7 / 12;
+  margin: var(--space-8) 0 0;
+  padding-left: var(--space-3);
+  border-left: 2px solid var(--signal);
+  font-family: var(--font-display), serif;
+  font-size: clamp(2rem, 3.5vw, 4rem);
+  line-height: 0.98;
+}
+
+@media (max-width: 760px) {
+  .scene,
+  .header {
+    grid-template-columns: 1fr;
+  }
+
+  .scene {
+    min-height: auto;
+    padding: var(--space-8) 1.25rem;
+  }
+
+  .header > p,
+  .header h2,
+  .visual,
+  .nodeList,
+  .question {
+    grid-column: 1;
+  }
+
+  .visual {
+    min-height: 42rem;
+  }
+
+  .visual svg {
+    height: 42rem;
+  }
+
+  .nodeList li {
+    grid-template-columns: 2rem 1fr;
+  }
+
+  .nodeList li > p {
+    grid-column: 2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .activePath,
+  .flowMarker {
+    display: none;
+  }
+}

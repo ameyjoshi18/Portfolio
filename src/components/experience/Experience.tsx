@@ -6,6 +6,7 @@ import { site } from "@/content/site";
 import { SceneMarker } from "./SceneMarker";
 import styles from "./experience.module.css";
 import { OpeningSequence } from "./scenes/OpeningSequence";
+import { RailsScene } from "./scenes/RailsScene";
 import { TranslationScene } from "./scenes/TranslationScene";
 
 export function Experience() {
@@ -15,26 +16,7 @@ export function Experience() {
       <OpeningSequence />
       <TranslationScene />
 
-      <section
-        className={styles.scene}
-        data-scene="rails"
-        aria-label="Rails"
-      >
-        <header className={styles.sceneHeader}>
-          <p>03 / Rails</p>
-          <h2>The customer sees a result. The system sees every leg.</h2>
-        </header>
-        <ol className={styles.railList}>
-          {dmtRail.nodes.map((node, index) => (
-            <li key={node.id}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <h3>{node.label}</h3>
-              <p>{node.detail}</p>
-            </li>
-          ))}
-        </ol>
-        <p className={styles.railQuestion}>{dmtRail.reconciliationQuestion}</p>
-      </section>
+      <RailsScene model={dmtRail} />
 
       <section
         className={`${styles.scene} ${styles.cutover}`}
