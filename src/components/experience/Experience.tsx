@@ -1,12 +1,14 @@
-import Link from "next/link";
-
 import { dmtRail } from "@/content/experience";
+import { getPublishedCaseStudies, getStoryChapters } from "@/content/selectors";
 import { site } from "@/content/site";
 
 import { SceneMarker } from "./SceneMarker";
 import styles from "./experience.module.css";
 import { CutoverScene } from "./scenes/CutoverScene";
+import { EvidenceRegisterScene } from "./scenes/EvidenceRegisterScene";
+import { OpenLine } from "./scenes/OpenLine";
 import { OpeningSequence } from "./scenes/OpeningSequence";
+import { OriginScene } from "./scenes/OriginScene";
 import { RailsScene } from "./scenes/RailsScene";
 import { TranslationScene } from "./scenes/TranslationScene";
 
@@ -20,54 +22,9 @@ export function Experience() {
       <RailsScene model={dmtRail} />
 
       <CutoverScene />
-
-      <section
-        className={styles.scene}
-        data-scene="evidence"
-        aria-label="Evidence register"
-      >
-        <header className={styles.sceneHeader}>
-          <p>05 / Evidence register</p>
-          <h2>Proof earns its place.</h2>
-        </header>
-        <div className={styles.editorialNote}>
-          <p>
-            Bounded engagement notes will appear only after their facts,
-            contribution and disclosure boundaries are confirmed.
-          </p>
-          <Link href="/work">Open the work register</Link>
-        </div>
-      </section>
-
-      <section
-        className={styles.scene}
-        data-scene="origin"
-        aria-label="Before the bank"
-      >
-        <header className={styles.sceneHeader}>
-          <p>06 / Before the bank</p>
-          <h2>Curiosity became a company before it became a career.</h2>
-        </header>
-        <div className={styles.editorialNote}>
-          <p>
-            Kodoli. College software used by real people. Zenox Technologies.
-            RB Esports. Two lockdowns. Then the move into Business Analysis and
-            banking.
-          </p>
-          <Link href="/story">Read the human route</Link>
-        </div>
-      </section>
-
-      <section
-        className={`${styles.scene} ${styles.openLine}`}
-        data-scene="open-line"
-        aria-label="Open line"
-      >
-        <p>07 / Open line</p>
-        <h2>Bring me the complicated version.</h2>
-        <a href={`mailto:${site.email}`}>{site.email}</a>
-        <span className={styles.signatureLine} aria-hidden="true" />
-      </section>
+      <EvidenceRegisterScene caseStudies={getPublishedCaseStudies()} />
+      <OriginScene chapters={getStoryChapters()} />
+      <OpenLine profile={site} />
     </div>
   );
 }
