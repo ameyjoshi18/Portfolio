@@ -1,0 +1,21 @@
+:root {
+  --ivory: #f2eee5;
+  --graphite: #161a1d;
+  color: var(--graphite);
+  background: var(--ivory);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  background: var(--ivory);
+  color: var(--graphite);
+}
