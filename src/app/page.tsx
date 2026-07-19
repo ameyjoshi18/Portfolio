@@ -1,14 +1,15 @@
+import { Experience } from "@/components/experience/Experience";
+import { ExperienceMotionProvider } from "@/components/experience/ExperienceMotionProvider";
+import { SiteShell } from "@/components/shell/SiteShell";
+
 export default function Home() {
   return (
-    <main id="main-content">
-      <h1>
-        <span>Amey Joshi</span>{" "}
-        <span>Complexity in. Clarity out.</span>
-      </h1>
-      <p>
-        I turn business intent, regulatory constraint and technical reality
-        into one system teams can ship.
-      </p>
-    </main>
+    <SiteShell active="experience">
+      <main id="main-content">
+        <ExperienceMotionProvider>
+          <Experience />
+        </ExperienceMotionProvider>
+      </main>
+    </SiteShell>
   );
 }
