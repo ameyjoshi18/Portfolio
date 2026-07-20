@@ -15,7 +15,8 @@ it.each([
     { dom: "resolved", cutover: "static" },
   ],
   [{ ...capable, saveData: true }, { dom: "resolved", cutover: "static" }],
-  [{ ...capable, viewportWidth: 767 }, { dom: "full", cutover: "static" }],
+  [{ ...capable, viewportWidth: 767 }, { dom: "resolved", cutover: "static" }],
+  [{ ...capable, viewportWidth: 1023 }, { dom: "resolved", cutover: "static" }],
   [{ ...capable, webgl: false }, { dom: "full", cutover: "static" }],
   [
     { ...capable, hardwareConcurrency: 2 },

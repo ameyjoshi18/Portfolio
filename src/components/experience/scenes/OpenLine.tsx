@@ -9,6 +9,7 @@ type OpenLineProps = {
 export function OpenLine({ profile }: OpenLineProps) {
   return (
     <section
+      id="contact"
       className={`${styles.scene} ${styles.openLine}`}
       data-scene="open-line"
       aria-label="Open line"

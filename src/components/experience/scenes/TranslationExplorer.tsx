@@ -31,8 +31,16 @@ export function TranslationExplorer() {
           </button>
         ))}
         <motion.span
-          className={styles.activeRule}
+          className={`${styles.activeRule} ${styles.horizontalRule}`}
+          data-active-rule="horizontal"
           animate={{ x: `${activeIndex * 100}%` }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          aria-hidden="true"
+        />
+        <motion.span
+          className={`${styles.activeRule} ${styles.verticalRule}`}
+          data-active-rule="vertical"
+          animate={{ y: `${activeIndex * 100}%` }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           aria-hidden="true"
         />

@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 import styles from "./shell.module.css";
 
 type ViewSwitcherProps = {
@@ -8,20 +6,20 @@ type ViewSwitcherProps = {
 
 export function ViewSwitcher({ active }: ViewSwitcherProps) {
   return (
-    <div className={styles.viewSwitcher} aria-label="Portfolio view">
-      <Link
+    <nav className={styles.viewSwitcher} aria-label="Portfolio view">
+      <a
         href="/"
         aria-current={active === "experience" ? "page" : undefined}
       >
         Experience
-      </Link>
+      </a>
       <span aria-hidden="true">/</span>
-      <Link
+      <a
         href="/index"
         aria-current={active === "index" ? "page" : undefined}
       >
         Index
-      </Link>
-    </div>
+      </a>
+    </nav>
   );
 }

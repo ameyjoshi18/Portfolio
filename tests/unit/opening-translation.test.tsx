@@ -18,9 +18,11 @@ it("keeps identity and stakeholder fragments readable before enhancement", () =>
 
 it("lets keyboard users inspect every translation stage", async () => {
   const user = userEvent.setup();
-  render(<TranslationExplorer />);
+  const { container } = render(<TranslationExplorer />);
 
   expect(screen.getAllByRole("button")).toHaveLength(5);
+  expect(container.querySelector('[data-active-rule="horizontal"]')).toBeInTheDocument();
+  expect(container.querySelector('[data-active-rule="vertical"]')).toBeInTheDocument();
   await user.click(screen.getByRole("button", { name: /acceptance/i }));
   expect(screen.getByRole("button", { name: /acceptance/i })).toHaveAttribute(
     "aria-pressed",

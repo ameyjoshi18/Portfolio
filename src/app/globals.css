@@ -7,14 +7,17 @@
   --steel: #525b60;
   --fault: #963d32;
   --hairline: rgb(22 26 29 / 18%);
-  --font-display: var(--font-instrument-serif);
-  --font-sans: var(--font-ibm-plex-sans);
-  --font-mono: var(--font-ibm-plex-mono);
+  --font-display: "Instrument Serif";
+  --font-sans: "IBM Plex Sans";
+  --font-mono: "IBM Plex Mono";
   --space-1: 0.5rem;
   --space-2: 1rem;
   --space-3: 1.5rem;
+  --space-4: 2rem;
   --space-5: 2.5rem;
+  --space-6: 3rem;
   --space-8: 4rem;
+  --space-10: 5rem;
   --space-12: 6rem;
   --space-18: 9rem;
   --text-hero: clamp(4rem, 10vw, 9rem);
@@ -31,6 +34,7 @@
 
 html {
   scroll-behavior: auto;
+  color-scheme: light;
 }
 
 body {
@@ -39,6 +43,7 @@ body {
   background: var(--ivory);
   color: var(--graphite);
   font-family: var(--font-sans), sans-serif;
+  font-variant-numeric: tabular-nums;
   line-height: 1.65;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -56,6 +61,13 @@ h2,
 h3 {
   font-family: var(--font-display), serif;
   font-weight: 400;
+  text-wrap: balance;
+}
+
+p,
+li,
+dd {
+  text-wrap: pretty;
 }
 
 a {
@@ -64,9 +76,25 @@ a {
   text-underline-offset: 0.2em;
 }
 
+@media (hover: hover) {
+  a:hover {
+    text-decoration-color: var(--signal-ink);
+  }
+}
+
+a:active,
+button:active {
+  opacity: 0.72;
+}
+
 button,
 a {
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+button {
+  font: inherit;
 }
 
 :focus-visible {

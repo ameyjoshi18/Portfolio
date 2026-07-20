@@ -1,7 +1,7 @@
 "use client";
 
 import { useScroll } from "motion/react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 import { cutoverWorkstreams } from "@/content/experience";
 import { useMotionPolicy } from "@/hooks/useMotionPolicy";
@@ -19,6 +19,10 @@ export function CutoverScene({ policy: policyOverride }: CutoverSceneProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const detectedPolicy = useMotionPolicy();
   const policy = policyOverride ?? detectedPolicy;
+  const [enhancementFailed, setEnhancementFailed] = useState(false);
+  const effectivePolicy: MotionPolicy = enhancementFailed
+    ? { ...policy, cutover: "static" }
+    : policy;
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end end"],
@@ -28,8 +32,8 @@ export function CutoverScene({ policy: policyOverride }: CutoverSceneProps) {
     <section
       className={styles.scene}
       data-scene="cutover"
-      data-motion={policy.dom}
-      data-cutover={policy.cutover}
+      data-motion={effectivePolicy.dom}
+      data-cutover={effectivePolicy.cutover}
       aria-label="Cutover"
       ref={sectionRef}
     >
@@ -41,7 +45,11 @@ export function CutoverScene({ policy: policyOverride }: CutoverSceneProps) {
 
         <div className={styles.visualStack}>
           <CutoverStatic />
-          <CutoverEnhancement policy={policy} progress={scrollYProgress} />
+          <CutoverEnhancement
+            policy={effectivePolicy}
+            progress={scrollYProgress}
+            onFailure={() => setEnhancementFailed(true)}
+          />
         </div>
 
         <ol className={styles.workstreamList}>

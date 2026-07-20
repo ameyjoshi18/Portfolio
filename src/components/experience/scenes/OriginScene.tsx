@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 
 import type { StoryChapter } from "@/content/schema";
 
@@ -57,9 +56,9 @@ export function OriginScene({ chapters }: OriginSceneProps) {
         ))}
       </ol>
 
-      <Link className={styles.originLink} href="/story">
+      <a className={styles.originLink} href="/story">
         Read the complete human route
-      </Link>
+      </a>
     </section>
   );
 }

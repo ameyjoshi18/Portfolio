@@ -13,18 +13,30 @@ type NavigatorCapabilities = Navigator & {
   deviceMemory?: number;
 };
 
-function supportsWebGL(): boolean {
-  if (typeof window.WebGLRenderingContext === "undefined") return false;
+export function createWebGLCapabilityDetector() {
+  let cached: boolean | undefined;
 
-  try {
-    const canvas = document.createElement("canvas");
-    return Boolean(
-      canvas.getContext("webgl2") || canvas.getContext("webgl"),
-    );
-  } catch {
-    return false;
-  }
+  return (): boolean => {
+    if (cached !== undefined) return cached;
+    if (typeof window.WebGLRenderingContext === "undefined") {
+      cached = false;
+      return cached;
+    }
+
+    try {
+      const canvas = document.createElement("canvas");
+      cached = Boolean(
+        canvas.getContext("webgl2") || canvas.getContext("webgl"),
+      );
+    } catch {
+      cached = false;
+    }
+
+    return cached;
+  };
 }
+
+const supportsWebGL = createWebGLCapabilityDetector();
 
 export function useMotionPolicy(): MotionPolicy {
   const [policy, setPolicy] = useState<MotionPolicy>(staticMotionPolicy);

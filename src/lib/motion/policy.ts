@@ -29,7 +29,7 @@ export function resolveMotionPolicy(input: MotionPolicyInput): MotionPolicy {
     (input.deviceMemory ?? 8) >= 4;
 
   return {
-    dom: "full",
+    dom: input.viewportWidth >= 1024 ? "full" : "resolved",
     cutover: capableDesktop ? "webgl" : "static",
   };
 }

@@ -14,13 +14,16 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:e2e": "playwright test",
-    "test:a11y": "playwright test tests/e2e/accessibility.spec.ts",
+    "test:e2e": "next build && playwright test",
+    "test:a11y": "next build && playwright test tests/e2e/accessibility.spec.ts",
     "validate": "pnpm lint && pnpm typecheck && pnpm test && pnpm build",
     "analyze": "cross-env ANALYZE=true next build",
-    "lighthouse": "lhci autorun"
+    "lighthouse": "next build && lhci autorun"
   },
   "dependencies": {
+    "@fontsource/ibm-plex-mono": "5.3.0",
+    "@fontsource/ibm-plex-sans": "5.3.0",
+    "@fontsource/instrument-serif": "5.3.0",
     "@react-three/fiber": "9.6.1",
     "motion": "12.42.2",
     "next": "16.2.10",

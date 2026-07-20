@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 import type { CaseStudy } from "@/content/schema";
 
 import styles from "./work.module.css";
@@ -31,7 +29,7 @@ export function WorkRegister({ caseStudies }: WorkRegisterProps) {
               <div>
                 <p className={styles.itemPremise}>{study.premise}</p>
                 <h2>
-                  <Link href={`/work/${study.slug}`}>{study.title}</Link>
+                  <a href={`/work/${study.slug}`}>{study.title}</a>
                 </h2>
                 <p className={styles.itemSummary}>{study.summary}</p>
               </div>
@@ -51,7 +49,7 @@ export function WorkRegister({ caseStudies }: WorkRegisterProps) {
               here only when their scope, contribution and public facts are
               verified.
             </p>
-            <Link href="/index">Use the domain Index in the meantime</Link>
+            <a href="/index">Use the domain Index in the meantime</a>
           </div>
         </section>
       )}

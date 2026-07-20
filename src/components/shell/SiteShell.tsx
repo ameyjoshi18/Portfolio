@@ -7,9 +7,14 @@ import styles from "./shell.module.css";
 type SiteShellProps = {
   active: "experience" | "index" | "work" | "story";
   children: ReactNode;
+  includeFooter?: boolean;
 };
 
-export function SiteShell({ active, children }: SiteShellProps) {
+export function SiteShell({
+  active,
+  children,
+  includeFooter = true,
+}: SiteShellProps) {
   return (
     <div className={styles.shell}>
       <a className={styles.skipLink} href="#main-content">
@@ -17,7 +22,7 @@ export function SiteShell({ active, children }: SiteShellProps) {
       </a>
       <SiteHeader active={active} />
       {children}
-      <ContactFooter />
+      {includeFooter ? <ContactFooter /> : null}
     </div>
   );
 }

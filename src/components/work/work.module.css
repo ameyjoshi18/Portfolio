@@ -231,6 +231,14 @@
     grid-template-columns: 2rem 1fr;
   }
 
+  .emptyRegister {
+    grid-template-columns: 1fr;
+  }
+
+  .emptyRegister > * {
+    grid-column: 1;
+  }
+
   .itemCapabilities {
     grid-column: 2;
     text-align: left;

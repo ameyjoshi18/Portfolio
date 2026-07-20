@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 import type { CaseStudy } from "@/content/schema";
 
 import styles from "./work.module.css";
@@ -36,7 +34,7 @@ export function CaseStudyArticle({ study }: CaseStudyArticleProps) {
   return (
     <article className={styles.caseStudy}>
       <header className={styles.caseHeader}>
-        <Link href="/work">← Work register</Link>
+        <a href="/work">← Work register</a>
         <p className={styles.kicker}>Bounded engagement</p>
         <h1>{study.title}</h1>
         <p className={styles.caseSummary}>{study.summary}</p>

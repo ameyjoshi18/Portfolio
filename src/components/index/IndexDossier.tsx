@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 import type { CaseStudy, Role } from "@/content/schema";
 import { site } from "@/content/site";
 
@@ -24,9 +22,9 @@ export function IndexDossier({ caseStudies, roles }: IndexDossierProps) {
           <p className={styles.headline}>{site.headline}</p>
           <p className={styles.positioning}>{site.positioning}</p>
         </div>
-        <Link className={styles.experienceLink} href="/">
+        <a className={styles.experienceLink} href="/">
           Enter the Experience <span aria-hidden="true">↗</span>
-        </Link>
+        </a>
       </header>
 
       <section className={styles.section} aria-labelledby="selected-work">
@@ -44,7 +42,7 @@ export function IndexDossier({ caseStudies, roles }: IndexDossierProps) {
                   </p>
                   <div>
                     <h3>
-                      <Link href={`/work/${study.slug}`}>{study.title}</Link>
+                      <a href={`/work/${study.slug}`}>{study.title}</a>
                     </h3>
                     <p>{study.summary}</p>
                   </div>
@@ -58,7 +56,7 @@ export function IndexDossier({ caseStudies, roles }: IndexDossierProps) {
                 Detailed engagement notes are being prepared; the domain
                 register below remains available.
               </p>
-              <Link href="/work">Open the work register</Link>
+              <a href="/work">Open the work register</a>
             </div>
           )}
         </div>
@@ -134,7 +132,7 @@ export function IndexDossier({ caseStudies, roles }: IndexDossierProps) {
           it is the habit of turning a difficult system into something people
           can act on together.
         </p>
-        <Link href="/story">Read the story</Link>
+        <a href="/story">Read the story</a>
       </section>
     </article>
   );

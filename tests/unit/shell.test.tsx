@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 
 import { SiteShell } from "@/components/shell/SiteShell";
 
@@ -27,6 +27,21 @@ it("provides skip navigation, ordinary route links and stable contact", () => {
     "page",
   );
   expect(screen.getByRole("contentinfo")).toHaveAttribute("id", "contact");
+  expect(
+    screen.getByRole("navigation", { name: "Portfolio view" }),
+  ).toBeVisible();
+  expect(
+    within(screen.getByRole("banner"))
+      .getAllByRole("link")
+      .map((link) => link.textContent?.replace(/\s+/g, " ").trim()),
+  ).toEqual([
+    "AMEY·JOSHI",
+    "Experience",
+    "Index",
+    "Work",
+    "Story",
+    "Contact",
+  ]);
   expect(
     screen.getByRole("link", { name: /ameyjoshi1881@gmail.com/i }),
   ).toBeVisible();

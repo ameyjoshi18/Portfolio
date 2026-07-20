@@ -7,6 +7,7 @@ import {
   getCaseStudyParams,
   getPublishedCaseStudy,
 } from "@/content/selectors";
+import { createPageMetadata } from "@/lib/pageMetadata";
 
 type WorkPageProps = {
   params: Promise<{ slug: string }>;
@@ -23,11 +24,11 @@ export async function generateMetadata({
   const study = getPublishedCaseStudy(slug);
   if (!study) return {};
 
-  return {
+  return createPageMetadata({
     title: `${study.title} — Amey Joshi`,
     description: study.summary,
-    alternates: { canonical: `/work/${study.slug}` },
-  };
+    path: `/work/${study.slug}`,
+  });
 }
 
 export default async function WorkDetailPage({ params }: WorkPageProps) {
@@ -38,7 +39,7 @@ export default async function WorkDetailPage({ params }: WorkPageProps) {
 
   return (
     <SiteShell active="work">
-      <main id="main-content">
+      <main id="main-content" tabIndex={-1}>
         <CaseStudyArticle study={study} />
       </main>
     </SiteShell>

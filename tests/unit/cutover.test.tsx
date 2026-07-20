@@ -3,9 +3,14 @@ import { beforeEach, vi } from "vitest";
 
 import { CutoverScene } from "@/components/experience/scenes/CutoverScene";
 
+const { canvasFailure } = vi.hoisted(() => ({
+  canvasFailure: { current: false },
+}));
+
 vi.mock("next/dynamic", () => ({
   default: () =>
     function MockCutoverCanvas() {
+      if (canvasFailure.current) throw new Error("WebGL render failed");
       return <div data-testid="cutover-canvas" />;
     },
 }));
@@ -35,6 +40,7 @@ class MockIntersectionObserver implements IntersectionObserver {
 }
 
 beforeEach(() => {
+  canvasFailure.current = false;
   disconnect.mockClear();
   vi.stubGlobal("IntersectionObserver", MockIntersectionObserver);
 });
@@ -87,4 +93,27 @@ it("mounts exactly one nearby canvas host and removes it when no longer eligible
 
   unmount();
   expect(disconnect).toHaveBeenCalled();
+});
+
+it("restores the full static cutover when the WebGL renderer fails", () => {
+  const consoleError = vi.spyOn(console, "error").mockImplementation(() => {});
+  canvasFailure.current = true;
+  const { container } = render(
+    <CutoverScene policy={{ dom: "full", cutover: "webgl" }} />,
+  );
+
+  act(() => {
+    intersectionCallback(
+      [{ isIntersecting: true } as IntersectionObserverEntry],
+      {} as IntersectionObserver,
+    );
+  });
+
+  expect(container.querySelector('[data-scene="cutover"]')).toHaveAttribute(
+    "data-cutover",
+    "static",
+  );
+  expect(screen.getByTestId("cutover-static")).toBeVisible();
+  expect(container.querySelector("[data-canvas-host]")).not.toBeInTheDocument();
+  consoleError.mockRestore();
 });

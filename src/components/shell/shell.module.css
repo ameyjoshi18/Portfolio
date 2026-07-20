@@ -58,9 +58,15 @@
 .navigation a,
 .viewSwitcher a {
   display: inline-flex;
+  min-width: 44px;
   min-height: 44px;
   align-items: center;
+  justify-content: center;
   text-decoration: none;
+}
+
+.navigation {
+  justify-self: end;
 }
 
 .navigation a[aria-current="page"],
@@ -70,8 +76,18 @@
   text-decoration-color: var(--signal-ink);
 }
 
+@media (hover: hover) {
+  .navigation a:hover,
+  .viewSwitcher a:hover,
+  .wordmark:hover,
+  .footerLinks a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--signal-ink);
+  }
+}
+
 .viewSwitcher {
-  justify-self: end;
+  justify-self: center;
   gap: 0.55rem;
   font-family: var(--font-mono), monospace;
   font-size: 0.68rem;
@@ -146,6 +162,7 @@
   .viewSwitcher {
     grid-column: 2;
     grid-row: 1;
+    justify-self: end;
   }
 
   .footer {

@@ -4,6 +4,7 @@ import { Component, type ReactNode } from "react";
 
 type CutoverErrorBoundaryProps = {
   children: ReactNode;
+  onError: () => void;
 };
 
 type CutoverErrorBoundaryState = {
@@ -18,6 +19,10 @@ export class CutoverErrorBoundary extends Component<
 
   static getDerivedStateFromError(): CutoverErrorBoundaryState {
     return { failed: true };
+  }
+
+  componentDidCatch() {
+    this.props.onError();
   }
 
   render() {

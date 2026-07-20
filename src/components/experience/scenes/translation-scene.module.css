@@ -70,6 +70,12 @@
   background: rgb(22 26 29 / 5%);
 }
 
+@media (hover: hover) {
+  .stageControls button:hover {
+    background: rgb(22 26 29 / 5%);
+  }
+}
+
 .activeRule {
   position: absolute;
   left: 0;
@@ -78,6 +84,10 @@
   height: 2px;
   background: var(--signal);
   transform-origin: left center;
+}
+
+.verticalRule {
+  display: none;
 }
 
 .activeStage {
@@ -135,6 +145,14 @@
     bottom: 0;
     width: 2px;
     height: 20%;
+  }
+
+  .horizontalRule {
+    display: none;
+  }
+
+  .verticalRule {
+    display: block;
   }
 
   .activeStage {

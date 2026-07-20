@@ -4,8 +4,8 @@ import { SiteShell } from "@/components/shell/SiteShell";
 
 export default function Home() {
   return (
-    <SiteShell active="experience">
-      <main id="main-content">
+    <SiteShell active="experience" includeFooter={false}>
+      <main id="main-content" tabIndex={-1}>
         <ExperienceMotionProvider>
           <Experience />
         </ExperienceMotionProvider>

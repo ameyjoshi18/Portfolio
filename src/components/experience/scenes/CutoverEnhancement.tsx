@@ -18,11 +18,13 @@ const LazyCutoverCanvas = dynamic(() => import("./CutoverCanvas"), {
 type CutoverEnhancementProps = {
   policy: MotionPolicy;
   progress: MotionValue<number>;
+  onFailure: () => void;
 };
 
 export function CutoverEnhancement({
   policy,
   progress,
+  onFailure,
 }: CutoverEnhancementProps) {
   const proximityRef = useRef<HTMLDivElement>(null);
   const [nearScene, setNearScene] = useState(false);
@@ -56,7 +58,7 @@ export function CutoverEnhancement({
     <div className={styles.enhancementProbe} ref={proximityRef} aria-hidden="true">
       {shouldRender ? (
         <div className={styles.canvasHost} data-canvas-host>
-          <CutoverErrorBoundary>
+          <CutoverErrorBoundary onError={onFailure}>
             <LazyCutoverCanvas progress={progress} />
           </CutoverErrorBoundary>
         </div>

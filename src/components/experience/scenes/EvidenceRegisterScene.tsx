@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 import type { CaseStudy } from "@/content/schema";
 
 import styles from "./closing-scenes.module.css";
@@ -45,7 +43,7 @@ export function EvidenceRegisterScene({
               <header className={styles.evidenceItemHeader}>
                 <p>{String(index + 1).padStart(2, "0")} / Verified dossier</p>
                 <h3>
-                  <Link href={`/work/${study.slug}`}>{study.title}</Link>
+                  <a href={`/work/${study.slug}`}>{study.title}</a>
                 </h3>
                 <p>{study.summary}</p>
               </header>
@@ -71,7 +69,7 @@ export function EvidenceRegisterScene({
 
               <footer className={styles.evidenceItemFooter}>
                 <p>{study.capabilities.join(" / ")}</p>
-                <Link href={`/work/${study.slug}`}>Inspect the complete dossier</Link>
+                <a href={`/work/${study.slug}`}>Inspect the complete dossier</a>
               </footer>
             </article>
           ))}
@@ -86,8 +84,8 @@ export function EvidenceRegisterScene({
             map and work register state exactly what is known.
           </p>
           <nav aria-label="Evidence alternatives">
-            <Link href="/work">Open the work register</Link>
-            <Link href="/index">Use the domain Index</Link>
+            <a href="/work">Open the work register</a>
+            <a href="/index">Use the domain Index</a>
           </nav>
         </div>
       )}
