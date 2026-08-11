@@ -2,7 +2,7 @@
 
 export const site = {
   name: "Amey Joshi",
-  role: "Business Analyst — Banking & Payments",
+  role: "Business Analyst — Fino Payments Bank",
   location: "Navi Mumbai",
   email: "ameyjoshi1881@gmail.com",
   linkedin: "https://linkedin.com/in/ameyjoshi180696",
@@ -10,76 +10,20 @@ export const site = {
 };
 
 export const hero = {
-  eyebrow: "Business Analyst — Banking & Payments",
-  headline: "I make systems that can't talk to each other, talk.",
-  sub: "Amey Joshi. Navi Mumbai, by way of Kodoli, near Kolhapur.",
-  scrollHint: "Scroll — this whole page is one build",
+  eyebrow: "Business Analyst — Fino Payments Bank",
+  headline: "Right now, I'm replacing a bank's core system while the bank stays open.",
+  sub: "Amey Joshi. Navi Mumbai.",
+  scrollHint: "Scroll",
 };
 
-export type Chapter = {
-  id: string;
-  kicker: string;
-  title: string;
-  years: string;
-  paragraphs: string[];
+export const now = {
+  kicker: "2025 — now",
+  title: "Fino Payments Bank",
+  paragraphs: [
+    "In 2025 I joined Fino Payments Bank. My first project was migrating the bank's core system from FIS to Finacle — while the bank stayed open. There's no maintenance window big enough to take a live bank offline; you replace the engine while it's running.",
+    "Since then: AePS, Domestic Money Transfer, eKYC, mATM certification, EMV 3DS, and contactless and NCMC cards. Different rails, same question every time — does this side actually talk to that side, correctly, under load.",
+  ],
 };
-
-export const chapters: Chapter[] = [
-  {
-    id: "origin",
-    kicker: "Where it started",
-    title: "Kodoli",
-    years: "6th standard",
-    paragraphs: [
-      "It started in 6th standard, in Kodoli, near Kolhapur. We had a PC with no internet connection. I had a Nokia phone that did.",
-      "I'd plug the phone into the PC with a USB cable, open PC Suite, and dial up over 2G. Watching one webpage load was the whole achievement.",
-      "Twenty years later I'm still doing the same thing, just at a different scale — getting two things that don't talk to each other to talk.",
-    ],
-  },
-  {
-    id: "zenox",
-    kicker: "2018 – 2024",
-    title: "Zenox Technologies",
-    years: "2018–2024",
-    paragraphs: [
-      "In 2018 I co-founded Zenox Technologies, a software consultancy in Kolhapur. We built websites, web apps, e-commerce stores, and portals for universities.",
-      "Year one, we had zero clients. No sales team, no ad budget — just work that held up long enough for the next referral.",
-      "By word of mouth alone, we grew past twenty clients. I ran that until 2024.",
-    ],
-  },
-  {
-    id: "rb-esports",
-    kicker: "Feb 2021 – ongoing",
-    title: "RB Esports",
-    years: "2021–now",
-    paragraphs: [
-      "In February 2021, in the middle of the pandemic, I co-founded RB Esports, a gaming café in Kolhapur. It's still running.",
-      "We closed for five months during one lockdown and kept paying the loan on the machines the entire time we couldn't open the doors. Those payments are still due, every month.",
-      "The café made it through two lockdowns because we didn't stop paying for it when it wasn't earning anything back.",
-    ],
-  },
-  {
-    id: "idfc",
-    kicker: "2024 – 2025",
-    title: "IDFC First Bank",
-    years: "2024–2025",
-    paragraphs: [
-      "In 2024 I moved into banking, as a Business Analyst at IDFC First Bank. I worked on NRI-PIS, ASBA, Demat accounts, and the API integrations that connect them.",
-      "It's the same work as before, dressed differently: systems that have to pass information to each other correctly, on the first try, with someone's money on the line.",
-    ],
-  },
-  {
-    id: "fino",
-    kicker: "2025 – now",
-    title: "Fino Payments Bank",
-    years: "2025–now",
-    paragraphs: [
-      "In 2025 I joined Fino Payments Bank. My first project was migrating the bank's core system from FIS to Finacle — while the bank stayed open.",
-      "There's no maintenance window big enough to take a live bank offline. You replace the engine while it's running.",
-      "After that: AePS, Domestic Money Transfer, eKYC, mATM certification, EMV 3DS, and contactless and NCMC cards. Different rails, same question every time — does this side actually talk to that side, correctly, under load.",
-    ],
-  },
-];
 
 export type ExpertiseArea = {
   id: string;
@@ -132,6 +76,46 @@ export const expertise: ExpertiseArea[] = [
       "BRDs and FRDs that hold up under audit, UAT that actually catches problems before go-live, release management, and vendors who have to hit the same date you do.",
   },
 ];
+
+export type BuildingProject = {
+  id: string;
+  name: string;
+  status: string;
+  paragraphs: string[];
+};
+
+export const building = {
+  kicker: "Outside the job",
+  title: "What I'm building",
+  intro:
+    "Twenty years ago it was a Nokia phone and a USB cable, teaching myself what a network connection even was. The tools change — right now it's LLMs and workflow automation — but the instinct hasn't: find whatever's new, and use it to do something that wasn't possible before. Not because I'm afraid of falling behind. Because that's the actual point.",
+  projects: [
+    {
+      id: "reglens",
+      name: "RegLens AI (Tabularium)",
+      status: "Working local prototype",
+      paragraphs: [
+        "A copilot for the regulatory side of being a BA in banking. Right now it's a working local prototype: retrieval-augmented Q&A over RBI circulars, plus a first pass at mapping which parts of a system a new circular actually affects. Built on FastAPI, Ollama, and PostgreSQL.",
+        "I built it to learn how tooling like this should actually work, not because a team asked for it. The impact-mapping isn't precise enough yet, and the interface needs a full rebuild. A recorded walkthrough and a written case study are next.",
+      ],
+    },
+    {
+      id: "node-factory",
+      name: "Node Factory",
+      status: "Pre-launch",
+      paragraphs: [
+        "Ready-made n8n automation workflows for small businesses that don't have time to build their own. The brand and the product assets are built. It hasn't launched yet.",
+      ],
+    },
+  ] as BuildingProject[],
+};
+
+export const storyTeaser = {
+  kicker: "Where this started",
+  title: "There's more before this",
+  body: "Before the banks, there was a software consultancy with zero clients in its first year, and a gaming café that stayed open through two lockdowns on borrowed money.",
+  cta: "Read the story",
+};
 
 export const contact = {
   heading: "If you're working on banking or payments infrastructure",

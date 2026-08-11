@@ -36,22 +36,7 @@ export function resolveQualityTier(): QualityTier {
 }
 
 export const TIER_SETTINGS = {
-  full: {
-    nodeCount: 560,
-    ambientNodeCount: 90,
-    dpr: [1, 2] as [number, number],
-    edgeUpdateEveryFrame: true,
-  },
-  reduced: {
-    nodeCount: 170,
-    ambientNodeCount: 20,
-    dpr: [1, 1.5] as [number, number],
-    edgeUpdateEveryFrame: false,
-  },
-  off: {
-    nodeCount: 0,
-    ambientNodeCount: 0,
-    dpr: [1, 1] as [number, number],
-    edgeUpdateEveryFrame: false,
-  },
+  full: { dpr: [1, 2] as [number, number] },
+  reduced: { dpr: [1, 1.5] as [number, number] },
+  off: { dpr: [1, 1] as [number, number] },
 } as const;

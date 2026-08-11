@@ -1,20 +1,29 @@
+import Link from "next/link";
 import { site } from "@/content/site";
 
 export function SiteHeader() {
   return (
-    <header className="fixed inset-x-0 top-0 z-20 flex items-center justify-between bg-ink px-5 py-4 sm:px-8 sm:py-6">
-      <a
-        href="#hero"
-        className="font-display text-sm tracking-wide text-paper/90 transition-colors hover:text-copper"
+    <header className="fixed inset-x-0 top-0 z-20 flex items-center justify-between bg-paper px-5 py-4 sm:px-8 sm:py-6">
+      <Link
+        href="/"
+        className="font-display text-sm tracking-wide text-ink transition-colors hover:text-terracotta"
       >
         Amey Joshi
-      </a>
-      <a
-        href={`mailto:${site.email}`}
-        className="font-display text-xs tracking-wide text-paper-dim transition-colors hover:text-copper sm:text-sm"
-      >
-        {site.email}
-      </a>
+      </Link>
+      <nav className="flex items-center gap-5 sm:gap-7">
+        <Link
+          href="/story"
+          className="font-display text-xs tracking-wide text-ink-soft transition-colors hover:text-terracotta sm:text-sm"
+        >
+          Story
+        </Link>
+        <a
+          href={`mailto:${site.email}`}
+          className="font-display hidden text-xs tracking-wide text-ink-soft transition-colors hover:text-terracotta sm:inline sm:text-sm"
+        >
+          {site.email}
+        </a>
+      </nav>
     </header>
   );
 }

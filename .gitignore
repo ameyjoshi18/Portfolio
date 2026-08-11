@@ -42,3 +42,6 @@ next-env.d.ts
 
 # source material (not part of the site)
 index_3.html
+
+# session-local tool state
+.claude/scheduled_tasks.lock

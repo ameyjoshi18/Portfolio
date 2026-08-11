@@ -1,9 +1,9 @@
 import localFont from "next/font/local";
 
-export const ranade = localFont({
-  src: "../fonts/ranade-variable.woff2",
-  variable: "--font-ranade",
-  weight: "100 700",
+export const clashGrotesk = localFont({
+  src: "../fonts/clash-grotesk-variable.woff2",
+  variable: "--font-clash",
+  weight: "200 700",
   display: "swap",
 });
 

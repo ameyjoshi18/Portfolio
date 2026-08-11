@@ -18,7 +18,7 @@ export function Portrait() {
             className="object-cover"
           />
         </div>
-        <p className="mt-5 font-display text-sm tracking-wide text-paper-dim">
+        <p className="mt-5 font-display text-sm tracking-wide text-ink-soft">
           Amey Joshi — Navi Mumbai
         </p>
       </Reveal>
