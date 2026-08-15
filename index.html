@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Amey Joshi — Business Analyst, Payments &amp; Core Banking</title>
+<meta name="description" content="Amey Joshi — business analyst working on payment systems and core banking at Fino Payments Bank, Navi Mumbai.">
+<meta property="og:title" content="Amey Joshi — Business Analyst, Payments &amp; Core Banking">
+<meta property="og:description" content="Payment rails, core banking, and delivery governance. Navi Mumbai.">
+<meta property="og:url" content="https://ameyjoshi.in">
+<meta name="theme-color" content="#07080C">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2307080C'/%3E%3Ccircle cx='32' cy='32' r='10' fill='none' stroke='%23EDEEF2' stroke-width='3'/%3E%3C/svg%3E">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07080C;
+  --txt:#EDEEF2;
+  --dim:#878C9C;
+  --faint:rgba(237,238,242,.10);
+  --amber:#FFB03A;
+  --teal:#2BC0B4;
+  --rose:#E85D75;
+  --r:26px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);
+  font-family:'Satoshi',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  -webkit-font-smoothing:antialiased;overflow-x:clip;line-height:1.6}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--txt);color:var(--bg)}
+h1,h2,h3{font-weight:700;letter-spacing:-.035em;line-height:1.04}
+
+/* background video layer */
+#film{position:fixed;inset:0;z-index:0;overflow:hidden;background:var(--bg)}
+#film video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s ease}
+#film video.on{opacity:.55}
+#filmveil{position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(100deg,rgba(7,8,12,.92) 0%,rgba(7,8,12,.62) 42%,rgba(7,8,12,.18) 78%),
+             linear-gradient(0deg,rgba(7,8,12,.94) 0%,rgba(7,8,12,.2) 44%,rgba(7,8,12,.55) 100%)}
+
+/* the light behind the glass */
+#lights{position:fixed;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:.26;will-change:transform}
+.o1{width:52vw;height:52vw;left:-8vw;top:-6vw;background:var(--amber);animation:d1 34s ease-in-out infinite}
+.o2{width:46vw;height:46vw;right:-6vw;top:24vh;background:var(--teal);animation:d2 41s ease-in-out infinite}
+.o3{width:44vw;height:44vw;left:22vw;bottom:-14vw;background:var(--rose);opacity:.28;animation:d3 47s ease-in-out infinite}
+@keyframes d1{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(14vw,10vh,0) scale(1.16)}}
+@keyframes d2{0%,100%{transform:translate3d(0,0,0) scale(1.1)}50%{transform:translate3d(-16vw,-8vh,0) scale(.9)}}
+@keyframes d3{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(10vw,-12vh,0) scale(1.2)}}
+
+#grain{position:fixed;inset:-60px;z-index:4;pointer-events:none;opacity:.30;mix-blend-mode:overlay;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.62'/%3E%3C/svg%3E")}
+#dim{position:fixed;inset:0;z-index:3;pointer-events:none;
+  background:radial-gradient(130% 100% at 50% 0%,transparent 30%,rgba(7,8,12,.55) 78%,rgba(7,8,12,.9) 100%)}
+
+/* LIQUID GLASS */
+.glass{
+  position:relative;isolation:isolate;border-radius:var(--r);
+  background:linear-gradient(150deg,rgba(255,255,255,.085),rgba(255,255,255,.028) 46%,rgba(255,255,255,.055));
+  backdrop-filter:blur(22px) saturate(190%) brightness(1.06);
+  -webkit-backdrop-filter:blur(22px) saturate(190%) brightness(1.06);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.30),
+    inset 0 -1px 0 rgba(255,255,255,.07),
+    inset 0 0 34px rgba(255,255,255,.035),
+    0 2px 6px rgba(0,0,0,.34),
+    0 20px 48px -14px rgba(0,0,0,.62);
+  transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s}
+.glass::after{content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;z-index:2;
+  background:linear-gradient(140deg,
+    rgba(255,226,190,.62) 0%,
+    rgba(255,255,255,.10) 26%,
+    rgba(255,255,255,.03) 52%,
+    rgba(198,228,255,.16) 74%,
+    rgba(214,238,255,.50) 100%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  mask-composite:exclude}
+.glass::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.16),rgba(255,255,255,.04) 34%,transparent 62%);
+  opacity:0;transition:opacity .45s}
+.glass:hover::before{opacity:1}
+.glass:hover{box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.42),
+    inset 0 -1px 0 rgba(255,255,255,.09),
+    inset 0 0 40px rgba(255,255,255,.055),
+    0 3px 8px rgba(0,0,0,.36),
+    0 30px 66px -16px rgba(0,0,0,.68)}
+
+/* layout */
+.wrap{max-width:1140px;margin:0 auto;padding:0 clamp(18px,4vw,34px);position:relative;z-index:5}
+nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:50;--r:999px;
+  display:flex;align-items:center;gap:clamp(14px,2.4vw,28px);padding:11px 10px 11px 22px}
+nav .id{font-weight:700;font-size:14.5px;letter-spacing:-.02em;white-space:nowrap}
+nav .lk{font-size:13px;color:var(--dim);transition:color .25s;position:relative;z-index:3}
+nav .lk:hover{color:var(--txt)}
+nav .go{font-size:13px;font-weight:500;padding:8px 16px;border-radius:999px;
+  background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16);position:relative;z-index:3;transition:background .3s}
+nav .go:hover{background:rgba(255,255,255,.19)}
+@media(max-width:640px){nav .lk:nth-of-type(-n+2){display:none}}
+
+header{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:150px 0 clamp(64px,11vh,110px)}
+.tag{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:26px}
+h1{font-size:clamp(42px,8vw,104px);font-weight:900;letter-spacing:-.05em;max-width:13ch}
+header .say{margin-top:28px;max-width:50ch;font-size:clamp(16px,1.8vw,21px);line-height:1.55;color:var(--dim)}
+.acts{margin-top:38px;display:flex;gap:12px;flex-wrap:wrap}
+.pill{--r:999px;padding:14px 26px;font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:9px}
+.pill span{position:relative;z-index:3}
+.solid{background:var(--txt);color:var(--bg);border-radius:999px;padding:15px 27px;font-size:14px;font-weight:600;
+  transition:transform .3s,opacity .3s}
+.solid:hover{transform:translateY(-2px);opacity:.92}
+
+section{padding:clamp(80px,13vh,140px) 0}
+.lbl{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:16px}
+h2{font-size:clamp(30px,4.6vw,58px);max-width:17ch}
+.note{margin-top:20px;max-width:46ch;font-size:16.5px;color:var(--dim)}
+
+.deck{margin-top:clamp(38px,6vw,66px);display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.cell{padding:32px 30px 30px;display:flex;flex-direction:column;min-height:230px}
+.cell .num{font-size:12px;font-weight:600;color:var(--dim);letter-spacing:.1em;position:relative;z-index:3}
+.cell h3{font-size:21px;font-weight:600;letter-spacing:-.02em;margin-top:14px;position:relative;z-index:3}
+.cell p{margin-top:12px;font-size:15px;line-height:1.68;color:var(--dim);position:relative;z-index:3}
+.cell .meta{margin-top:auto;padding-top:20px;font-size:12px;letter-spacing:.04em;color:rgba(135,140,156,.85);
+  border-top:1px solid var(--faint);position:relative;z-index:3}
+
+.stack{margin-top:clamp(38px,6vw,66px);display:grid;gap:16px}
+@media(min-width:880px){.stack{grid-template-columns:1fr 1fr}}
+.proj{padding:36px 34px 32px;display:flex;flex-direction:column;min-height:290px}
+.proj .top{display:flex;justify-content:space-between;align-items:center;gap:12px;position:relative;z-index:3}
+.proj .yr{font-size:12px;color:var(--dim);letter-spacing:.06em}
+.proj .st{font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:5px 11px;border-radius:999px;
+  border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06);color:var(--txt)}
+.proj h3{font-size:clamp(22px,2.4vw,28px);font-weight:700;letter-spacing:-.028em;margin-top:18px;position:relative;z-index:3}
+.proj p{margin-top:14px;font-size:15.5px;line-height:1.72;color:var(--dim);position:relative;z-index:3}
+.proj .tech{margin-top:auto;padding-top:22px;font-size:12px;letter-spacing:.05em;color:rgba(135,140,156,.85);
+  border-top:1px solid var(--faint);position:relative;z-index:3}
+
+#contact .box{margin-top:clamp(34px,5vw,56px);padding:clamp(38px,6vw,66px);text-align:center}
+#contact h2{margin:0 auto;max-width:15ch}
+#contact .note{margin:20px auto 0}
+#contact .acts{justify-content:center;position:relative;z-index:3}
+footer{padding:0 0 60px;font-size:12.5px;color:var(--dim);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+
+.rise{opacity:0;transform:translateY(30px);transition:opacity .85s cubic-bezier(.2,.75,.2,1),transform .85s cubic-bezier(.2,.75,.2,1)}
+.rise.on{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  .rise{opacity:1;transform:none}
+  .orb{animation:none}
+  [data-par]{transform:none!important}
+}
+</style>
+</head>
+<body>
+
+<div id="film"><video id="bg" muted loop playsinline preload="auto"></video></div>
+<div id="filmveil"></div>
+<div id="lights"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
+<div id="dim"></div><div id="grain"></div>
+
+<nav class="glass">
+  <span class="id">Amey Joshi</span>
+  <a class="lk" href="#skills">Skills</a>
+  <a class="lk" href="#projects">Projects</a>
+  <a class="go" href="#contact">Contact</a>
+</nav>
+
+<div class="wrap">
+
+  <header>
+    <p class="tag rise">Navi Mumbai, India</p>
+    <h1 class="rise">Business analyst. Payments and core banking.</h1>
+    <p class="say rise">I work at Fino Payments Bank on the systems that move money across India — writing the requirements, testing the flows, and getting releases out the door.</p>
+    <div class="acts rise">
+      <a class="solid" href="#projects">View projects</a>
+      <a class="pill glass" href="#skills"><span>What I work on</span></a>
+    </div>
+  </header>
+
+  <section id="skills">
+    <p class="lbl rise">Skills</p>
+    <h2 class="rise">The rails, and the platforms underneath them.</h2>
+    <p class="note rise">Six areas I work in day to day. Listed by how deep I've been in each.</p>
+
+    <div class="deck">
+      <article class="cell glass rise" data-par="14">
+        <p class="num">01</p>
+        <h3>Domestic Money Transfer</h3>
+        <p>Agent cash-in, the IMPS leg that moves the money, NPCI switching in between, and the reconciliation that closes the day out.</p>
+        <p class="meta">Agent cash-in · IMPS · NPCI · Reconciliation</p>
+      </article>
+      <article class="cell glass rise" data-par="24">
+        <p class="num">02</p>
+        <h3>Aadhaar-enabled Payments</h3>
+        <p>UIDAI authentication, the acquirer to NPCI to issuer hop, what happens when a biometric read fails, and how settlement closes it out.</p>
+        <p class="meta">UIDAI · Acquirer–issuer · Biometrics · Settlement</p>
+      </article>
+      <article class="cell glass rise" data-par="10">
+        <p class="num">03</p>
+        <h3>Cards and EMV</h3>
+        <p>Contactless payments, NCMC transit cards, EMV 3DS for online authentication, and how PIN data stays encrypted end to end.</p>
+        <p class="meta">Contactless · NCMC · EMV 3DS · PIN encryption</p>
+      </article>
+      <article class="cell glass rise" data-par="26">
+        <p class="num">04</p>
+        <h3>UPI, NACH, POS, mATM</h3>
+        <p>Mandate flows, terminal acquiring, and device certification. The rest of the plumbing that has to work for anything else to.</p>
+        <p class="meta">UPI · NACH mandates · POS · mATM</p>
+      </article>
+      <article class="cell glass rise" data-par="16">
+        <p class="num">05</p>
+        <h3>Core Banking</h3>
+        <p>Account structures, general ledger, and end-of-day cycles — the ledger every payment eventually answers to.</p>
+        <p class="meta">FIS · Finacle · TCS BaNCS</p>
+      </article>
+      <article class="cell glass rise" data-par="22">
+        <p class="num">06</p>
+        <h3>Delivery Governance</h3>
+        <p>Requirement documents that hold up in an audit, UAT planned so problems surface before go-live, and releases coordinated across vendors.</p>
+        <p class="meta">BRD / FRD · UAT · Release management · Vendors</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="projects">
+    <p class="lbl rise">Projects</p>
+    <h2 class="rise">Work I've done, and things I'm building.</h2>
+    <p class="note rise">Two from the bank, two of my own.</p>
+
+    <div class="stack">
+      <article class="proj glass rise" data-par="12">
+        <div class="top"><span class="yr">2025 · Fino Payments Bank</span><span class="st">Delivered</span></div>
+        <h3>Core banking migration</h3>
+        <p>Moving the bank's core system from FIS to Finacle while the bank stayed open. I handled the business analysis and coordinated between the business teams, engineering, QA and the vendor through the execution windows.</p>
+        <p class="tech">FIS · Finacle · Migration · Cutover planning</p>
+      </article>
+
+      <article class="proj glass rise" data-par="20">
+        <div class="top"><span class="yr">2025 — present · Fino Payments Bank</span><span class="st">Ongoing</span></div>
+        <h3>Payment rails delivery</h3>
+        <p>Requirements, test planning and release coordination across AePS, Domestic Money Transfer, eKYC, mATM certification, EMV 3DS and NCMC contactless cards.</p>
+        <p class="tech">AePS · DMT · eKYC · mATM · EMV 3DS · NCMC</p>
+      </article>
+
+      <article class="proj glass rise" data-par="16">
+        <div class="top"><span class="yr">Personal project</span><span class="st">In development</span></div>
+        <h3>RegLens AI</h3>
+        <p>Reads regulatory circulars and answers questions about them in plain language, then maps which systems and processes each new change touches. Every answer retrieves from the source document, so it traces back to the text it came from.</p>
+        <p class="tech">FastAPI · Ollama · PostgreSQL · Retrieval</p>
+      </article>
+
+      <article class="proj glass rise" data-par="24">
+        <div class="top"><span class="yr">Personal project</span><span class="st">Pre-launch</span></div>
+        <h3>Node Factory</h3>
+        <p>Pre-built n8n automation workflows for small businesses that don't have anyone in-house to set them up. The templates and product assets are done. Not launched yet.</p>
+        <p class="tech">n8n · Automation templates</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="box glass rise">
+      <p class="lbl">Contact</p>
+      <h2>Happy to talk about payments infrastructure.</h2>
+      <p class="note">I sit between the business side and the engineering side, and make sure both end up building the same thing.</p>
+      <div class="acts">
+        <a class="solid" href="mailto:ameyjoshi1881@gmail.com">ameyjoshi1881@gmail.com</a>
+        <a class="pill glass" href="https://www.linkedin.com/in/ameyjoshi180696" target="_blank" rel="noopener"><span>LinkedIn</span></a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Amey Joshi — Navi Mumbai</span>
+    <span>Previously IDFC First Bank · Zenox Technologies</span>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* background video: drop hero-loop.mp4 next to this file and it plays.
+     If missing, the light orbs carry the page alone. */
+  var VIDEO_URL = 'hero-loop.mp4';
+  (function(){
+    if (!VIDEO_URL || RM) return;
+    var v = document.getElementById('bg');
+    v.src = VIDEO_URL;
+    v.addEventListener('canplay', function(){
+      v.classList.add('on');
+      var p = v.play();
+      if (p && p.catch) p.catch(function(){});
+    });
+    v.addEventListener('error', function(){ v.classList.remove('on'); });
+  })();
+
+  /* specular highlight follows the cursor across every glass surface */
+  if (matchMedia('(hover:hover)').matches) {
+    document.querySelectorAll('.glass').forEach(function(el){
+      el.addEventListener('pointermove', function(e){
+        var r = el.getBoundingClientRect();
+        el.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+        el.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+      });
+    });
+  }
+
+  /* parallax — each card drifts at its own rate as it crosses the viewport */
+  var pars = [].slice.call(document.querySelectorAll('[data-par]')).map(function(el){
+    return { el: el, k: parseFloat(el.getAttribute('data-par')) || 0, y: 0 };
+  });
+  var raf = null;
+  function step(){
+    raf = null;
+    var vh = innerHeight;
+    pars.forEach(function(p){
+      var r = p.el.getBoundingClientRect();
+      if (r.bottom < -200 || r.top > vh + 200) return;
+      var mid = r.top + r.height / 2;
+      var t = (mid - vh / 2) / vh;
+      var want = -t * p.k;
+      p.y += (want - p.y) * 0.22;
+      p.el.style.transform = 'translate3d(0,' + p.y.toFixed(2) + 'px,0)';
+    });
+  }
+  function onScroll(){ if (!raf && !RM) raf = requestAnimationFrame(step); }
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll);
+  onScroll();
+
+  /* reveals */
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
+    });
+  }, { threshold: .12, rootMargin: '0px 0px -5% 0px' });
+  document.querySelectorAll('.rise').forEach(function(el, i){
+    el.style.transitionDelay = (Math.min(i, 6) * 55) + 'ms';
+    io.observe(el);
+  });
+})();
+</script>
+</body>
+</html>
