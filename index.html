@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Amey Joshi — Business × Technology × Execution</title>
-<meta name="description" content="Amey Joshi — Business Analyst at Fino Payments Bank, Navi Mumbai. Core banking, payments rails, integrations and delivery governance.">
-<meta property="og:title" content="Amey Joshi — Business × Technology × Execution">
-<meta property="og:description" content="Business Analyst at Fino Payments Bank, Navi Mumbai. Core banking, payments rails, integrations and delivery governance.">
+<title>Amey Joshi — Business Analyst, Fino Payments Bank</title>
+<meta name="description" content="Amey Joshi — Business Analyst at Fino Payments Bank, Navi Mumbai. Core banking, payment rails, and the delivery governance that holds them together.">
+<meta property="og:title" content="Amey Joshi — Business Analyst, Fino Payments Bank">
+<meta property="og:description" content="Right now I'm replacing a bank's core system while the bank stays open.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ameyjoshi.in">
-<meta name="theme-color" content="#07080C">
+<meta name="theme-color" content="#14110E">
 <link rel="icon" href="data:,">
 <style>
 /* ============ fonts ============ */
@@ -19,16 +19,21 @@
 @font-face{font-family:'Satoshi';src:url('fonts/satoshi-500.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap}
 @font-face{font-family:'Satoshi';src:url('fonts/satoshi-700.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
 
-/* ============ tokens ============ */
+/* ============ tokens — exactly these six colours ============ */
 :root{
-  --bg:#07080C;
-  --txt:#EDEEF2;
-  --dim:#878C9C;
-  --amber:#FFB03A;
-  --teal:#2BC0B4;
-  --rose:#E85D75;
-  --line:rgba(237,238,242,.12);
-  --measure:64ch;
+  --bg:#14110E;
+  --card:#1C1815;
+  --head:#F2EEE6;
+  --body:#9A948A;
+  /* --meta is #655F55 in the spec; measured contrast against --card is 2.79:1
+     and against --bg 2.98:1 — fails WCAG AA even at large-text size (needs 3:1
+     minimum, let alone the 4.5:1 required here for small label/meta text).
+     Lightened to the nearest value that clears 4.5:1 with a small margin,
+     same warm-grey hue. See the audit trail in the deploy report. */
+  --meta:#8F8879;
+  --sage:#A3B18A;
+  --hairline:rgba(242,238,230,.07);
+  --measure:66ch;
   --ease:cubic-bezier(.16,1,.3,1);
   --font-head:'Cabinet Grotesk',system-ui,sans-serif;
   --font-body:'Satoshi',system-ui,sans-serif;
@@ -37,100 +42,49 @@
 *{box-sizing:border-box}
 html{background:var(--bg);scroll-behavior:smooth}
 body{
-  margin:0;background:var(--bg);color:var(--txt);
+  margin:0;background:var(--bg);color:var(--body);
   font-family:var(--font-body);font-weight:400;
-  font-size:16px;line-height:1.65;
+  font-size:16px;line-height:1.7;
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
   overflow-x:hidden;position:relative;
 }
-h1,h2,h3,h4,.font-head{font-family:var(--font-head);font-weight:800;letter-spacing:-.03em;line-height:1.02;margin:0}
+h1,h2,h3,h4{font-family:var(--font-head);color:var(--head);font-weight:800;line-height:1.05;margin:0}
+h1{letter-spacing:-.05em}
+h2{letter-spacing:-.04em}
+h3,h4{letter-spacing:-.03em}
 p{margin:0}
 a{color:inherit;text-decoration:none}
-img,video{max-width:100%;display:block}
-::selection{background:rgba(237,238,242,.22);color:var(--txt)}
-:focus-visible{outline:2px solid var(--txt);outline-offset:3px;border-radius:4px}
+::selection{background:rgba(242,238,230,.2);color:var(--bg)}
+:focus-visible{outline:2px solid var(--head);outline-offset:3px;border-radius:3px}
 
-.skip-link{position:absolute;left:-9999px;top:0;z-index:1000;background:var(--txt);color:var(--bg);padding:.8rem 1.2rem;font-family:var(--font-head);font-weight:700;border-radius:0 0 8px 0}
+.skip-link{position:absolute;left:-9999px;top:0;z-index:1000;background:var(--head);color:var(--bg);padding:.8rem 1.2rem;font-family:var(--font-head);font-weight:700;border-radius:0 0 8px 0}
 .skip-link:focus{left:0}
 
-/* ============ background layers ============ */
-.orbs{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
-.orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:.26;will-change:transform}
-.orb-amber{width:52vw;height:52vw;max-width:760px;max-height:760px;background:var(--amber);top:-14%;left:-10%;animation:driftA 34s ease-in-out infinite}
-.orb-teal{width:60vw;height:60vw;max-width:860px;max-height:860px;background:var(--teal);top:28%;right:-18%;animation:driftB 41s ease-in-out infinite}
-.orb-rose{width:46vw;height:46vw;max-width:660px;max-height:660px;background:var(--rose);bottom:-16%;left:22%;animation:driftC 47s ease-in-out infinite}
-
-@keyframes driftA{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(6vw,4vh) scale(1.08)}66%{transform:translate(-3vw,7vh) scale(.96)}}
-@keyframes driftB{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(-7vw,5vh) scale(.94)}66%{transform:translate(-2vw,-6vh) scale(1.06)}}
-@keyframes driftC{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(5vw,-5vh) scale(1.05)}66%{transform:translate(-6vw,-2vh) scale(.97)}}
-
-.grain{
-  position:fixed;inset:0;z-index:100;pointer-events:none;
-  opacity:.30;mix-blend-mode:overlay;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size:180px 180px;
-}
+/* link underline on hover — one of the three sage uses, nothing else uses it */
+.link-hover{transition:color .25s}
+.link-hover:hover{text-decoration:underline;text-decoration-color:var(--sage);text-underline-offset:.25em}
 
 @media (prefers-reduced-motion:reduce){
-  .orb{animation:none !important}
   html{scroll-behavior:auto}
 }
 
-/* ============ liquid glass — do not simplify ============ */
-.glass{
-  position:relative;isolation:isolate;border-radius:26px;
-  background:linear-gradient(150deg,rgba(255,255,255,.085),rgba(255,255,255,.028) 46%,rgba(255,255,255,.055));
-  backdrop-filter:blur(22px) saturate(190%) brightness(1.06);
-  -webkit-backdrop-filter:blur(22px) saturate(190%) brightness(1.06);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.30),
-    inset 0 -1px 0 rgba(255,255,255,.07),
-    inset 0 0 34px rgba(255,255,255,.035),
-    0 2px 6px rgba(0,0,0,.34),
-    0 20px 48px -14px rgba(0,0,0,.62);
-  transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s;
-}
-.glass::after{content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;
-  pointer-events:none;z-index:2;
-  background:linear-gradient(140deg,
-    rgba(255,226,190,.62) 0%, rgba(255,255,255,.10) 26%,
-    rgba(255,255,255,.03) 52%, rgba(198,228,255,.16) 74%,
-    rgba(214,238,255,.50) 100%);
-  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
-  -webkit-mask-composite:xor;
-  mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
-  mask-composite:exclude;
-}
-.glass::before{content:'';position:absolute;inset:0;border-radius:inherit;
-  pointer-events:none;z-index:1;
-  background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),
-    rgba(255,255,255,.16),rgba(255,255,255,.04) 34%,transparent 62%);
-  opacity:0;transition:opacity .45s;
-}
-.glass:hover::before{opacity:1}
-.glass > *{position:relative;z-index:3}
-
-/* lightweight variant for many small tags — same family, cheaper to composite en masse */
-.chip{
-  position:relative;border-radius:100px;padding:.55rem 1.1rem;
-  background:linear-gradient(150deg,rgba(255,255,255,.07),rgba(255,255,255,.025));
-  border:1px solid rgba(255,255,255,.10);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.14), 0 8px 20px -10px rgba(0,0,0,.5);
-  font-size:.85rem;color:var(--dim);
+/* ============ node diagram canvas — ambient by default, full-opacity in its section ============ */
+#rails-canvas{position:fixed;inset:0;z-index:0;opacity:.16;transition:opacity .6s ease;pointer-events:none;display:block}
+@media (prefers-reduced-motion:reduce){
+  #rails-canvas{transition:opacity .3s ease}
 }
 
 /* ============ layout helpers ============ */
 .wrap{max-width:1240px;margin:0 auto;padding-inline:clamp(1.25rem,4vw,3rem)}
 main{position:relative;z-index:1}
-section{padding-block:clamp(4.5rem,9vw,8rem);position:relative}
-.eyebrow{font-family:var(--font-head);font-weight:700;font-size:.8rem;letter-spacing:.08em;color:var(--dim);text-transform:uppercase;margin-bottom:1.1rem;display:block}
-.section-head{max-width:820px;margin-bottom:clamp(2.5rem,5vw,4.5rem)}
-.section-head h2{font-size:clamp(2.1rem,5.4vw,4.2rem)}
-.section-head .sub{margin-top:1.1rem;color:var(--dim);font-size:clamp(1rem,1.6vw,1.15rem);max-width:var(--measure);line-height:1.7}
+section{padding-block:clamp(4rem,8vw,7.5rem);position:relative}
+.section-head{max-width:760px;margin-bottom:clamp(2.25rem,5vw,4rem)}
+.section-head h2{font-size:clamp(2rem,5vw,3.6rem)}
+.section-head .sub{margin-top:1.1rem;color:var(--body);font-size:clamp(1rem,1.5vw,1.1rem);max-width:var(--measure);line-height:1.75}
 .measure{max-width:var(--measure)}
 
 /* ============ reveal + parallax ============ */
-[data-reveal]{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+[data-reveal]{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
 [data-reveal].is-visible{opacity:1;transform:translateY(0)}
 @media (prefers-reduced-motion:reduce){
   [data-reveal]{opacity:1 !important;transform:none !important;transition:none !important}
@@ -139,133 +93,154 @@ section{padding-block:clamp(4.5rem,9vw,8rem);position:relative}
 
 /* ============ nav ============ */
 .nav{
-  position:fixed;top:1rem;left:50%;transform:translateX(-50%);z-index:50;
-  width:min(1240px,calc(100% - 2rem));
+  position:fixed;top:0;left:0;right:0;z-index:50;
   display:flex;align-items:center;justify-content:space-between;
-  padding:.85rem 1.4rem;border-radius:20px;
+  padding:1.1rem clamp(1.25rem,4vw,3rem);
+  background:rgba(20,17,14,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--hairline);
 }
-.nav .logo{font-family:var(--font-head);font-weight:800;font-size:1rem;letter-spacing:-.01em}
-.nav ul{list-style:none;display:flex;gap:2rem;margin:0;padding:0}
-.nav ul a{font-size:.88rem;color:var(--dim);transition:color .3s}
-.nav ul a:hover{color:var(--txt)}
-.nav-toggle{display:none;background:none;border:0;color:var(--txt);cursor:pointer;padding:.4rem}
+.nav .logo{font-family:var(--font-head);font-weight:800;font-size:1rem;letter-spacing:-.02em;color:var(--head)}
+.nav ul{list-style:none;display:flex;gap:2.1rem;margin:0;padding:0}
+.nav ul a{font-size:.88rem;color:var(--body)}
+.nav ul a:hover{color:var(--head)}
+.nav-toggle{display:none;background:none;border:0;color:var(--head);cursor:pointer;padding:.4rem}
 .nav-toggle svg{display:block}
 
 @media (max-width:860px){
-  .nav ul{position:fixed;inset:5.4rem 1rem auto 1rem;flex-direction:column;gap:0;
-    background:rgba(7,8,12,.92);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.1);
-    border-radius:20px;padding:.5rem;transform:translateY(-14px);opacity:0;pointer-events:none;transition:all .35s var(--ease)}
+  .nav ul{position:fixed;inset:3.9rem .75rem auto .75rem;flex-direction:column;gap:0;
+    background:var(--card);border:1px solid var(--hairline);
+    border-radius:12px;padding:.4rem;transform:translateY(-10px);opacity:0;pointer-events:none;transition:all .3s var(--ease)}
   .nav ul.open{transform:translateY(0);opacity:1;pointer-events:auto}
-  .nav ul li{border-bottom:1px solid rgba(255,255,255,.07)}
+  .nav ul li{border-bottom:1px solid var(--hairline)}
   .nav ul li:last-child{border-bottom:0}
   .nav ul a{display:block;padding:.9rem 1rem;font-size:1rem}
   .nav-toggle{display:block}
 }
 
-/* ============ buttons ============ */
-.btn{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-head);font-weight:700;font-size:.92rem;
-  padding:1rem 1.6rem;border-radius:100px;cursor:pointer;border:none;color:var(--txt)}
-.btn-primary{background:linear-gradient(150deg,rgba(255,255,255,.16),rgba(255,255,255,.05))}
-.btn-outline{background:linear-gradient(150deg,rgba(255,255,255,.06),rgba(255,255,255,.02))}
+/* ============ buttons — flat, no gradients, no sage ============ */
+.btn{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-head);font-weight:700;font-size:.9rem;
+  padding:.95rem 1.55rem;border-radius:8px;cursor:pointer;border:1px solid transparent;transition:opacity .25s,border-color .25s}
+.btn-primary{background:var(--head);color:var(--bg)}
+.btn-primary:hover{opacity:.86}
+.btn-outline{background:transparent;color:var(--head);border-color:var(--hairline)}
+.btn-outline:hover{border-color:rgba(242,238,230,.3)}
 .btn-row{display:flex;flex-wrap:wrap;gap:1rem}
 
 /* ============ hero ============ */
-#hero{min-height:100dvh;display:flex;flex-direction:column;justify-content:center;padding-top:7rem}
-#hero .tag-line{font-family:var(--font-head);font-weight:700;font-size:.82rem;letter-spacing:.08em;color:var(--dim);text-transform:uppercase;max-width:34rem;margin-bottom:1.6rem}
-#hero h1{font-size:clamp(2.6rem,9.5vw,6.7rem);letter-spacing:-.045em}
-#hero h1 .x{color:var(--dim);font-weight:700;padding-inline:.12em}
-#hero .sub{margin-top:1.8rem;font-size:clamp(1.05rem,1.8vw,1.3rem);color:var(--dim);max-width:38rem;line-height:1.7}
-#hero .btn-row{margin-top:2.4rem}
-.scroll-hint{margin-top:clamp(3rem,8vw,5.5rem);display:flex;align-items:center;gap:.75rem;font-size:.75rem;letter-spacing:.12em;color:var(--dim);text-transform:uppercase}
-.scroll-hint::before{content:'';width:34px;height:1px;background:var(--line)}
+#hero{min-height:100dvh;display:flex;flex-direction:column;justify-content:center;padding-top:5rem}
+#hero .eyebrow{font-size:.95rem;color:var(--meta);margin-bottom:1.5rem}
+#hero h1{font-size:clamp(2.1rem,6.4vw,6rem);max-width:20ch}
+#hero .sub{margin-top:1.6rem;font-size:clamp(1.05rem,1.7vw,1.25rem);color:var(--body);max-width:42ch;line-height:1.7}
+#hero .btn-row{margin-top:2.3rem}
+.scroll-hint{margin-top:clamp(3rem,7vw,5rem);font-size:.85rem;color:var(--meta)}
 
-/* ============ how i think ============ */
-.think-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-.think-card{padding:2.2rem 2rem}
-.think-card .n{font-family:var(--font-head);font-weight:700;font-size:.8rem;color:var(--dim);margin-bottom:1.6rem;display:block}
-.think-card h3{font-size:1.5rem}
-.think-card p{margin-top:.8rem;color:var(--dim);font-size:.98rem;line-height:1.7}
-@media (max-width:860px){.think-grid{grid-template-columns:1fr}}
+/* ============ card system — six layers ============ */
+.card-persp{perspective:1000px}
+.card{
+  position:relative;background:var(--card);border:1px solid var(--hairline);border-radius:14px;
+  transform-style:preserve-3d;
+  box-shadow:0 2px 4px rgba(0,0,0,.35), 0 10px 24px rgba(0,0,0,.28), 0 34px 68px -12px rgba(0,0,0,.5);
+}
+.card::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:5;
+  background:radial-gradient(320px circle at var(--mx,50%) var(--my,50%), rgba(242,238,230,.09), transparent 60%);
+  opacity:0;transition:opacity .4s;
+}
+.card:hover::before{opacity:1}
+.cz1{transform:translateZ(20px)}
+.cz2{transform:translateZ(40px)}
+.cz3{transform:translateZ(10px)}
+.sage-rule{height:1px;background:var(--sage);opacity:.55;border:0;margin:1.4rem 0;width:2.5rem}
 
 /* ============ journey ============ */
-.timeline{position:relative;padding-left:2.2rem;border-left:1px solid var(--line)}
-.tl-item{position:relative;padding-bottom:clamp(2.5rem,5vw,4rem)}
-.tl-item:last-child{padding-bottom:0}
-.tl-item::before{content:'';position:absolute;left:-2.2rem;top:.4rem;width:9px;height:9px;border-radius:50%;background:var(--txt);transform:translateX(-4.5px)}
-.tl-item .range{font-family:var(--font-head);font-weight:700;font-size:.8rem;color:var(--dim);letter-spacing:.04em}
-.tl-item .cat{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-top:.6rem;display:block}
-.tl-item h3{font-size:clamp(1.5rem,3vw,2rem);margin-top:.5rem}
-.tl-item .role{color:var(--dim);font-size:.92rem;margin-top:.4rem;font-weight:500}
-.tl-item p.desc{margin-top:.9rem;color:var(--dim);max-width:var(--measure);line-height:1.7}
-.tl-item .place{margin-top:.9rem;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);opacity:.7}
+.timeline{display:flex;flex-direction:column;gap:1.5rem}
+.tl-card{padding:clamp(1.5rem,3.4vw,2.4rem)}
+.tl-card .range{font-family:var(--font-head);font-weight:700;font-size:.8rem;color:var(--meta);letter-spacing:.02em}
+.tl-card .cat{font-size:.78rem;color:var(--meta);margin-top:.5rem;display:block}
+.tl-card h3{font-size:clamp(1.4rem,2.6vw,1.9rem);margin-top:.5rem}
+.tl-card .role{color:var(--body);font-size:.92rem;margin-top:.3rem;font-weight:500}
+.tl-card p.desc{margin-top:1rem;color:var(--body);max-width:var(--measure);line-height:1.75}
+.tl-card .place{margin-top:.9rem;font-size:.8rem;color:var(--meta)}
 
 /* ============ selected work ============ */
-.work-list{display:flex;flex-direction:column;gap:1.75rem}
+.work-list{display:flex;flex-direction:column;gap:1.5rem}
 .work-card{padding:clamp(1.75rem,4vw,3rem)}
 .work-top{display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap}
-.work-top .idx{font-family:var(--font-head);font-weight:800;font-size:1.1rem;color:var(--dim)}
-.work-cat{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
-.work-card h3{font-size:clamp(1.6rem,3.4vw,2.5rem);margin-top:.6rem}
-.work-rows{display:grid;grid-template-columns:9rem 1fr;gap:1rem 1.5rem;margin-top:1.8rem}
-.work-rows dt{font-family:var(--font-head);font-weight:700;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin:0}
-.work-rows dd{margin:0;color:var(--txt);line-height:1.7;font-size:.98rem}
+.work-top .idx{font-family:var(--font-head);font-weight:800;font-size:1.1rem;color:var(--meta)}
+.work-cat{font-size:.78rem;color:var(--meta)}
+.work-card h3{font-size:clamp(1.5rem,3.2vw,2.3rem);margin-top:.6rem}
+.work-rows{display:grid;grid-template-columns:9rem 1fr;gap:1rem 1.5rem;margin-top:1.6rem}
+.work-rows dt{font-family:var(--font-head);font-weight:700;font-size:.72rem;letter-spacing:.04em;color:var(--meta);margin:0}
+.work-rows dd{margin:0;color:var(--body);line-height:1.75;font-size:.98rem}
 .sys-tags{display:flex;flex-wrap:wrap;gap:.5rem}
-.work-outcome{margin-top:1.6rem;padding-top:1.6rem;border-top:1px solid var(--line);color:var(--dim);line-height:1.7}
-.work-outcome b{color:var(--txt);font-weight:500}
-@media (max-width:700px){.work-rows{grid-template-columns:1fr;gap:.35rem 0}.work-rows dt{margin-top:.9rem}}
+.chip{border-radius:100px;padding:.4rem .9rem;background:var(--bg);border:1px solid var(--hairline);font-size:.82rem;color:var(--meta)}
+.work-outcome{margin-top:0;color:var(--body);line-height:1.75}
+.work-outcome b{color:var(--head);font-weight:500}
+@media (max-width:700px){.work-rows{grid-template-columns:1fr;gap:.3rem 0}.work-rows dt{margin-top:.9rem}}
+
+/* ============ rails / diagram section ============ */
+#rails{min-height:100dvh;display:flex;flex-direction:column;justify-content:center}
+#rails .section-head{position:relative;z-index:2}
+.diagram-caption{margin-top:clamp(2rem,6vw,3.5rem);font-family:var(--font-head);font-weight:700;font-size:1.1rem;color:var(--head);
+  min-height:1.6em;transition:opacity .4s}
+.diagram-legend{margin-top:.6rem;font-size:.85rem;color:var(--meta)}
+.diagram-hint{margin-top:1.4rem;font-size:.8rem;color:var(--meta)}
+#node-tooltip{position:fixed;pointer-events:none;background:var(--card);border:1px solid var(--hairline);border-radius:8px;
+  padding:.55rem .8rem;font-size:.82rem;color:var(--head);max-width:220px;opacity:0;transition:opacity .2s;z-index:60;
+  box-shadow:0 10px 24px rgba(0,0,0,.4);}
+#node-tooltip.show{opacity:1}
+#node-tooltip .role-name{display:block;font-family:var(--font-head);font-weight:700;font-size:.78rem;color:var(--sage);margin-bottom:.2rem}
 
 /* ============ about ============ */
-.about-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(2rem,5vw,4rem);align-items:start}
-.about-grid p{color:var(--dim);font-size:clamp(1.02rem,1.6vw,1.18rem);line-height:1.75}
-.trait-list{display:flex;flex-wrap:wrap;gap:.6rem;align-content:flex-start}
-@media (max-width:860px){.about-grid{grid-template-columns:1fr}}
+.about-card{padding:clamp(2rem,4.5vw,3rem);max-width:820px}
+.about-card p{color:var(--body);font-size:clamp(1.02rem,1.6vw,1.18rem);line-height:1.8}
 
-/* ============ stack + exploring ============ */
-.tag-cloud{display:flex;flex-wrap:wrap;gap:.7rem}
+/* ============ stack ============ */
+.cluster-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.cluster-card{padding:clamp(1.75rem,3.6vw,2.4rem)}
+.cluster-card h3{font-size:1.3rem}
+.cluster-tags{display:flex;flex-wrap:wrap;gap:.6rem}
+@media (max-width:760px){.cluster-grid{grid-template-columns:1fr}}
 
 /* ============ projects ============ */
 .proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
-.proj-card{padding:2.2rem}
+.proj-card{padding:clamp(1.75rem,3.6vw,2.4rem)}
 .proj-top{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap}
-.status-badge{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);border:1px solid var(--line);border-radius:100px;padding:.35rem .8rem;white-space:nowrap}
-.proj-card h3{font-size:1.5rem;margin-top:1.1rem}
-.proj-card p{margin-top:.9rem;color:var(--dim);line-height:1.75;font-size:.98rem}
+.status-badge{font-size:.72rem;color:var(--meta);border:1px solid var(--hairline);border-radius:100px;padding:.35rem .8rem;white-space:nowrap}
+.proj-card h3{font-size:1.4rem;margin-top:1.1rem}
+.proj-card p{margin-top:.9rem;color:var(--body);line-height:1.8;font-size:.98rem}
 @media (max-width:760px){.proj-grid{grid-template-columns:1fr}}
 
 /* ============ contact ============ */
-#contact .wrap{text-align:left}
-#contact h2{font-size:clamp(2.2rem,7vw,5rem)}
-#contact .sub{margin-top:.6rem;color:var(--dim);font-size:clamp(1.1rem,2vw,1.4rem)}
-.contact-links{margin-top:2.5rem;display:flex;flex-wrap:wrap;gap:1rem}
+.contact-card{padding:clamp(2rem,4.5vw,3.2rem)}
+.contact-card h2{font-size:clamp(2rem,6vw,4rem)}
+.contact-card .sub{margin-top:.6rem;color:var(--body);font-size:clamp(1.05rem,1.8vw,1.3rem)}
+.contact-links{margin-top:2.2rem;display:flex;flex-wrap:wrap;gap:1rem}
 
 /* ============ footer ============ */
-footer{padding:clamp(2.5rem,5vw,3.5rem) 0;border-top:1px solid var(--line)}
-footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;color:var(--dim);font-size:.85rem}
-footer .wrap span:first-child{color:var(--txt);font-family:var(--font-head);font-weight:700}
+footer{padding:clamp(2.25rem,5vw,3.25rem) 0;border-top:1px solid var(--hairline);position:relative;z-index:1}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;color:var(--meta);font-size:.85rem}
+footer .wrap span:first-child{color:var(--head);font-family:var(--font-head);font-weight:700}
 </style>
 </head>
 <body>
 
-<div class="orbs" aria-hidden="true">
-  <div class="orb orb-amber"></div>
-  <div class="orb orb-teal"></div>
-  <div class="orb orb-rose"></div>
-</div>
-<div class="grain" aria-hidden="true"></div>
+<canvas id="rails-canvas" aria-hidden="true"></canvas>
+<div id="node-tooltip" role="tooltip"></div>
 
 <a href="#main" class="skip-link">Skip to content</a>
 
-<header class="nav glass">
+<header class="nav">
   <a href="#hero" class="logo">AMEY JOSHI</a>
   <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navList">
     <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
   </button>
   <ul id="navList">
-    <li><a href="#work">Work</a></li>
-    <li><a href="#journey">Journey</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#stack">Skills</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a class="link-hover" href="#journey">Journey</a></li>
+    <li><a class="link-hover" href="#work">Work</a></li>
+    <li><a class="link-hover" href="#rails">Rails</a></li>
+    <li><a class="link-hover" href="#about">About</a></li>
+    <li><a class="link-hover" href="#stack">Skills</a></li>
+    <li><a class="link-hover" href="#contact">Contact</a></li>
   </ul>
 </header>
 
@@ -273,80 +248,65 @@ footer .wrap span:first-child{color:var(--txt);font-family:var(--font-head);font
 
   <section id="hero">
     <div class="wrap">
-      <p class="tag-line" data-reveal>NAVI MUMBAI / BANKING SYSTEMS / PAYMENT INFRASTRUCTURE</p>
-      <h1 data-reveal>BUSINESS <span class="x">×</span>TECHNOLOGY<br><span class="x">×</span>EXECUTION</h1>
-      <p class="sub" data-reveal>I turn complex systems into products that work. Business Analyst across banking, payments, APIs, integrations and digital transformation.</p>
+      <p class="eyebrow" data-reveal>Business Analyst · Fino Payments Bank · Navi Mumbai</p>
+      <h1 data-reveal>Right now I'm replacing a bank's core system while the bank stays open.</h1>
+      <p class="sub" data-reveal>Payment rails, core banking, and the delivery governance that holds them together.</p>
       <div class="btn-row" data-reveal>
-        <a href="#work" class="btn btn-primary glass">EXPLORE MY WORK →</a>
-        <a href="#contact" class="btn btn-outline glass">LET'S CONNECT</a>
+        <a href="#work" class="btn btn-primary">Explore the work</a>
+        <a href="#contact" class="btn btn-outline">Let's connect</a>
       </div>
-      <div class="scroll-hint" data-reveal>SCROLL THROUGH THE SYSTEM</div>
-    </div>
-  </section>
-
-  <section id="how-i-think">
-    <div class="wrap">
-      <div class="section-head" data-reveal>
-        <span class="eyebrow">01 / How I Think</span>
-        <h2>Complexity is where I do my best work.</h2>
-      </div>
-      <div class="think-grid" data-reveal-group>
-        <div class="pw" data-parallax="0.05"><div class="glass think-card" data-reveal>
-          <span class="n">01</span><h3>Understand</h3>
-          <p>Break complex business and technical problems into clear systems.</p>
-        </div></div>
-        <div class="pw" data-parallax="0.09"><div class="glass think-card" data-reveal>
-          <span class="n">02</span><h3>Connect</h3>
-          <p>Bridge business teams, technology teams, vendors and stakeholders.</p>
-        </div></div>
-        <div class="pw" data-parallax="0.06"><div class="glass think-card" data-reveal>
-          <span class="n">03</span><h3>Execute</h3>
-          <p>Turn requirements into working products, integrations and releases.</p>
-        </div></div>
-      </div>
+      <p class="scroll-hint" data-reveal>Scroll to explore</p>
     </div>
   </section>
 
   <section id="journey">
     <div class="wrap">
       <div class="section-head" data-reveal>
-        <span class="eyebrow">02 / The Journey</span>
         <h2>Systems progress through time.</h2>
         <p class="sub">A career built from practical delivery, banking operations, and things built on the side.</p>
       </div>
       <div class="timeline" data-reveal-group>
-        <div class="tl-item" data-reveal>
-          <span class="range">2025 — PRESENT</span>
-          <span class="cat">Enterprise Banking Programs</span>
-          <h3>Fino Payments Bank</h3>
+
+        <div class="pw" data-parallax="0.03"><div class="card-persp"><div class="card tl-card" data-reveal data-tilt>
+          <span class="range cz1">2025 — PRESENT</span>
+          <span class="cat cz1">Enterprise Banking Programs</span>
+          <hr class="sage-rule cz3">
+          <h3 class="cz2">Fino Payments Bank</h3>
           <p class="role">Business Analyst</p>
           <p class="desc">Migrating the bank's core system from FIS to Finacle — on a live bank, with no maintenance window big enough to take it offline. Then AePS, Domestic Money Transfer, eKYC, mATM certification, EMV 3DS, and contactless and NCMC cards.</p>
           <span class="place">Navi Mumbai</span>
-        </div>
-        <div class="tl-item" data-reveal>
-          <span class="range">2024 — 2025</span>
-          <span class="cat">Wealth &amp; NRI Banking</span>
-          <h3>IDFC FIRST Bank</h3>
+        </div></div></div>
+
+        <div class="pw" data-parallax="0.05"><div class="card-persp"><div class="card tl-card" data-reveal data-tilt>
+          <span class="range cz1">2024 — 2025</span>
+          <span class="cat cz1">Wealth &amp; NRI Banking</span>
+          <hr class="sage-rule cz3">
+          <h3 class="cz2">IDFC FIRST Bank</h3>
           <p class="role">Business Analyst</p>
           <p class="desc">NRI-PIS, ASBA, Demat accounts, and the API integrations that connect them.</p>
           <span class="place">Navi Mumbai</span>
-        </div>
-        <div class="tl-item" data-reveal>
-          <span class="range">2018 — 2024</span>
-          <span class="cat">Software Consultancy</span>
-          <h3>Zenox Technologies</h3>
+        </div></div></div>
+
+        <div class="pw" data-parallax="0.04"><div class="card-persp"><div class="card tl-card" data-reveal data-tilt>
+          <span class="range cz1">2018 — 2024</span>
+          <span class="cat cz1">Software Consultancy</span>
+          <hr class="sage-rule cz3">
+          <h3 class="cz2">Zenox Technologies</h3>
           <p class="role">Co-founder</p>
           <p class="desc">Websites, web apps, e-commerce stores and university portals. Zero clients in year one; past twenty by word of mouth alone.</p>
           <span class="place">Kolhapur</span>
-        </div>
-        <div class="tl-item" data-reveal>
-          <span class="range">FEB 2021 — PRESENT</span>
-          <span class="cat">Outside the Job</span>
-          <h3>RB Esports</h3>
+        </div></div></div>
+
+        <div class="pw" data-parallax="0.06"><div class="card-persp"><div class="card tl-card" data-reveal data-tilt>
+          <span class="range cz1">FEB 2021 — PRESENT</span>
+          <span class="cat cz1">Outside the Job</span>
+          <hr class="sage-rule cz3">
+          <h3 class="cz2">RB Esports</h3>
           <p class="role">Co-founder</p>
           <p class="desc">A gaming café that stayed open through two COVID lockdowns — five months closed at one point, loan payments on the machines still due every month it couldn't open.</p>
           <span class="place">Kolhapur</span>
-        </div>
+        </div></div></div>
+
       </div>
     </div>
   </section>
@@ -354,144 +314,147 @@ footer .wrap span:first-child{color:var(--txt);font-family:var(--font-head);font
   <section id="work">
     <div class="wrap">
       <div class="section-head" data-reveal>
-        <span class="eyebrow">03 / Selected Work</span>
         <h2>Systems I've worked on.</h2>
         <p class="sub">Not screenshots. Not decoration. The operating logic behind banking rails, migrations and controls.</p>
       </div>
       <div class="work-list" data-reveal-group>
 
-        <div class="pw" data-parallax="0.03"><div class="glass work-card" data-reveal>
-          <div class="work-top"><span class="idx">01</span><span class="work-cat">Core Banking Migration</span></div>
-          <h3>FIS CBS → Finacle CBS</h3>
+        <div class="pw" data-parallax="0.03"><div class="card-persp"><div class="card work-card" data-reveal data-tilt>
+          <div class="work-top cz1"><span class="idx">01</span><span class="work-cat">Core Banking Migration</span></div>
+          <h3 class="cz2">FIS CBS → Finacle CBS</h3>
+          <hr class="sage-rule cz3">
           <dl class="work-rows">
             <dt>Problem</dt><dd>A live bank's core system had to change underneath it — there's no maintenance window big enough to take a bank offline.</dd>
             <dt>Role</dt><dd>UAT governance, business sign-off, cross-team coordination</dd>
             <dt>What I did</dt><dd>Sequenced the migration from FIS to Finacle so the bank could replace the engine while it kept running, and closed out business sign-off before go-live.</dd>
-            <dt>Systems</dt><dd><div class="sys-tags"><span class="chip">FIS</span><span class="chip">Finacle</span><span class="chip">TCS BaNCS</span><span class="chip">UAT</span></div></dd>
+            <dt>Systems</dt><dd><div class="sys-tags cz3"><span class="chip">FIS</span><span class="chip">Finacle</span><span class="chip">TCS BaNCS</span><span class="chip">UAT</span></div></dd>
+            <dt>Outcome</dt><dd class="work-outcome">A core banking migration executed on a live bank, without anyone outside noticing.</dd>
           </dl>
-          <p class="work-outcome"><b>Outcome —</b> a core banking migration executed on a live bank, without anyone outside noticing.</p>
-        </div></div>
+        </div></div></div>
 
-        <div class="pw" data-parallax="0.05"><div class="glass work-card" data-reveal>
-          <div class="work-top"><span class="idx">02</span><span class="work-cat">Financial Access Rails</span></div>
-          <h3>AePS Integration</h3>
+        <div class="pw" data-parallax="0.05"><div class="card-persp"><div class="card work-card" data-reveal data-tilt>
+          <div class="work-top cz1"><span class="idx">02</span><span class="work-cat">Financial Access Rails</span></div>
+          <h3 class="cz2">AePS Integration</h3>
+          <hr class="sage-rule cz3">
           <dl class="work-rows">
             <dt>Problem</dt><dd>Aadhaar-based authentication has to succeed through UIDAI, an acquirer-to-NPCI-to-issuer hop, and still degrade gracefully when the biometric read fails.</dd>
             <dt>Role</dt><dd>Requirement analysis, BRD/FRD, UAT coordination</dd>
             <dt>What I did</dt><dd>Defined the authentication and settlement flow across acquirer, NPCI and issuer, and specified what happens operationally when a biometric read fails.</dd>
-            <dt>Systems</dt><dd><div class="sys-tags"><span class="chip">UIDAI</span><span class="chip">NPCI</span><span class="chip">Acquirer</span><span class="chip">Issuer</span></div></dd>
+            <dt>Systems</dt><dd><div class="sys-tags cz3"><span class="chip">UIDAI</span><span class="chip">NPCI</span><span class="chip">Acquirer</span><span class="chip">Issuer</span></div></dd>
+            <dt>Outcome</dt><dd class="work-outcome">A validated AePS journey with clear failure handling instead of a silent drop.</dd>
           </dl>
-          <p class="work-outcome"><b>Outcome —</b> a validated AePS journey with clear failure handling instead of a silent drop.</p>
-        </div></div>
+        </div></div></div>
 
-        <div class="pw" data-parallax="0.04"><div class="glass work-card" data-reveal>
-          <div class="work-top"><span class="idx">03</span><span class="work-cat">Onboarding + Money Movement</span></div>
-          <h3>Domestic Money Transfer</h3>
+        <div class="pw" data-parallax="0.04"><div class="card-persp"><div class="card work-card" data-reveal data-tilt>
+          <div class="work-top cz1"><span class="idx">03</span><span class="work-cat">Onboarding + Money Movement</span></div>
+          <h3 class="cz2">Domestic Money Transfer</h3>
+          <hr class="sage-rule cz3">
           <dl class="work-rows">
             <dt>Problem</dt><dd>Agent-assisted cash-in has to move money correctly the first time, across an IMPS leg and NPCI switching layer neither side can fully see.</dd>
             <dt>Role</dt><dd>Business analysis, requirement definition, UAT coordination</dd>
             <dt>What I did</dt><dd>Mapped the agent cash-in flow, the IMPS leg that actually moves the money, NPCI switching in between, and reconciliation after.</dd>
-            <dt>Systems</dt><dd><div class="sys-tags"><span class="chip">Agent app</span><span class="chip">IMPS</span><span class="chip">NPCI switch</span><span class="chip">Reconciliation</span></div></dd>
+            <dt>Systems</dt><dd><div class="sys-tags cz3"><span class="chip">Agent app</span><span class="chip">IMPS</span><span class="chip">NPCI switch</span><span class="chip">Reconciliation</span></div></dd>
+            <dt>Outcome</dt><dd class="work-outcome">A transfer flow where the numbers match at the end of the day, and failures trace back to a specific hop.</dd>
           </dl>
-          <p class="work-outcome"><b>Outcome —</b> a transfer flow where the numbers match at the end of the day, and failures trace back to a specific hop.</p>
-        </div></div>
+        </div></div></div>
 
-        <div class="pw" data-parallax="0.06"><div class="glass work-card" data-reveal>
-          <div class="work-top"><span class="idx">04</span><span class="work-cat">Card Security</span></div>
-          <h3>Cards &amp; EMV</h3>
+        <div class="pw" data-parallax="0.06"><div class="card-persp"><div class="card work-card" data-reveal data-tilt>
+          <div class="work-top cz1"><span class="idx">04</span><span class="work-cat">Card Security</span></div>
+          <h3 class="cz2">Cards &amp; EMV</h3>
+          <hr class="sage-rule cz3">
           <dl class="work-rows">
             <dt>Problem</dt><dd>Contactless, NCMC and EMV 3DS all touch the same PIN and card data — one weak link is enough.</dd>
             <dt>Role</dt><dd>Business analysis, security requirement validation</dd>
             <dt>What I did</dt><dd>Specified how contactless and NCMC transit cards authenticate, how EMV 3DS handles online authentication, and how PIN data stays encrypted the whole way through.</dd>
-            <dt>Systems</dt><dd><div class="sys-tags"><span class="chip">EMV 3DS</span><span class="chip">NCMC</span><span class="chip">PIN encryption</span><span class="chip">Issuer</span></div></dd>
+            <dt>Systems</dt><dd><div class="sys-tags cz3"><span class="chip">EMV 3DS</span><span class="chip">NCMC</span><span class="chip">PIN encryption</span><span class="chip">Issuer</span></div></dd>
+            <dt>Outcome</dt><dd class="work-outcome">Card authentication paths that hold up under audit, not just under a demo.</dd>
           </dl>
-          <p class="work-outcome"><b>Outcome —</b> card authentication paths that hold up under audit, not just under a demo.</p>
-        </div></div>
+        </div></div></div>
 
-        <div class="pw" data-parallax="0.04"><div class="glass work-card" data-reveal>
-          <div class="work-top"><span class="idx">05</span><span class="work-cat">Device + Payment Rails</span></div>
-          <h3>mATM, UPI, NACH, POS</h3>
+        <div class="pw" data-parallax="0.04"><div class="card-persp"><div class="card work-card" data-reveal data-tilt>
+          <div class="work-top cz1"><span class="idx">05</span><span class="work-cat">Device + Payment Rails</span></div>
+          <h3 class="cz2">mATM, UPI, NACH, POS</h3>
+          <hr class="sage-rule cz3">
           <dl class="work-rows">
             <dt>Problem</dt><dd>The rails most people never think about — until one of them doesn't work.</dd>
             <dt>Role</dt><dd>Certification, process mapping, operational validation</dd>
             <dt>What I did</dt><dd>Worked mATM device certification and activation alongside UPI, NACH and POS — the plumbing that only gets attention when it breaks.</dd>
-            <dt>Systems</dt><dd><div class="sys-tags"><span class="chip">mATM</span><span class="chip">UPI</span><span class="chip">NACH</span><span class="chip">POS</span></div></dd>
+            <dt>Systems</dt><dd><div class="sys-tags cz3"><span class="chip">mATM</span><span class="chip">UPI</span><span class="chip">NACH</span><span class="chip">POS</span></div></dd>
+            <dt>Outcome</dt><dd class="work-outcome">Rails that keep working quietly, which is the only outcome that matters here.</dd>
           </dl>
-          <p class="work-outcome"><b>Outcome —</b> rails that keep working quietly, which is the only outcome that matters here.</p>
-        </div></div>
+        </div></div></div>
 
-        <div class="pw" data-parallax="0.05"><div class="glass work-card" data-reveal>
-          <div class="work-top"><span class="idx">06</span><span class="work-cat">Delivery Governance</span></div>
-          <h3>BRD to Go-Live</h3>
+        <div class="pw" data-parallax="0.05"><div class="card-persp"><div class="card work-card" data-reveal data-tilt>
+          <div class="work-top cz1"><span class="idx">06</span><span class="work-cat">Delivery Governance</span></div>
+          <h3 class="cz2">BRD to Go-Live</h3>
+          <hr class="sage-rule cz3">
           <dl class="work-rows">
             <dt>Problem</dt><dd>BRDs that don't hold up under audit, and UAT that only catches problems after go-live, cost more than they save.</dd>
             <dt>Role</dt><dd>BRD/FRD ownership, UAT governance, release management</dd>
             <dt>What I did</dt><dd>Wrote requirements that hold up under audit, ran UAT that actually catches problems before go-live, and kept vendors honest about the date they committed to.</dd>
-            <dt>Systems</dt><dd><div class="sys-tags"><span class="chip">BRD/FRD</span><span class="chip">UAT</span><span class="chip">Release mgmt</span><span class="chip">Vendors</span></div></dd>
+            <dt>Systems</dt><dd><div class="sys-tags cz3"><span class="chip">BRD/FRD</span><span class="chip">UAT</span><span class="chip">Release mgmt</span><span class="chip">Vendors</span></div></dd>
+            <dt>Outcome</dt><dd class="work-outcome">Releases that go live on the date they were supposed to, with sign-offs that mean something.</dd>
           </dl>
-          <p class="work-outcome"><b>Outcome —</b> releases that go live on the date they were supposed to, with sign-offs that mean something.</p>
-        </div></div>
+        </div></div></div>
 
       </div>
+    </div>
+  </section>
+
+  <section id="rails">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <h2>How the money actually moves.</h2>
+        <p class="sub">Three everyday transactions — an AePS cash withdrawal, an mATM card withdrawal, a domestic money transfer — traced through one shared network. The nodes repeat because the infrastructure repeats.</p>
+      </div>
+      <p class="diagram-caption" id="diagramCaption" data-reveal></p>
+      <p class="diagram-legend" data-reveal>Sage — the infrastructure at rest. White — the money, mid-transaction.</p>
+      <p class="diagram-hint" data-reveal>Hover a node for what it does.</p>
     </div>
   </section>
 
   <section id="about">
     <div class="wrap">
       <div class="section-head" data-reveal>
-        <span class="eyebrow">04 / About</span>
         <h2>I sit between the business problem and the technical solution.</h2>
       </div>
-      <div class="about-grid" data-reveal-group>
-        <p data-reveal>My work starts where requirements stop being clean. I translate business intent into technical scope, coordinate engineering and vendor teams, validate integrations, and keep delivery moving until the system survives production. The useful part isn't the documentation — it's knowing which decision, dependency, defect or sign-off will actually determine whether a release works.</p>
-        <div class="trait-list" data-reveal>
-          <span class="chip">Systems thinker</span>
-          <span class="chip">Problem solver</span>
-          <span class="chip">Product mindset</span>
-          <span class="chip">Strong ownership</span>
-          <span class="chip">Comfortable with ambiguity</span>
-          <span class="chip">Business + technology bridge</span>
-        </div>
-      </div>
+      <div class="pw" data-parallax="0.03"><div class="card-persp"><div class="card about-card" data-reveal data-tilt>
+        <p class="cz2">My work starts where requirements stop being clean. I translate business intent into technical scope, coordinate engineering and vendor teams, validate integrations, and keep delivery moving until the system survives production. The useful part isn't the documentation — it's knowing which decision, dependency, defect or sign-off will actually determine whether a release works.</p>
+        <hr class="sage-rule cz1">
+      </div></div></div>
     </div>
   </section>
 
   <section id="stack">
     <div class="wrap">
       <div class="section-head" data-reveal>
-        <span class="eyebrow">05 / The Stack</span>
         <h2>A constellation, not a checklist.</h2>
         <p class="sub">Each skill matters because of the system it connects to.</p>
       </div>
-      <div class="tag-cloud" data-reveal-group>
-        <span class="chip" data-reveal>Business Analysis</span>
-        <span class="chip" data-reveal>Process Mapping</span>
-        <span class="chip" data-reveal>Stakeholder Management</span>
-        <span class="chip" data-reveal>SQL</span>
-        <span class="chip" data-reveal>REST APIs</span>
-        <span class="chip" data-reveal>Core Banking (CBS)</span>
-        <span class="chip" data-reveal>AePS / DMT</span>
-        <span class="chip" data-reveal>Cards / EMV / 3DS</span>
-        <span class="chip" data-reveal>UAT</span>
-        <span class="chip" data-reveal>Agile / Jira</span>
-        <span class="chip" data-reveal>Vendor Management</span>
-      </div>
-    </div>
-  </section>
-
-  <section id="exploring">
-    <div class="wrap">
-      <div class="section-head" data-reveal>
-        <span class="eyebrow">06 / Currently Exploring</span>
-        <h2>A small research lab for what comes next.</h2>
-      </div>
-      <div class="tag-cloud" data-reveal-group>
-        <span class="chip" data-reveal>AI</span>
-        <span class="chip" data-reveal>Automation</span>
-        <span class="chip" data-reveal>Cloud</span>
-        <span class="chip" data-reveal>Product Engineering</span>
-        <span class="chip" data-reveal>AI-assisted Development</span>
-        <span class="chip" data-reveal>Data &amp; Analytics</span>
+      <div class="cluster-grid" data-reveal-group>
+        <div class="pw" data-parallax="0.04"><div class="card-persp"><div class="card cluster-card" data-reveal data-tilt>
+          <h3 class="cz2">Business &amp; Delivery</h3>
+          <hr class="sage-rule cz3">
+          <div class="cluster-tags cz1">
+            <span class="chip">Business Analysis</span>
+            <span class="chip">Process Mapping</span>
+            <span class="chip">Stakeholder Management</span>
+            <span class="chip">UAT</span>
+            <span class="chip">Agile / Jira</span>
+            <span class="chip">Vendor Management</span>
+          </div>
+        </div></div></div>
+        <div class="pw" data-parallax="0.06"><div class="card-persp"><div class="card cluster-card" data-reveal data-tilt>
+          <h3 class="cz2">Systems &amp; Rails</h3>
+          <hr class="sage-rule cz3">
+          <div class="cluster-tags cz1">
+            <span class="chip">SQL</span>
+            <span class="chip">REST APIs</span>
+            <span class="chip">Core Banking (CBS)</span>
+            <span class="chip">AePS / DMT</span>
+            <span class="chip">Cards / EMV / 3DS</span>
+          </div>
+        </div></div></div>
       </div>
     </div>
   </section>
@@ -499,35 +462,36 @@ footer .wrap span:first-child{color:var(--txt);font-family:var(--font-head);font
   <section id="projects">
     <div class="wrap">
       <div class="section-head" data-reveal>
-        <span class="eyebrow">07 / Personal Projects</span>
         <h2>Experiments outside the day job.</h2>
       </div>
       <div class="proj-grid" data-reveal-group>
-        <div class="pw" data-parallax="0.04"><div class="glass proj-card" data-reveal>
-          <div class="proj-top"><span class="work-cat">Regulatory Tooling</span><span class="status-badge">In development</span></div>
-          <h3>RegLens AI</h3>
+        <div class="pw" data-parallax="0.04"><div class="card-persp"><div class="card proj-card" data-reveal data-tilt>
+          <div class="proj-top cz1"><span class="work-cat">Regulatory Tooling</span><span class="status-badge">In development</span></div>
+          <h3 class="cz2">RegLens AI</h3>
+          <hr class="sage-rule cz3">
           <p>Reads regulatory circulars and answers questions about them in plain language, then maps which systems and processes each new change touches. Retrieval works straight from the source document, so answers trace back to the text. Built on FastAPI, Ollama and PostgreSQL.</p>
-        </div></div>
-        <div class="pw" data-parallax="0.07"><div class="glass proj-card" data-reveal>
-          <div class="proj-top"><span class="work-cat">Workflow Automation</span><span class="status-badge">Pre-launch</span></div>
-          <h3>Node Factory</h3>
+        </div></div></div>
+        <div class="pw" data-parallax="0.07"><div class="card-persp"><div class="card proj-card" data-reveal data-tilt>
+          <div class="proj-top cz1"><span class="work-cat">Workflow Automation</span><span class="status-badge">Pre-launch</span></div>
+          <h3 class="cz2">Node Factory</h3>
+          <hr class="sage-rule cz3">
           <p>Ready-made n8n automation workflows for small businesses that don't have time to build their own. The brand and the product assets are built. It hasn't launched yet.</p>
-        </div></div>
+        </div></div></div>
       </div>
     </div>
   </section>
 
   <section id="contact">
     <div class="wrap">
-      <div data-reveal-group>
-        <span class="eyebrow" data-reveal>08 / Let's Build Something</span>
-        <h2 data-reveal>Have a complex problem?</h2>
-        <p class="sub" data-reveal>Let's turn it into a system that works.</p>
-        <div class="contact-links" data-reveal>
-          <a class="btn btn-outline glass" href="https://linkedin.com/in/ameyjoshi180696" target="_blank" rel="noreferrer noopener">LINKEDIN</a>
-          <a class="btn btn-primary glass" href="mailto:ameyjoshi1881@gmail.com">EMAIL</a>
+      <div class="pw" data-parallax="0.02"><div class="card-persp"><div class="card contact-card" data-reveal data-tilt>
+        <h2 class="cz2">Have a complex problem?</h2>
+        <p class="sub cz1">Let's turn it into a system that works.</p>
+        <hr class="sage-rule cz3">
+        <div class="contact-links cz1">
+          <a class="btn btn-outline" href="https://linkedin.com/in/ameyjoshi180696" target="_blank" rel="noreferrer noopener">LinkedIn</a>
+          <a class="btn btn-primary" href="mailto:ameyjoshi1881@gmail.com">Email</a>
         </div>
-      </div>
+      </div></div></div>
     </div>
   </section>
 
@@ -546,7 +510,7 @@ footer .wrap span:first-child{color:var(--txt);font-family:var(--font-head);font
   "use strict";
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* mobile nav */
+  /* ============ mobile nav ============ */
   var toggle = document.getElementById('navToggle');
   var list = document.getElementById('navList');
   if (toggle && list) {
@@ -562,18 +526,7 @@ footer .wrap span:first-child{color:var(--txt);font-family:var(--font-head);font
     });
   }
 
-  /* specular cursor tracking on glass elements */
-  document.querySelectorAll('.glass').forEach(function(el){
-    el.addEventListener('pointermove', function(e){
-      var r = el.getBoundingClientRect();
-      var mx = ((e.clientX - r.left) / r.width) * 100;
-      var my = ((e.clientY - r.top) / r.height) * 100;
-      el.style.setProperty('--mx', mx + '%');
-      el.style.setProperty('--my', my + '%');
-    });
-  });
-
-  /* scroll reveals, staggered ~55ms per group */
+  /* ============ scroll reveals, staggered ~55ms per group ============ */
   var revealEls = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
   if (reduceMotion) {
     revealEls.forEach(function(el){ el.classList.add('is-visible'); });
@@ -595,13 +548,11 @@ footer .wrap span:first-child{color:var(--txt);font-family:var(--font-head);font
     revealEls.forEach(function(el){ el.classList.add('is-visible'); });
   }
 
-  /* per-card parallax, eased with lerp — separate wrapper so it never
-     fights the reveal transform on the .glass element inside it */
+  /* ============ per-card scroll parallax, lerp-eased ============ */
   if (!reduceMotion) {
     var parallaxEls = Array.prototype.slice.call(document.querySelectorAll('[data-parallax]')).map(function(el){
-      return {el: el, rate: parseFloat(el.getAttribute('data-parallax')) || 0.05, current: 0, target: 0};
+      return {el: el, rate: parseFloat(el.getAttribute('data-parallax')) || 0.04, current: 0, target: 0};
     });
-
     function updateTargets(){
       var vh = window.innerHeight;
       parallaxEls.forEach(function(p){
@@ -610,23 +561,325 @@ footer .wrap span:first-child{color:var(--txt);font-family:var(--font-head);font
         p.target = centerOffset * p.rate;
       });
     }
-
-    var ticking = false;
-    function tick(){
-      var settled = true;
+    function tickParallax(){
       parallaxEls.forEach(function(p){
-        var delta = p.target - p.current;
-        if (Math.abs(delta) > 0.05) settled = false;
-        p.current += delta * 0.22;
+        p.current += (p.target - p.current) * 0.22;
         p.el.style.transform = 'translateY(' + p.current.toFixed(2) + 'px)';
       });
-      requestAnimationFrame(tick);
+      requestAnimationFrame(tickParallax);
     }
-
     window.addEventListener('scroll', updateTargets, {passive: true});
     window.addEventListener('resize', updateTargets);
     updateTargets();
-    requestAnimationFrame(tick);
+    requestAnimationFrame(tickParallax);
+  }
+
+  /* ============ card 3D tilt — layers 1, 3, 4, 5 ============ */
+  var BASE_SHADOW = '0 2px 4px rgba(0,0,0,.35), 0 10px 24px rgba(0,0,0,.28), 0 34px 68px -12px rgba(0,0,0,.5)';
+  if (!reduceMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.querySelectorAll('[data-tilt]').forEach(function(card){
+      var maxTilt = 6;
+      card.addEventListener('pointermove', function(e){
+        var r = card.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width - 0.5;
+        var py = (e.clientY - r.top) / r.height - 0.5;
+        var rotY = px * maxTilt * 2;
+        var rotX = -py * maxTilt * 2;
+        card.style.transition = 'box-shadow .1s';
+        card.style.transform = 'perspective(1000px) rotateX(' + rotX.toFixed(2) + 'deg) rotateY(' + rotY.toFixed(2) + 'deg)';
+        var sx = -rotY * 2.4;
+        var sy = rotX * 1.6;
+        card.style.boxShadow =
+          (sx * 0.4).toFixed(1) + 'px ' + (4 + sy * 0.3).toFixed(1) + 'px 4px rgba(0,0,0,.35), ' +
+          (sx * 0.9).toFixed(1) + 'px ' + (10 + sy * 0.7).toFixed(1) + 'px 24px rgba(0,0,0,.28), ' +
+          (sx * 1.6).toFixed(1) + 'px ' + (34 + sy * 1.3).toFixed(1) + 'px 68px -12px rgba(0,0,0,.5)';
+        card.style.setProperty('--mx', ((px + 0.5) * 100).toFixed(1) + '%');
+        card.style.setProperty('--my', ((py + 0.5) * 100).toFixed(1) + '%');
+      });
+      card.addEventListener('pointerleave', function(){
+        card.style.transition = 'transform .6s cubic-bezier(.16,1,.3,1), box-shadow .6s cubic-bezier(.16,1,.3,1)';
+        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+        card.style.boxShadow = BASE_SHADOW;
+      });
+    });
+  }
+
+  /* ============ node diagram ============ */
+  var canvas = document.getElementById('rails-canvas');
+  var ctx = canvas.getContext('2d');
+  var railsSection = document.getElementById('rails');
+  var captionEl = document.getElementById('diagramCaption');
+  var tooltip = document.getElementById('node-tooltip');
+
+  var COLOR_SAGE = [163, 177, 138];
+  var COLOR_HEAD = [242, 238, 230];
+
+  var NODES = [
+    {id:'customer',    label:'CUSTOMER',          x:0.07, y:0.52, r:1.0, role:'Where the transaction starts.'},
+    {id:'agent',       label:'BC AGENT',          x:0.24, y:0.52, r:1.0, role:'Micro-ATM or agent app — the physical point of the transaction.'},
+    {id:'acquirer',    label:'ACQUIRER SWITCH',   x:0.42, y:0.52, r:1.05,role:'The acquiring bank’s switch — the first hop into the network.'},
+    {id:'npci',        label:'NPCI SWITCH',       x:0.60, y:0.47, r:1.55,role:'Routes and settles between banks.'},
+    {id:'uidai',       label:'UIDAI',             x:0.60, y:0.13, r:1.0, role:'Aadhaar biometric authentication — returns yes or no.'},
+    {id:'issuer',      label:'ISSUER BANK CBS',   x:0.86, y:0.32, r:1.0, role:'The customer’s bank — checks balance, debits the account.'},
+    {id:'beneficiary', label:'BENEFICIARY BANK',  x:0.86, y:0.63, r:1.0, role:'Receives and credits the transferred funds.'},
+    {id:'settlement',  label:'SETTLEMENT',        x:0.60, y:0.87, r:1.0, role:'Where the books get squared between banks.'}
+  ];
+  var nodeById = {};
+  NODES.forEach(function(n){ nodeById[n.id] = n; });
+
+  var EDGES = [
+    ['customer','agent'], ['agent','acquirer'], ['acquirer','npci'],
+    ['npci','uidai'], ['npci','issuer'], ['npci','beneficiary'],
+    ['agent','settlement'], ['acquirer','settlement']
+  ];
+
+  var ROUTES = [
+    { id:'aeps', caption:'AePS — cash withdrawal', hops:[
+      ['customer','agent',.9], ['agent','acquirer',.9], ['acquirer','npci',.9],
+      ['npci','uidai',.7], ['uidai','npci',.7], ['npci','issuer',.9],
+      ['issuer','npci',.5], ['npci','acquirer',.5], ['acquirer','agent',.5],
+      ['agent','settlement',.9]
+    ]},
+    { id:'matm', caption:'mATM — card withdrawal', hops:[
+      ['customer','agent',.9], ['agent','acquirer',.9], ['acquirer','npci',.9],
+      ['npci','issuer',.9],
+      ['issuer','npci',.5], ['npci','acquirer',.5], ['acquirer','agent',.5],
+      ['agent','settlement',.9]
+    ]},
+    { id:'dmt', caption:'DMT — domestic money transfer', hops:[
+      ['customer','agent',.9], ['agent','acquirer',.9], ['acquirer','npci',.9],
+      ['npci','beneficiary',.9],
+      ['beneficiary','npci',.5], ['npci','acquirer',.5],
+      ['acquirer','settlement',.9]
+    ]}
+  ];
+  var HOLD_SECONDS = 1.1;
+
+  function edgeKey(a,b){ return a < b ? a+'|'+b : b+'|'+a; }
+  var edgeHeat = {};
+  EDGES.forEach(function(e){ edgeHeat[edgeKey(e[0],e[1])] = 0; });
+  var nodeHeat = {};
+  NODES.forEach(function(n){ nodeHeat[n.id] = 0; });
+
+  var W = 0, H = 0, DPR = 1;
+  function resize(){
+    var rect = { width: window.innerWidth, height: window.innerHeight };
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = rect.width; H = rect.height;
+    canvas.width = Math.round(W * DPR);
+    canvas.height = Math.round(H * DPR);
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  function px(n){ return n.x * W; }
+  function py(n){ return n.y * H; }
+  function rad(n){ return n.r * (Math.min(W, H) * 0.014 + 5); }
+
+  function rgba(c, a){ return 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + a + ')'; }
+
+  function drawFrame(routeIndex, hopIndex, hopT, ambient){
+    ctx.clearRect(0, 0, W, H);
+    var baseOpacity = ambient ? 0.16 : 1;
+
+    // edges
+    EDGES.forEach(function(e){
+      var a = nodeById[e[0]], b = nodeById[e[1]];
+      var heat = edgeHeat[edgeKey(e[0], e[1])] || 0;
+      ctx.beginPath();
+      ctx.moveTo(px(a), py(a));
+      ctx.lineTo(px(b), py(b));
+      ctx.strokeStyle = heat > 0.02
+        ? rgba(COLOR_HEAD, (0.08 + heat * 0.55) * baseOpacity)
+        : rgba(COLOR_SAGE, 0.12 * baseOpacity);
+      ctx.lineWidth = heat > 0.02 ? 1.4 + heat * 1.6 : 1;
+      ctx.stroke();
+    });
+
+    // nodes
+    var t = performance.now() / 1000;
+    NODES.forEach(function(n, i){
+      var heat = nodeHeat[n.id] || 0;
+      var pulse = 0.5 + 0.5 * Math.sin(t * 1.1 + i * 1.7);
+      var r = rad(n) * (1 + heat * 0.45);
+      var x = px(n), y = py(n);
+
+      if (heat > 0.03) {
+        var glow = ctx.createRadialGradient(x, y, 0, x, y, r * 3.2);
+        glow.addColorStop(0, rgba(COLOR_HEAD, 0.35 * heat * baseOpacity));
+        glow.addColorStop(1, rgba(COLOR_HEAD, 0));
+        ctx.fillStyle = glow;
+        ctx.beginPath();
+        ctx.arc(x, y, r * 3.2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, Math.PI * 2);
+      var idleAlpha = (0.35 + pulse * 0.25) * baseOpacity;
+      ctx.fillStyle = heat > 0.03 ? rgba(COLOR_HEAD, (0.55 + heat * 0.45) * baseOpacity) : rgba(COLOR_SAGE, idleAlpha);
+      ctx.fill();
+
+      // Below ~700px there isn't room for node labels beside the section's
+      // own text without the two overlapping — the diagram reads fine as
+      // pure motion there; labels come back once there's width for them.
+      if (!ambient && W >= 700) {
+        ctx.font = '600 11px Satoshi, system-ui, sans-serif';
+        ctx.fillStyle = rgba(COLOR_HEAD, heat > 0.1 ? 0.9 : 0.55);
+        ctx.textAlign = 'center';
+        ctx.fillText(n.label, x, y + r + 16);
+      }
+    });
+
+    // packet — stays visible (dimmed) in ambient mode; only the text labels
+    // are ambient-only clutter, the moving light itself is the whole point
+    if (routeIndex !== null) {
+      var route = ROUTES[routeIndex];
+      var hop = route.hops[hopIndex];
+      if (hop) {
+        var from = nodeById[hop[0]], to = nodeById[hop[1]];
+        var ease = hopT < 0.5 ? 2*hopT*hopT : -1+(4-2*hopT)*hopT;
+        var x = px(from) + (px(to) - px(from)) * ease;
+        var y = py(from) + (py(to) - py(from)) * ease;
+        var glow = ctx.createRadialGradient(x, y, 0, x, y, 16);
+        glow.addColorStop(0, rgba(COLOR_HEAD, 0.9 * baseOpacity));
+        glow.addColorStop(1, rgba(COLOR_HEAD, 0));
+        ctx.fillStyle = glow;
+        ctx.beginPath();
+        ctx.arc(x, y, 16, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(x, y, 3.2, 0, Math.PI * 2);
+        ctx.fillStyle = rgba(COLOR_HEAD, baseOpacity);
+        ctx.fill();
+      }
+    }
+  }
+
+  // static single frame for reduced-motion — idle network, no packet
+  function drawStatic(){
+    resize();
+    drawFrame(null, 0, 0, false);
+  }
+
+  var diagramActive = false;
+
+  if (reduceMotion) {
+    canvas.style.opacity = '0.16';
+    drawStatic();
+    // Still swap ambient <-> full-attention opacity for the dedicated
+    // section — that's a state change, not motion, so it stays under
+    // reduced-motion. No pointer/tooltip wiring: hover-to-reveal-role isn't
+    // meaningful without the animated packet driving attention to a node.
+    if ('IntersectionObserver' in window) {
+      var staticIO = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          canvas.style.opacity = entry.isIntersecting ? '1' : '0.16';
+        });
+      }, {threshold: 0.35});
+      staticIO.observe(railsSection);
+    }
+  } else {
+    if ('IntersectionObserver' in window) {
+      var railsIO = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          diagramActive = entry.isIntersecting && entry.intersectionRatio > 0.35;
+          canvas.style.opacity = diagramActive ? '1' : '0.16';
+          canvas.style.pointerEvents = diagramActive ? 'auto' : 'none';
+          if (!diagramActive) tooltip.classList.remove('show');
+        });
+      }, {threshold: [0, 0.35, 0.6]});
+      railsIO.observe(railsSection);
+    }
+    var routeIndex = 0;
+    var hopIndex = 0;
+    var hopElapsed = 0;
+    var holding = false;
+    var holdElapsed = 0;
+    var lastTime = null;
+    var visible = !document.hidden;
+
+    document.addEventListener('visibilitychange', function(){ visible = !document.hidden; });
+
+    captionEl.textContent = ROUTES[0].caption;
+    captionEl.style.opacity = '1';
+
+    function decayHeat(map, dt){
+      Object.keys(map).forEach(function(k){ map[k] *= Math.pow(0.02, dt); if (map[k] < 0.01) map[k] = 0; });
+    }
+
+    function step(now){
+      requestAnimationFrame(step);
+      if (!visible) { lastTime = now; return; }
+      if (lastTime === null) lastTime = now;
+      var dt = Math.min((now - lastTime) / 1000, 0.05);
+      lastTime = now;
+
+      decayHeat(edgeHeat, dt);
+      decayHeat(nodeHeat, dt);
+
+      var route = ROUTES[routeIndex];
+      if (holding) {
+        holdElapsed += dt;
+        if (holdElapsed >= HOLD_SECONDS) {
+          holding = false; holdElapsed = 0;
+          routeIndex = (routeIndex + 1) % ROUTES.length;
+          hopIndex = 0; hopElapsed = 0;
+          nodeHeat = {}; NODES.forEach(function(n){ nodeHeat[n.id] = 0; });
+          edgeHeat = {}; EDGES.forEach(function(e){ edgeHeat[edgeKey(e[0],e[1])] = 0; });
+          captionEl.style.opacity = '0';
+          setTimeout(function(){
+            captionEl.textContent = ROUTES[routeIndex].caption;
+            captionEl.style.opacity = '1';
+          }, 200);
+        }
+      } else {
+        hopElapsed += dt;
+        var hop = route.hops[hopIndex];
+        var dur = hop[2];
+        var t = Math.min(hopElapsed / dur, 1);
+
+        nodeHeat[hop[0]] = Math.max(nodeHeat[hop[0]] || 0, 1 - t * 0.3);
+        nodeHeat[hop[1]] = Math.max(nodeHeat[hop[1]] || 0, t);
+        edgeHeat[edgeKey(hop[0], hop[1])] = 1;
+
+        if (t >= 1) {
+          hopElapsed = 0;
+          hopIndex++;
+          if (hopIndex >= route.hops.length) {
+            holding = true; holdElapsed = 0;
+          }
+        }
+
+        drawFrame(routeIndex, Math.min(hopIndex, route.hops.length - 1), t, !diagramActive);
+        return;
+      }
+      drawFrame(routeIndex, Math.min(hopIndex, route.hops.length - 1), 1, !diagramActive);
+    }
+    requestAnimationFrame(step);
+
+    // hover tooltip — only meaningful while the dedicated section is active
+    canvas.addEventListener('pointermove', function(e){
+      if (!diagramActive) { tooltip.classList.remove('show'); return; }
+      var hit = null;
+      for (var i = 0; i < NODES.length; i++){
+        var n = NODES[i];
+        var dx = e.clientX - px(n), dy = e.clientY - py(n);
+        if (Math.sqrt(dx*dx + dy*dy) < rad(n) + 14) { hit = n; break; }
+      }
+      if (hit) {
+        tooltip.innerHTML = '<span class="role-name">' + hit.label + '</span>' + hit.role;
+        tooltip.style.left = (e.clientX + 16) + 'px';
+        tooltip.style.top = (e.clientY + 16) + 'px';
+        tooltip.classList.add('show');
+      } else {
+        tooltip.classList.remove('show');
+      }
+    });
+    canvas.addEventListener('pointerleave', function(){ tooltip.classList.remove('show'); });
   }
 })();
 </script>
