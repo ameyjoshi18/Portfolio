@@ -7,7 +7,7 @@ type SiteHeaderProps = {
 
 export function SiteHeader({ active }: SiteHeaderProps) {
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} glass`}>
       <a
         className={styles.wordmark}
         href="/"

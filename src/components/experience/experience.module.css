@@ -10,8 +10,8 @@
   display: flex;
   gap: 0.45rem;
   padding: 0.55rem 0.7rem;
-  border: 1px solid var(--hairline);
-  background: var(--ivory);
+  border-radius: 8px;
+  color: var(--meta);
   font-family: var(--font-mono), monospace;
   font-size: 0.68rem;
 }

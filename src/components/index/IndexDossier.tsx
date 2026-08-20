@@ -36,7 +36,7 @@ export function IndexDossier({ caseStudies, roles }: IndexDossierProps) {
           {caseStudies.length > 0 ? (
             <div className={styles.workList}>
               {caseStudies.map((study, index) => (
-                <article className={styles.workItem} key={study.slug}>
+                <article className={`${styles.workItem} glass`} key={study.slug}>
                   <p className={styles.itemNumber}>
                     {String(index + 1).padStart(2, "0")}
                   </p>
@@ -51,7 +51,7 @@ export function IndexDossier({ caseStudies, roles }: IndexDossierProps) {
               ))}
             </div>
           ) : (
-            <div className={styles.emptyEvidence}>
+            <div className={`${styles.emptyEvidence} glass`}>
               <p>
                 Detailed engagement notes are being prepared; the domain
                 register below remains available.

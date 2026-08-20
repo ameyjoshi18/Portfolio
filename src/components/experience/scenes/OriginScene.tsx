@@ -40,7 +40,7 @@ export function OriginScene({ chapters }: OriginSceneProps) {
               ))}
             </div>
             {chapter.media ? (
-              <figure className={styles.originMedia}>
+              <figure className={`${styles.originMedia} glass`}>
                 <Image
                   src={chapter.media.src}
                   alt={chapter.media.alt}

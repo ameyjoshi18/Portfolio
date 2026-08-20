@@ -13,31 +13,6 @@ type NavigatorCapabilities = Navigator & {
   deviceMemory?: number;
 };
 
-export function createWebGLCapabilityDetector() {
-  let cached: boolean | undefined;
-
-  return (): boolean => {
-    if (cached !== undefined) return cached;
-    if (typeof window.WebGLRenderingContext === "undefined") {
-      cached = false;
-      return cached;
-    }
-
-    try {
-      const canvas = document.createElement("canvas");
-      cached = Boolean(
-        canvas.getContext("webgl2") || canvas.getContext("webgl"),
-      );
-    } catch {
-      cached = false;
-    }
-
-    return cached;
-  };
-}
-
-const supportsWebGL = createWebGLCapabilityDetector();
-
 export function useMotionPolicy(): MotionPolicy {
   const [policy, setPolicy] = useState<MotionPolicy>(staticMotionPolicy);
 
@@ -54,7 +29,6 @@ export function useMotionPolicy(): MotionPolicy {
           reducedMotion: media?.matches ?? false,
           saveData: Boolean(capabilities.connection?.saveData),
           viewportWidth: window.innerWidth,
-          webgl: supportsWebGL(),
           hardwareConcurrency: capabilities.hardwareConcurrency,
           deviceMemory: capabilities.deviceMemory,
         }),

@@ -22,7 +22,7 @@ export function WorkRegister({ caseStudies }: WorkRegisterProps) {
       {caseStudies.length > 0 ? (
         <div className={styles.registerList}>
           {caseStudies.map((study, index) => (
-            <article className={styles.registerItem} key={study.slug}>
+            <article className={`${styles.registerItem} glass`} key={study.slug}>
               <p className={styles.itemIndex}>
                 {String(index + 1).padStart(2, "0")}
               </p>
@@ -40,7 +40,7 @@ export function WorkRegister({ caseStudies }: WorkRegisterProps) {
           ))}
         </div>
       ) : (
-        <section className={styles.emptyRegister} aria-labelledby="work-in-progress">
+        <section className={`${styles.emptyRegister} glass`} aria-labelledby="work-in-progress">
           <p className={styles.itemIndex}>Publication boundary</p>
           <div>
             <h2 id="work-in-progress">Evidence before theatre.</h2>

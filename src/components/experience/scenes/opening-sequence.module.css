@@ -2,7 +2,7 @@
   position: relative;
   height: 140svh;
   overflow: clip;
-  background: var(--ivory);
+  background: var(--bg);
 }
 
 .stickyFrame {
@@ -29,7 +29,7 @@
 .identity > p:first-child,
 .fragment > p {
   font-family: var(--font-mono), monospace;
-  color: var(--steel);
+  color: var(--body);
   font-size: 0.7rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -72,11 +72,11 @@
 
 .fragment > p {
   margin-bottom: 0.4rem;
-  color: var(--signal-ink);
+  color: var(--accent);
 }
 
 .fragment > span {
-  color: var(--steel);
+  color: var(--body);
   font-size: 0.9rem;
 }
 
@@ -108,7 +108,7 @@
 .identity > p:last-child {
   max-width: 42rem;
   margin-left: 44%;
-  color: var(--steel);
+  color: var(--body);
   font-size: var(--text-lead);
 }
 
@@ -118,7 +118,7 @@
   right: clamp(1.5rem, 5vw, 5rem);
   top: 55%;
   height: 1px;
-  background: var(--signal);
+  background: var(--accent);
   transform-origin: left center;
   will-change: transform;
 }

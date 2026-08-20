@@ -28,7 +28,7 @@ export function SceneMarker() {
   }, []);
 
   return (
-    <aside className={styles.sceneMarker} aria-label="Scene progress">
+    <aside className={`${styles.sceneMarker} glass`} aria-label="Scene progress">
       <span>{String(active).padStart(2, "0")}</span>
       <span aria-hidden="true">/</span>
       <span>07</span>

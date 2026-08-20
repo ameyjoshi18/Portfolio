@@ -92,7 +92,11 @@ export function CaseStudyArticle({ study }: CaseStudyArticleProps) {
       </DossierSection>
       <DossierSection id="capabilities" label="11" title="Related capabilities">
         <ul className={styles.capabilityList}>
-          {study.capabilities.map((item) => <li key={item}>{item}</li>)}
+          {study.capabilities.map((item) => (
+            <li className="glass" key={item}>
+              {item}
+            </li>
+          ))}
         </ul>
       </DossierSection>
     </article>

@@ -8,6 +8,7 @@ import "@fontsource/ibm-plex-sans/latin-500.css";
 import "@fontsource/ibm-plex-sans/latin-600.css";
 import "@fontsource/instrument-serif/latin-400.css";
 
+import { GlassPointerTracker } from "@/components/shell/GlassPointerTracker";
 import { site } from "@/content/site";
 import { createPageMetadata, siteUrl } from "@/lib/pageMetadata";
 
@@ -43,8 +44,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  colorScheme: "light",
-  themeColor: "#f2eee5",
+  colorScheme: "dark",
+  themeColor: "#061a24",
 };
 
 export default function RootLayout({
@@ -57,6 +58,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: serializeJsonLd(personJsonLd) }}
         />
+        <GlassPointerTracker />
         {children}
       </body>
     </html>

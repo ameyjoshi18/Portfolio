@@ -2,12 +2,12 @@
   position: relative;
   min-height: 100svh;
   overflow: clip;
-  border-top: 1px solid rgb(242 238 229 / 32%);
-  background: var(--obsidian);
-  color: var(--ivory);
+  border-top: 1px solid var(--hairline-strong);
+  background: var(--surface);
+  color: var(--head);
 }
 
-.scene[data-cutover="webgl"] {
+.scene[data-cutover="animated"] {
   min-height: 165svh;
 }
 
@@ -21,7 +21,7 @@
   align-content: center;
 }
 
-.scene[data-cutover="webgl"] .stickyFrame {
+.scene[data-cutover="animated"] .stickyFrame {
   position: sticky;
   top: 0;
 }
@@ -35,7 +35,7 @@
 }
 
 .header > p,
-.staticCaption,
+.caption,
 .workstreamList span {
   font-family: var(--font-mono), monospace;
   font-size: 0.68rem;
@@ -45,7 +45,7 @@
 
 .header > p {
   grid-column: 1 / 4;
-  color: rgb(242 238 229 / 62%);
+  color: var(--meta);
 }
 
 .header h2 {
@@ -64,75 +64,158 @@
 }
 
 .staticVisual,
+.animatedVisual,
 .enhancementProbe,
 .canvasHost {
   position: absolute;
   inset: 0;
 }
 
-.staticVisual {
+.staticVisual,
+.animatedVisual {
   display: grid;
-  align-items: end;
+  align-items: center;
 }
 
-.staticVisual svg {
+.staticVisual svg,
+.animatedVisual svg {
   display: block;
   width: 100%;
   height: 100%;
 }
 
-.scene[data-cutover="webgl"] .staticVisual svg {
+.scene[data-cutover="animated"] .staticVisual svg {
   opacity: 0.18;
 }
 
-.releaseAxis,
-.truthLine,
-.workstreamPath {
+/* ---- diagram elements, shared by the animated and static SVGs ---- */
+
+.railLine {
   fill: none;
-  vector-effect: non-scaling-stroke;
-}
-
-.releaseAxis {
-  stroke: rgb(242 238 229 / 35%);
-  stroke-width: 1;
-}
-
-.truthLine {
-  stroke: rgb(231 161 26 / 50%);
-  stroke-width: 1;
-}
-
-.workstreamPath {
-  stroke: var(--ivory);
-  stroke-width: 1.4;
-}
-
-.laneOrigin {
-  fill: var(--obsidian);
-  stroke: var(--ivory);
+  stroke: var(--meta);
   stroke-width: 1.5;
   vector-effect: non-scaling-stroke;
 }
 
-.releaseSignal {
-  fill: var(--signal);
+.fillLine {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
 }
 
-.staticCaption {
+.checkpoint,
+.trackEnd {
+  fill: var(--bg);
+  stroke: var(--meta);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+  transition:
+    fill 0.15s ease,
+    stroke 0.15s ease;
+}
+
+.checkpointLit {
+  fill: var(--accent);
+  stroke: var(--accent);
+}
+
+.trackHolding {
+  animation: cutoverHold 2.2s ease-in-out infinite;
+}
+
+[data-phase="synced"] .trackEnd {
+  animation: cutoverSync 0.7s ease-in-out infinite;
+}
+
+@keyframes cutoverHold {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes cutoverSync {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.trackLabel,
+.gateLabel,
+.releaseLabel {
+  fill: var(--body);
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.gateLine {
+  stroke: var(--meta);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+  transition: opacity 0.5s ease;
+}
+
+[data-phase="open"] .gateLine {
+  opacity: 0.15;
+}
+
+.pulseLine {
+  stroke: var(--accent);
+  stroke-width: 3;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+  filter: drop-shadow(0 0 6px rgb(255 107 74 / 60%));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+[data-phase="open"] .pulseLine {
+  opacity: 1;
+}
+
+.releaseNode {
+  fill: var(--bg);
+  stroke: var(--meta);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+  transition:
+    fill 0.3s ease,
+    stroke 0.3s ease;
+}
+
+.releaseLit {
+  fill: var(--accent);
+  stroke: var(--accent);
+  filter: drop-shadow(0 0 10px rgb(255 107 74 / 70%));
+}
+
+.caption {
   position: absolute;
   right: 0;
   bottom: 0;
-  color: rgb(242 238 229 / 55%);
+  margin: 0;
+  color: var(--meta);
 }
 
 .enhancementProbe,
-.canvasHost,
-.canvas {
+.canvasHost {
   pointer-events: none;
 }
 
-.canvasHost,
-.canvas {
+.canvasHost {
   width: 100%;
   height: 100%;
 }
@@ -144,14 +227,14 @@
   grid-template-columns: repeat(5, minmax(0, 1fr));
   padding: 0;
   margin: 0;
-  border-top: 1px solid rgb(242 238 229 / 24%);
+  border-top: 1px solid var(--hairline-strong);
   list-style: none;
 }
 
 .workstreamList li {
   min-width: 0;
   padding: var(--space-2) 0.8rem 0;
-  border-right: 1px solid rgb(242 238 229 / 20%);
+  border-right: 1px solid var(--hairline);
 }
 
 .workstreamList li:first-child {
@@ -165,7 +248,7 @@
 .workstreamList span {
   display: block;
   margin-bottom: var(--space-2);
-  color: var(--signal);
+  color: var(--accent);
 }
 
 .workstreamList h3 {
@@ -176,22 +259,22 @@
 
 .workstreamList p {
   margin-top: 0.45rem;
-  color: rgb(242 238 229 / 58%);
+  color: var(--meta);
   font-size: clamp(0.72rem, 0.85vw, 0.88rem);
   line-height: 1.45;
 }
 
 @media (max-width: 1023px), (prefers-reduced-motion: reduce) {
   .scene,
-  .scene[data-cutover="webgl"] {
+  .scene[data-cutover="animated"] {
     min-height: auto;
   }
 
-  .scene[data-cutover="webgl"] .stickyFrame {
+  .scene[data-cutover="animated"] .stickyFrame {
     position: relative;
   }
 
-  .scene[data-cutover="webgl"] .staticVisual svg {
+  .scene[data-cutover="animated"] .staticVisual svg {
     opacity: 1;
   }
 }
@@ -220,10 +303,10 @@
   }
 
   .visualStack {
-    min-height: 18rem;
+    min-height: 34rem;
   }
 
-  .staticCaption {
+  .caption {
     left: 0;
     right: auto;
   }
@@ -239,7 +322,7 @@
     gap: var(--space-2);
     padding: var(--space-2) 0;
     border-right: 0;
-    border-bottom: 1px solid rgb(242 238 229 / 20%);
+    border-bottom: 1px solid var(--hairline);
   }
 
   .workstreamList span,

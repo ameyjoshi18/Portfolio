@@ -35,7 +35,7 @@ export function StoryArticle({ chapters }: StoryArticleProps) {
               ))}
             </div>
             {chapter.media ? (
-              <figure className={styles.chapterMedia}>
+              <figure className={`${styles.chapterMedia} glass`}>
                 <Image
                   src={chapter.media.src}
                   alt={chapter.media.alt}

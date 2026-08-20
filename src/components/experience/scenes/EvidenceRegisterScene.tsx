@@ -39,7 +39,7 @@ export function EvidenceRegisterScene({
       {publishedStudies.length > 0 ? (
         <div className={styles.evidenceList}>
           {publishedStudies.map((study, index) => (
-            <article className={styles.evidenceItem} key={study.slug}>
+            <article className={`${styles.evidenceItem} glass`} key={study.slug}>
               <header className={styles.evidenceItemHeader}>
                 <p>{String(index + 1).padStart(2, "0")} / Verified dossier</p>
                 <h3>
@@ -75,7 +75,7 @@ export function EvidenceRegisterScene({
           ))}
         </div>
       ) : (
-        <div className={styles.evidenceBoundary}>
+        <div className={`${styles.evidenceBoundary} glass`}>
           <p>Publication boundary / Active</p>
           <h3>No borrowed certainty.</h3>
           <p>

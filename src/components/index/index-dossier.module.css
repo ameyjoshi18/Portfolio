@@ -15,7 +15,7 @@
 .heroMeta {
   grid-column: 1 / 4;
   font-family: var(--font-mono), monospace;
-  color: var(--steel);
+  color: var(--body);
   font-size: 0.7rem;
   letter-spacing: 0.1em;
   line-height: 1.35;
@@ -48,7 +48,7 @@
 .positioning {
   max-width: 45rem;
   margin: var(--space-3) 0 0;
-  color: var(--steel);
+  color: var(--body);
   font-size: var(--text-lead);
 }
 
@@ -68,7 +68,7 @@
   grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: var(--space-3);
   padding: var(--space-8) 0 var(--space-12);
-  border-top: 1px solid var(--graphite);
+  border-top: 1px solid var(--hairline-strong);
 }
 
 .sectionHeading {
@@ -82,7 +82,7 @@
 .roleLocation,
 .originIndex {
   font-family: var(--font-mono), monospace;
-  color: var(--steel);
+  color: var(--body);
   font-size: 0.7rem;
   letter-spacing: 0.09em;
   text-transform: uppercase;
@@ -112,8 +112,9 @@
   display: grid;
   grid-template-columns: 3rem minmax(0, 1fr) minmax(10rem, 0.35fr);
   gap: var(--space-3);
-  padding: var(--space-3) 0 var(--space-5);
-  border-bottom: 1px solid var(--hairline);
+  padding: var(--space-4);
+  margin-bottom: var(--space-3);
+  border-radius: var(--radius);
 }
 
 .workItem h3,
@@ -130,13 +131,13 @@
 
 .workItem h3 a:hover {
   text-decoration: underline;
-  text-decoration-color: var(--signal-ink);
+  text-decoration-color: var(--accent);
 }
 
 .workItem p:not(.itemNumber, .itemMeta),
 .roleList li > div > p:last-child {
   max-width: 42rem;
-  color: var(--steel);
+  color: var(--body);
 }
 
 .itemMeta {
@@ -145,7 +146,8 @@
 
 .emptyEvidence {
   max-width: 42rem;
-  padding: var(--space-5) 0;
+  padding: var(--space-5);
+  border-radius: var(--radius);
   font-size: var(--text-lead);
 }
 
@@ -154,7 +156,7 @@
   min-height: 44px;
   align-items: center;
   margin-top: var(--space-2);
-  color: var(--signal-ink);
+  color: var(--accent);
 }
 
 .domainList {
@@ -178,7 +180,7 @@
   display: block;
   margin-bottom: var(--space-3);
   font-family: var(--font-mono), monospace;
-  color: var(--signal-ink);
+  color: var(--accent);
   font-size: 0.68rem;
 }
 
@@ -199,7 +201,7 @@
 
 .methodList p {
   max-width: 24rem;
-  color: var(--steel);
+  color: var(--body);
 }
 
 .roleList li {
@@ -212,7 +214,7 @@
 
 .roleTitle {
   margin-bottom: var(--space-2);
-  color: var(--signal-ink);
+  color: var(--accent);
 }
 
 .roleLocation {
@@ -224,7 +226,7 @@
   grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: var(--space-3);
   padding: var(--space-12) 0;
-  border-top: 1px solid var(--graphite);
+  border-top: 1px solid var(--hairline-strong);
 }
 
 .originIndex {
@@ -244,7 +246,7 @@
 }
 
 .origin > p:not(.originIndex) {
-  color: var(--steel);
+  color: var(--body);
   font-size: var(--text-lead);
 }
 
@@ -252,7 +254,7 @@
   width: max-content;
   min-height: 44px;
   align-content: center;
-  color: var(--signal-ink);
+  color: var(--accent);
 }
 
 @media (max-width: 760px) {
@@ -295,7 +297,11 @@
     max-width: none;
   }
 
-  .workItem,
+  .workItem {
+    grid-template-columns: 2rem 1fr;
+    padding: var(--space-3);
+  }
+
   .roleList li {
     grid-template-columns: 2rem 1fr;
   }

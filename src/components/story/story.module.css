@@ -15,7 +15,7 @@
 .chapterMeta,
 .chapterMedia figcaption {
   font-family: var(--font-mono), monospace;
-  color: var(--steel);
+  color: var(--body);
   font-size: 0.7rem;
   letter-spacing: 0.09em;
   text-transform: uppercase;
@@ -36,7 +36,7 @@
 
 .storyHeader > p:last-child {
   grid-column: 7 / 12;
-  color: var(--steel);
+  color: var(--body);
   font-size: var(--text-lead);
 }
 
@@ -46,7 +46,7 @@
   gap: var(--space-3);
   min-height: 58svh;
   padding: var(--space-8) 0 var(--space-12);
-  border-top: 1px solid var(--graphite);
+  border-top: 1px solid var(--hairline-strong);
   align-content: start;
 }
 
@@ -55,7 +55,7 @@
 }
 
 .chapterMeta p:first-child {
-  color: var(--signal-ink);
+  color: var(--accent);
 }
 
 .chapterCopy {
@@ -70,7 +70,7 @@
 
 .chapterCopy > p {
   max-width: 45rem;
-  color: var(--steel);
+  color: var(--body);
   font-size: var(--text-lead);
 }
 
@@ -80,7 +80,7 @@
   aspect-ratio: 4 / 3;
   margin: var(--space-5) 0 0;
   overflow: hidden;
-  background: var(--graphite);
+  border-radius: var(--radius);
 }
 
 .chapterMedia img {
@@ -90,10 +90,10 @@
 .chapterMedia figcaption {
   position: absolute;
   inset: auto 0 0;
-  z-index: 1;
+  z-index: 3;
   padding: 0.75rem;
-  background: var(--graphite);
-  color: var(--ivory);
+  background: var(--raised);
+  color: var(--head);
 }
 
 @media (max-width: 760px) {

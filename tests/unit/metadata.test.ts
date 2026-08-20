@@ -32,7 +32,7 @@ describe("production metadata", () => {
       siteName: site.name,
     });
     expect(metadata.twitter).toMatchObject({ card: "summary_large_image" });
-    expect(viewport).toMatchObject({ themeColor: "#f2eee5" });
+    expect(viewport).toMatchObject({ themeColor: "#061a24" });
   });
 
   it("publishes a source-backed and script-safe Person record", () => {

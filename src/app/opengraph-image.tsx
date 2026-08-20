@@ -12,8 +12,8 @@ export default function OpenGraphImage() {
       <div
         style={{
           alignItems: "stretch",
-          background: "#f2eee5",
-          color: "#161a1d",
+          background: "#061a24",
+          color: "#f4f7f6",
           display: "flex",
           flexDirection: "column",
           fontFamily: "Arial, sans-serif",
@@ -40,7 +40,7 @@ export default function OpenGraphImage() {
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div
             style={{
-              background: "#e7a11a",
+              background: "#ff6b4a",
               display: "flex",
               height: 6,
               marginBottom: 42,
@@ -64,7 +64,7 @@ export default function OpenGraphImage() {
 
         <div
           style={{
-            borderTop: "2px solid #161a1d",
+            borderTop: "2px solid rgba(244,247,246,0.25)",
             display: "flex",
             fontSize: 23,
             justifyContent: "space-between",

@@ -2,14 +2,13 @@ export type MotionPolicyInput = {
   reducedMotion: boolean;
   saveData: boolean;
   viewportWidth: number;
-  webgl: boolean;
   hardwareConcurrency?: number;
   deviceMemory?: number;
 };
 
 export type MotionPolicy = {
   dom: "full" | "resolved";
-  cutover: "webgl" | "static";
+  cutover: "animated" | "static";
 };
 
 export const staticMotionPolicy: MotionPolicy = {
@@ -17,19 +16,23 @@ export const staticMotionPolicy: MotionPolicy = {
   cutover: "static",
 };
 
+/**
+ * The cutover diagram is hand-written SVG driven by scroll progress and a
+ * handful of DOM writes per frame — cheap enough for phones. It only falls
+ * back to static for the genuinely low-end tier (old low-core/low-memory
+ * devices), not for viewport width or WebGL support, neither of which it
+ * needs.
+ */
 export function resolveMotionPolicy(input: MotionPolicyInput): MotionPolicy {
   if (input.reducedMotion || input.saveData) {
     return staticMotionPolicy;
   }
 
-  const capableDesktop =
-    input.viewportWidth >= 1024 &&
-    input.webgl &&
-    (input.hardwareConcurrency ?? 8) >= 4 &&
-    (input.deviceMemory ?? 8) >= 4;
+  const lowEndDevice =
+    (input.hardwareConcurrency ?? 8) < 2 || (input.deviceMemory ?? 8) < 2;
 
   return {
     dom: input.viewportWidth >= 1024 ? "full" : "resolved",
-    cutover: capableDesktop ? "webgl" : "static",
+    cutover: lowEndDevice ? "static" : "animated",
   };
 }

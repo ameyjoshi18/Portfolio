@@ -1,7 +1,7 @@
 import { expect, test, type Page, type Request } from "@playwright/test";
 
 const kibibyte = 1024;
-const canvasModuleMarker = "cutover-canvas";
+const cutoverModuleMarker = "cutover-animated";
 
 type RouteBudget = {
   route: string;
@@ -11,7 +11,7 @@ type RouteBudget = {
 
 const routeBudgets: readonly RouteBudget[] = [
   // These real wire-transfer caps include Next 16's shared App Router runtime.
-  // The optional Three.js scene is excluded here and constrained separately below.
+  // The lazy-loaded cutover animation module is excluded here and constrained separately below.
   {
     route: "/",
     initialJavaScript: 210 * kibibyte,
@@ -78,17 +78,11 @@ async function expectedCutoverMode(page: Page) {
     };
 
     const capabilities = navigator as CapabilityNavigator;
-    const canvas = document.createElement("canvas");
-    const webgl =
-      typeof window.WebGLRenderingContext !== "undefined" &&
-      Boolean(canvas.getContext("webgl2") || canvas.getContext("webgl"));
+    const lowEndDevice =
+      (capabilities.hardwareConcurrency ?? 8) < 2 ||
+      (capabilities.deviceMemory ?? 8) < 2;
 
-    return window.innerWidth >= 1024 &&
-      webgl &&
-      (capabilities.hardwareConcurrency ?? 8) >= 4 &&
-      (capabilities.deviceMemory ?? 8) >= 4
-      ? "webgl"
-      : "static";
+    return lowEndDevice ? "static" : "animated";
   });
 }
 
@@ -116,14 +110,9 @@ for (const budget of routeBudgets) {
   });
 }
 
-test("the 3D payload is requested only near cutover and stays in budget", async ({
+test("the cutover animation module is requested only near cutover and stays in budget", async ({
   page,
-}, testInfo) => {
-  test.skip(
-    testInfo.project.name !== "chromium",
-    "The mobile policy intentionally keeps the static cutover.",
-  );
-
+}) => {
   const requests = finishedRequests(page);
   await page.goto("/", { waitUntil: "networkidle" });
 
@@ -132,9 +121,9 @@ test("the 3D payload is requested only near cutover and stays in budget", async 
   );
   const initialScriptTransfer = await transferredBytes(page, "scripts");
   const initialSources = await responseSources(initialScripts);
-  expect(initialSources.some((source) => source.includes(canvasModuleMarker))).toBe(
-    false,
-  );
+  expect(
+    initialSources.some((source) => source.includes(cutoverModuleMarker)),
+  ).toBe(false);
 
   const cutover = page.locator('[data-scene="cutover"]');
   const mode = await expectedCutoverMode(page);
@@ -142,30 +131,30 @@ test("the 3D payload is requested only near cutover and stays in budget", async 
   await cutover.scrollIntoViewIfNeeded();
 
   if (mode === "static") {
-    await expect(page.locator("canvas")).toHaveCount(0);
+    await expect(page.getByTestId("cutover-animated")).toHaveCount(0);
     return;
   }
 
-  await expect(page.getByTestId("cutover-canvas")).toHaveCount(1);
+  await expect(page.getByTestId("cutover-animated")).toHaveCount(1);
   await page.waitForLoadState("networkidle");
 
   const lateScripts = requests
     .filter((request) => request.resourceType() === "script")
     .slice(initialScripts.length);
   const lateSources = await responseSources(lateScripts);
-  expect(lateSources.some((source) => source.includes(canvasModuleMarker))).toBe(
-    true,
-  );
+  expect(
+    lateSources.some((source) => source.includes(cutoverModuleMarker)),
+  ).toBe(true);
 
   const lazyBytes =
     (await transferredBytes(page, "scripts")) - initialScriptTransfer;
   expect(
     lazyBytes,
-    `The lazy 3D payload transferred ${(lazyBytes / kibibyte).toFixed(1)} KiB`,
+    `The lazy cutover module transferred ${(lazyBytes / kibibyte).toFixed(1)} KiB`,
   ).toBeLessThanOrEqual(300 * kibibyte);
 });
 
-test("cutover never mounts more than one canvas", async ({ page }) => {
+test("cutover never mounts more than one animated instance", async ({ page }) => {
   await page.goto("/", { waitUntil: "networkidle" });
 
   const cutover = page.locator('[data-scene="cutover"]');
@@ -173,16 +162,16 @@ test("cutover never mounts more than one canvas", async ({ page }) => {
   await expect(cutover).toHaveAttribute("data-cutover", mode);
   await cutover.scrollIntoViewIfNeeded();
 
-  if (mode === "webgl") {
+  if (mode === "animated") {
     await expect(page.locator("[data-canvas-host]")).toHaveCount(1);
-    await expect(page.getByTestId("cutover-canvas")).toHaveCount(1);
+    await expect(page.getByTestId("cutover-animated")).toHaveCount(1);
   } else {
     await expect(page.locator("[data-canvas-host]")).toHaveCount(0);
   }
 
-  expect(await page.locator("canvas").count()).toBeLessThanOrEqual(1);
+  expect(await page.getByTestId("cutover-animated").count()).toBeLessThanOrEqual(1);
 
   await page.locator('[data-scene="open-line"]').scrollIntoViewIfNeeded();
   await cutover.scrollIntoViewIfNeeded();
-  expect(await page.locator("canvas").count()).toBeLessThanOrEqual(1);
+  expect(await page.getByTestId("cutover-animated").count()).toBeLessThanOrEqual(1);
 });

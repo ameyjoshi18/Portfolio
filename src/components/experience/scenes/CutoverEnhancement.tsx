@@ -10,10 +10,13 @@ import type { MotionPolicy } from "@/lib/motion/policy";
 import { CutoverErrorBoundary } from "./CutoverErrorBoundary";
 import styles from "./cutover-scene.module.css";
 
-const LazyCutoverCanvas = dynamic(() => import("./CutoverCanvas"), {
-  loading: () => null,
-  ssr: false,
-});
+const LazyCutoverAnimated = dynamic(
+  () => import("./CutoverAnimated").then((mod) => mod.CutoverAnimated),
+  {
+    loading: () => null,
+    ssr: false,
+  },
+);
 
 type CutoverEnhancementProps = {
   policy: MotionPolicy;
@@ -34,7 +37,7 @@ export function CutoverEnhancement({
     const target = proximityRef.current;
 
     if (
-      policy.cutover !== "webgl" ||
+      policy.cutover !== "animated" ||
       !target ||
       !("IntersectionObserver" in window)
     ) {
@@ -52,14 +55,14 @@ export function CutoverEnhancement({
   }, [policy.cutover]);
 
   const shouldRender =
-    policy.cutover === "webgl" && nearScene && documentVisible;
+    policy.cutover === "animated" && nearScene && documentVisible;
 
   return (
     <div className={styles.enhancementProbe} ref={proximityRef} aria-hidden="true">
       {shouldRender ? (
         <div className={styles.canvasHost} data-canvas-host>
           <CutoverErrorBoundary onError={onFailure}>
-            <LazyCutoverCanvas progress={progress} />
+            <LazyCutoverAnimated progress={progress} />
           </CutoverErrorBoundary>
         </div>
       ) : null}

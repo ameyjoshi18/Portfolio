@@ -29,7 +29,7 @@
 
 .copy {
   max-width: 42rem;
-  color: var(--steel);
+  color: var(--body);
   font-size: var(--text-lead);
 }
 

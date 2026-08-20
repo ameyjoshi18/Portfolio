@@ -9,7 +9,7 @@ test.describe("reduced-motion experience", () => {
     await page.emulateMedia({ reducedMotion: "reduce" });
   });
 
-  test("keeps every scene resolved, readable and free of WebGL", async ({
+  test("keeps every scene resolved, readable and free of the animated canvas", async ({
     page,
   }) => {
     await page.goto("/", { waitUntil: "networkidle" });

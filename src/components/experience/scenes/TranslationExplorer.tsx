@@ -18,7 +18,7 @@ export function TranslationExplorer() {
 
   return (
     <div className={styles.explorer}>
-      <div className={styles.stageControls} role="group" aria-label="Translation stages">
+      <div className={`${styles.stageControls} glass`} role="group" aria-label="Translation stages">
         {translationStages.map((stage, index) => (
           <button
             type="button"

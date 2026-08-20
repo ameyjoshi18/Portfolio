@@ -1,5 +1,10 @@
 import { globSync, readFileSync } from "node:fs";
 
+// Set on the currently-hovered .glass element via a pointermove listener
+// (GlassPointerTracker), not declared in any stylesheet — both are read with
+// an inline var() fallback, so they never need a static definition.
+const RUNTIME_ONLY_TOKENS = new Set(["--mx", "--my"]);
+
 it("defines every CSS custom property used by the portfolio", () => {
   const css = globSync("src/**/*.css")
     .map((file) => readFileSync(file, "utf8"))
@@ -11,5 +16,9 @@ it("defines every CSS custom property used by the portfolio", () => {
     Array.from(css.matchAll(/var\((--[\w-]+)/g), (match) => match[1]),
   );
 
-  expect([...used].filter((token) => !defined.has(token)).sort()).toEqual([]);
+  expect(
+    [...used]
+      .filter((token) => !defined.has(token) && !RUNTIME_ONLY_TOKENS.has(token))
+      .sort(),
+  ).toEqual([]);
 });

@@ -6,7 +6,7 @@ type ViewSwitcherProps = {
 
 export function ViewSwitcher({ active }: ViewSwitcherProps) {
   return (
-    <nav className={styles.viewSwitcher} aria-label="Portfolio view">
+    <nav className={`${styles.viewSwitcher} glass`} aria-label="Portfolio view">
       <a
         href="/"
         aria-current={active === "experience" ? "page" : undefined}

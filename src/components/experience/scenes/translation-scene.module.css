@@ -4,7 +4,7 @@
   gap: var(--space-3);
   min-height: 88svh;
   padding: var(--space-12) clamp(1.5rem, 5vw, 5rem);
-  border-top: 1px solid var(--graphite);
+  border-top: 1px solid var(--hairline-strong);
   align-content: center;
 }
 
@@ -20,7 +20,7 @@
 .activeStage > p,
 .stageControls button span {
   font-family: var(--font-mono), monospace;
-  color: var(--steel);
+  color: var(--meta);
   font-size: 0.7rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -45,7 +45,8 @@
   position: relative;
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  border-top: 1px solid var(--hairline);
+  overflow: hidden;
+  border-radius: var(--radius);
 }
 
 .stageControls button {
@@ -54,7 +55,7 @@
   border: 0;
   border-right: 1px solid var(--hairline);
   background: transparent;
-  color: var(--graphite);
+  color: var(--head);
   font-family: var(--font-display), serif;
   font-size: clamp(1.2rem, 1.8vw, 2rem);
   text-align: left;
@@ -67,12 +68,12 @@
 }
 
 .stageControls button[aria-pressed="true"] {
-  background: rgb(22 26 29 / 5%);
+  background: var(--raised);
 }
 
 @media (hover: hover) {
   .stageControls button:hover {
-    background: rgb(22 26 29 / 5%);
+    background: var(--raised);
   }
 }
 
@@ -82,7 +83,7 @@
   bottom: 0;
   width: 20%;
   height: 2px;
-  background: var(--signal);
+  background: var(--accent);
   transform-origin: left center;
 }
 
@@ -96,11 +97,11 @@
   gap: var(--space-3);
   min-height: 12rem;
   padding: var(--space-5) 0;
-  border-top: 1px solid var(--graphite);
+  border-top: 1px solid var(--hairline-strong);
 }
 
 .activeStage > p {
-  color: var(--signal-ink);
+  color: var(--accent);
 }
 
 .activeStage strong {
@@ -130,7 +131,6 @@
 
   .stageControls {
     grid-template-columns: 1fr;
-    border-bottom: 1px solid var(--hairline);
   }
 
   .stageControls button {

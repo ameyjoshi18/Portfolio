@@ -5,7 +5,7 @@
   min-height: 100svh;
   padding: var(--space-12) clamp(1.5rem, 5vw, 5rem);
   overflow: clip;
-  border-top: 1px solid var(--graphite);
+  border-top: 1px solid var(--hairline-strong);
   align-content: center;
 }
 
@@ -20,7 +20,7 @@
 .nodeList > li > span,
 .nodeList li div > p {
   font-family: var(--font-mono), monospace;
-  color: var(--steel);
+  color: var(--meta);
   font-size: 0.7rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -60,34 +60,34 @@
 }
 
 .basePath {
-  stroke: var(--graphite);
+  stroke: var(--meta);
   stroke-width: 1.5;
 }
 
 .activePath {
-  stroke: var(--signal);
+  stroke: var(--accent);
   stroke-width: 3;
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
 }
 
 .nodeHalo {
-  fill: var(--ivory);
-  stroke: var(--graphite);
+  fill: var(--bg);
+  stroke: var(--meta);
   stroke-width: 1;
   vector-effect: non-scaling-stroke;
 }
 
 .nodeCore {
-  fill: var(--graphite);
+  fill: var(--meta);
 }
 
 .flowMarker {
-  fill: var(--signal);
-  stroke: var(--obsidian);
+  fill: var(--accent);
+  stroke: var(--bg);
   stroke-width: 2;
   vector-effect: non-scaling-stroke;
-  filter: drop-shadow(0 0 7px rgb(231 161 26 / 55%));
+  filter: drop-shadow(0 0 7px rgb(255 107 74 / 55%));
 }
 
 .flowMarker[data-static="true"] {
@@ -111,7 +111,7 @@
 
 .nodeList li div > p {
   margin-bottom: 0.25rem;
-  color: var(--signal-ink);
+  color: var(--accent);
 }
 
 .nodeList h3 {
@@ -121,14 +121,14 @@
 
 .nodeList li > p {
   max-width: 38rem;
-  color: var(--steel);
+  color: var(--body);
 }
 
 .question {
   grid-column: 7 / 12;
   margin: var(--space-8) 0 0;
   padding-left: var(--space-3);
-  border-left: 2px solid var(--signal);
+  border-left: 2px solid var(--accent);
   font-family: var(--font-display), serif;
   font-size: clamp(2rem, 3.5vw, 4rem);
   line-height: 0.98;
