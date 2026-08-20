@@ -35,7 +35,7 @@ it("provides skip navigation, ordinary route links and stable contact", () => {
       .getAllByRole("link")
       .map((link) => link.textContent?.replace(/\s+/g, " ").trim()),
   ).toEqual([
-    "AMEY·JOSHI",
+    "Amey Joshi",
     "Experience",
     "Index",
     "Work",

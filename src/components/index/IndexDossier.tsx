@@ -36,17 +36,19 @@ export function IndexDossier({ caseStudies, roles }: IndexDossierProps) {
           {caseStudies.length > 0 ? (
             <div className={styles.workList}>
               {caseStudies.map((study, index) => (
-                <article className={`${styles.workItem} glass`} key={study.slug}>
-                  <p className={styles.itemNumber}>
+                <article className={`${styles.workItem} glass tile`} key={study.slug}>
+                  <p className={`${styles.itemNumber} tileNumber`}>
                     {String(index + 1).padStart(2, "0")}
                   </p>
-                  <div>
+                  <div className="tileHeading">
                     <h3>
                       <a href={`/work/${study.slug}`}>{study.title}</a>
                     </h3>
                     <p>{study.summary}</p>
                   </div>
-                  <p className={styles.itemMeta}>{study.capabilities.join(" · ")}</p>
+                  <p className={`${styles.itemMeta} tileTags`}>
+                    {study.capabilities.join(" · ")}
+                  </p>
                 </article>
               ))}
             </div>
@@ -70,9 +72,13 @@ export function IndexDossier({ caseStudies, roles }: IndexDossierProps) {
         <div className={styles.sectionBody}>
           <ul className={styles.domainList}>
             {site.domains.map((domain, index) => (
-              <li key={domain}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                {domain}
+              <li className={`${styles.domainTile} glass tile`} key={domain}>
+                <span className={`${styles.domainNumber} tileNumber`}>
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className={`${styles.domainName} tileHeading`}>
+                  {domain}
+                </span>
               </li>
             ))}
           </ul>
@@ -87,9 +93,11 @@ export function IndexDossier({ caseStudies, roles }: IndexDossierProps) {
         <div className={styles.sectionBody}>
           <ol className={styles.methodList}>
             {site.method.map((phase, index) => (
-              <li key={phase.verb}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <h3>{phase.verb}</h3>
+              <li className="glass tile" key={phase.verb}>
+                <span className="tileNumber">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <h3 className="tileHeading">{phase.verb}</h3>
                 <p>{phase.detail}</p>
               </li>
             ))}
@@ -105,21 +113,21 @@ export function IndexDossier({ caseStudies, roles }: IndexDossierProps) {
         <div className={styles.sectionBody}>
           <ol className={styles.roleList}>
             {roles.map((role) => (
-              <li key={role.id}>
-                <p className={styles.rolePeriod}>{role.period}</p>
-                <div>
+              <li className="glass tile" key={role.id}>
+                <p className={`${styles.rolePeriod} tileTags`}>{role.period}</p>
+                <div className="tileHeading">
                   <h3>{role.organisation}</h3>
                   <p className={styles.roleTitle}>{role.title}</p>
                   <p>{role.summary}</p>
                 </div>
-                <p className={styles.roleLocation}>{role.location}</p>
+                <p className={`${styles.roleLocation} tileTags`}>{role.location}</p>
               </li>
             ))}
           </ol>
         </div>
       </section>
 
-      <section className={styles.origin} aria-labelledby="origin-note">
+      <section className={`${styles.origin} glass tile`} aria-labelledby="origin-note">
         <p className={styles.originIndex}>05 / Before the bank</p>
         <h2 id="origin-note">
           Founder instincts.

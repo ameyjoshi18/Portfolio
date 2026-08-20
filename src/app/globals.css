@@ -37,6 +37,7 @@
   --font-display: "Instrument Serif";
   --font-sans: "IBM Plex Sans";
   --font-mono: "IBM Plex Mono";
+  --font-wordmark: "Cabinet Grotesk";
   --space-1: 0.5rem;
   --space-2: 1rem;
   --space-3: 1.5rem;
@@ -53,6 +54,14 @@
   --text-lead: clamp(1.05rem, 1.5vw, 1.375rem);
   color: var(--head);
   background: var(--bg);
+}
+
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src: url("/fonts/CabinetGrotesk-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }
 
 * {
@@ -217,5 +226,41 @@ button {
 @media (prefers-reduced-motion: reduce) {
   .glass::before {
     display: none;
+  }
+}
+
+/* ============ tile — glass + cursor tilt + Z-plane content depth ============ */
+.tile {
+  background-color: var(--surface);
+  background-image: var(--glass-bg);
+  border: 1px solid rgb(244 247 246 / 7%);
+  border-top: 2px solid var(--accent);
+  transform-style: preserve-3d;
+  transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tile {
+    transform: perspective(1000px) rotateX(var(--tilt-x, 0deg))
+      rotateY(var(--tilt-y, 0deg));
+  }
+}
+
+.tileNumber {
+  transform: translateZ(20px);
+}
+
+.tileHeading {
+  transform: translateZ(40px);
+}
+
+.tileTags {
+  transform: translateZ(10px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile {
+    transition: none;
   }
 }

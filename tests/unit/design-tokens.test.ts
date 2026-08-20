@@ -1,9 +1,9 @@
 import { globSync, readFileSync } from "node:fs";
 
-// Set on the currently-hovered .glass element via a pointermove listener
-// (GlassPointerTracker), not declared in any stylesheet — both are read with
-// an inline var() fallback, so they never need a static definition.
-const RUNTIME_ONLY_TOKENS = new Set(["--mx", "--my"]);
+// Set on the currently-hovered .glass/.tile element via a pointermove
+// listener (GlassPointerTracker), not declared in any stylesheet — all are
+// read with an inline var() fallback, so they never need a static definition.
+const RUNTIME_ONLY_TOKENS = new Set(["--mx", "--my", "--tilt-x", "--tilt-y"]);
 
 it("defines every CSS custom property used by the portfolio", () => {
   const css = globSync("src/**/*.css")

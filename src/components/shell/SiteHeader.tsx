@@ -1,3 +1,4 @@
+import { LogoMark } from "./LogoMark";
 import { ViewSwitcher } from "./ViewSwitcher";
 import styles from "./shell.module.css";
 
@@ -13,9 +14,8 @@ export function SiteHeader({ active }: SiteHeaderProps) {
         href="/"
         aria-label="Amey Joshi — home"
       >
-        <strong>AMEY</strong>
-        <span aria-hidden="true">·</span>
-        <span>JOSHI</span>
+        <LogoMark className={styles.wordmarkMark} />
+        <span className={styles.wordmarkText}>Amey Joshi</span>
       </a>
 
       <ViewSwitcher active={active} />

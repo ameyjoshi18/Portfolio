@@ -37,14 +37,25 @@
 .wordmark {
   display: inline-flex;
   justify-self: start;
-  gap: 0.3rem;
+  gap: 12px;
   min-height: 44px;
   align-items: center;
   text-decoration: none;
 }
 
-.wordmark strong {
-  font-weight: 600;
+.wordmarkMark {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  color: var(--head);
+}
+
+.wordmarkText {
+  font-family: var(--font-wordmark), var(--font-sans), sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .navigation,
@@ -110,6 +121,14 @@
   border-top: 1px solid var(--hairline-strong);
 }
 
+.footerMark {
+  grid-column: 1 / 4;
+  width: 22px;
+  height: 22px;
+  margin-bottom: var(--space-3);
+  color: var(--meta);
+}
+
 .footerLabel,
 .footerFinePrint {
   grid-column: 1 / 4;
@@ -120,16 +139,16 @@
   color: var(--meta);
 }
 
-.footer h2 {
+.footerCard {
   grid-column: 4 / 11;
+  padding: var(--space-6);
+  border-radius: var(--radius);
+}
+
+.footerCard h2 {
   margin-bottom: var(--space-3);
   font-size: var(--text-display);
   line-height: 0.95;
-}
-
-.footerCopy,
-.footerLinks {
-  grid-column: 7 / 11;
 }
 
 .footerCopy {
@@ -173,12 +192,15 @@
     padding: var(--space-8) 1.25rem var(--space-3);
   }
 
+  .footerMark,
   .footerLabel,
-  .footer h2,
-  .footerCopy,
-  .footerLinks,
+  .footerCard,
   .footerFinePrint {
     grid-column: 1;
+  }
+
+  .footerCard {
+    padding: var(--space-4);
   }
 
   .footerLinks {

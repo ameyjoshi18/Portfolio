@@ -159,44 +159,63 @@
   color: var(--accent);
 }
 
+.domainTile,
+.domainList {
+  border-radius: var(--radius);
+}
+
 .domainList {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  border-top: 1px solid var(--hairline);
-  border-left: 1px solid var(--hairline);
+  grid-auto-rows: 8rem;
+  grid-auto-flow: dense;
+  gap: var(--space-3);
 }
 
-.domainList li {
-  min-height: 9rem;
-  padding: 1rem;
-  border-right: 1px solid var(--hairline);
-  border-bottom: 1px solid var(--hairline);
-  font-family: var(--font-display), serif;
-  font-size: clamp(1.4rem, 2vw, 2.1rem);
+.domainTile {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.25rem;
 }
 
-.domainList span,
-.methodList span {
-  display: block;
-  margin-bottom: var(--space-3);
+.domainTile:nth-child(1) {
+  grid-column: span 2;
+}
+
+.domainTile:nth-child(5) {
+  grid-row: span 2;
+}
+
+.domainTile:nth-child(8) {
+  grid-column: span 2;
+}
+
+.domainNumber {
   font-family: var(--font-mono), monospace;
   color: var(--accent);
   font-size: 0.68rem;
 }
 
+.domainName {
+  font-family: var(--font-display), serif;
+  font-size: clamp(1.4rem, 2vw, 2.1rem);
+}
+
 .methodList {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
 }
 
 .methodList li {
-  min-height: 15rem;
-  padding: var(--space-3);
-  border-top: 1px solid var(--hairline);
+  min-height: 13rem;
+  padding: var(--space-4);
+  border-radius: var(--radius);
 }
 
-.methodList li:nth-child(odd) {
-  border-right: 1px solid var(--hairline);
+.methodList li:nth-child(1) {
+  grid-row: span 2;
 }
 
 .methodList p {
@@ -204,12 +223,22 @@
   color: var(--body);
 }
 
+.roleList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
 .roleList li {
   display: grid;
   grid-template-columns: minmax(9rem, 0.28fr) minmax(0, 1fr) minmax(8rem, 0.25fr);
   gap: var(--space-3);
-  padding: var(--space-3) 0 var(--space-5);
-  border-top: 1px solid var(--hairline);
+  padding: var(--space-4);
+  border-radius: var(--radius);
+}
+
+.roleList li:last-child {
+  padding-block: var(--space-5);
 }
 
 .roleTitle {
@@ -225,8 +254,8 @@
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: var(--space-3);
-  padding: var(--space-12) 0;
-  border-top: 1px solid var(--hairline-strong);
+  padding: var(--space-10) var(--space-8);
+  border-radius: var(--radius);
 }
 
 .originIndex {
@@ -317,12 +346,15 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .domainList li,
+  .domainList {
+    grid-auto-rows: 7rem;
+  }
+
   .methodList li {
-    min-height: 8rem;
+    min-height: 10rem;
   }
 
   .origin {
-    padding: var(--space-8) 0;
+    padding: var(--space-6) var(--space-3);
   }
 }

@@ -22,27 +22,27 @@ export function WorkRegister({ caseStudies }: WorkRegisterProps) {
       {caseStudies.length > 0 ? (
         <div className={styles.registerList}>
           {caseStudies.map((study, index) => (
-            <article className={`${styles.registerItem} glass`} key={study.slug}>
-              <p className={styles.itemIndex}>
+            <article className={`${styles.registerItem} glass tile`} key={study.slug}>
+              <p className={`${styles.itemIndex} tileNumber`}>
                 {String(index + 1).padStart(2, "0")}
               </p>
-              <div>
+              <div className="tileHeading">
                 <p className={styles.itemPremise}>{study.premise}</p>
                 <h2>
                   <a href={`/work/${study.slug}`}>{study.title}</a>
                 </h2>
                 <p className={styles.itemSummary}>{study.summary}</p>
               </div>
-              <p className={styles.itemCapabilities}>
+              <p className={`${styles.itemCapabilities} tileTags`}>
                 {study.capabilities.join(" · ")}
               </p>
             </article>
           ))}
         </div>
       ) : (
-        <section className={`${styles.emptyRegister} glass`} aria-labelledby="work-in-progress">
-          <p className={styles.itemIndex}>Publication boundary</p>
-          <div>
+        <section className={`${styles.emptyRegister} glass tile`} aria-labelledby="work-in-progress">
+          <p className={`${styles.itemIndex} tileNumber`}>Publication boundary</p>
+          <div className="tileHeading">
             <h2 id="work-in-progress">Evidence before theatre.</h2>
             <p>
               Detailed engagement notes are being prepared. They will appear

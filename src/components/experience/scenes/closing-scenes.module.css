@@ -175,19 +175,12 @@
 .originTimeline {
   position: relative;
   grid-column: 2 / 13;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
   padding: 0;
   margin: var(--space-12) 0 0;
   list-style: none;
-}
-
-.originTimeline::before {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: calc(18% - 1px);
-  width: 1px;
-  background: var(--accent);
-  content: "";
 }
 
 .originChapter {
@@ -196,19 +189,8 @@
   grid-template-columns: 18% minmax(0, 48%) 1fr;
   gap: var(--space-5);
   min-height: 15rem;
-  padding: var(--space-4) 0 var(--space-8);
-  border-top: 1px solid var(--hairline-strong);
-}
-
-.originChapter::before {
-  position: absolute;
-  top: calc(var(--space-4) - 0.28rem);
-  left: calc(18% - 0.28rem);
-  width: 0.56rem;
-  height: 0.56rem;
-  border: 1px solid var(--head);
-  background: var(--raised);
-  content: "";
+  padding: var(--space-6);
+  border-radius: var(--radius);
 }
 
 .originMeta {
@@ -383,18 +365,10 @@
     flex-direction: column;
   }
 
-  .originTimeline::before {
-    left: 1rem;
-  }
-
   .originChapter {
     grid-template-columns: 2rem 1fr;
     min-height: auto;
-    padding-bottom: var(--space-6);
-  }
-
-  .originChapter::before {
-    left: 0.72rem;
+    padding: var(--space-4);
   }
 
   .originMeta {

@@ -7,6 +7,7 @@ import { stakeholderFragments } from "@/content/experience";
 import { site } from "@/content/site";
 import { useMotionPolicy } from "@/hooks/useMotionPolicy";
 
+import { HeroNetwork } from "./HeroNetwork";
 import styles from "./opening-sequence.module.css";
 
 export function OpeningSequence() {
@@ -45,6 +46,7 @@ export function OpeningSequence() {
       aria-label="Unresolved and one truth"
     >
       <div className={styles.stickyFrame}>
+        <HeroNetwork />
         <p className={styles.sceneIndex}>01 / Unresolved</p>
         <div className={styles.fragments}>
           {stakeholderFragments.map((fragment, index) => (

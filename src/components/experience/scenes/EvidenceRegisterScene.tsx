@@ -39,9 +39,11 @@ export function EvidenceRegisterScene({
       {publishedStudies.length > 0 ? (
         <div className={styles.evidenceList}>
           {publishedStudies.map((study, index) => (
-            <article className={`${styles.evidenceItem} glass`} key={study.slug}>
-              <header className={styles.evidenceItemHeader}>
-                <p>{String(index + 1).padStart(2, "0")} / Verified dossier</p>
+            <article className={`${styles.evidenceItem} glass tile`} key={study.slug}>
+              <header className={`${styles.evidenceItemHeader} tileHeading`}>
+                <p className="tileNumber">
+                  {String(index + 1).padStart(2, "0")} / Verified dossier
+                </p>
                 <h3>
                   <a href={`/work/${study.slug}`}>{study.title}</a>
                 </h3>
@@ -75,9 +77,9 @@ export function EvidenceRegisterScene({
           ))}
         </div>
       ) : (
-        <div className={`${styles.evidenceBoundary} glass`}>
-          <p>Publication boundary / Active</p>
-          <h3>No borrowed certainty.</h3>
+        <div className={`${styles.evidenceBoundary} glass tile`}>
+          <p className="tileNumber">Publication boundary / Active</p>
+          <h3 className="tileHeading">No borrowed certainty.</h3>
           <p>
             Engagement dossiers enter this register only after scope,
             contribution and public facts are verified. Until then, the domain

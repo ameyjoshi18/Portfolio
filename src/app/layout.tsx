@@ -41,6 +41,15 @@ export const metadata: Metadata = {
   ...createPageMetadata({ title, description, path: "/" }),
   metadataBase: new URL(siteUrl),
   authors: [{ name: site.name, url: "/" }],
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon-16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+    ],
+    shortcut: [{ url: "/favicon.ico" }],
+    apple: [{ url: "/apple-touch-icon.png" }],
+  },
 };
 
 export const viewport: Viewport = {

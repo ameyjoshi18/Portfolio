@@ -23,12 +23,12 @@ export function StoryArticle({ chapters }: StoryArticleProps) {
 
       <div className={styles.chapterList}>
         {chapters.map((chapter, index) => (
-          <section className={styles.chapter} key={chapter.id}>
-            <div className={styles.chapterMeta}>
+          <section className={`${styles.chapter} glass tile`} key={chapter.id}>
+            <div className={`${styles.chapterMeta} tileNumber`}>
               <p>{String(index + 1).padStart(2, "0")}</p>
               <p>{chapter.eyebrow}</p>
             </div>
-            <div className={styles.chapterCopy}>
+            <div className={`${styles.chapterCopy} tileHeading`}>
               <h2>{chapter.title}</h2>
               {chapter.body.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>

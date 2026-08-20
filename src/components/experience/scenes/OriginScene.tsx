@@ -28,12 +28,12 @@ export function OriginScene({ chapters }: OriginSceneProps) {
 
       <ol className={styles.originTimeline}>
         {chapters.map((chapter, index) => (
-          <li className={styles.originChapter} key={chapter.id}>
-            <div className={styles.originMeta}>
+          <li className={`${styles.originChapter} glass tile`} key={chapter.id}>
+            <div className={`${styles.originMeta} tileNumber`}>
               <span>{String(index + 1).padStart(2, "0")}</span>
               <p>{chapter.eyebrow}</p>
             </div>
-            <div className={styles.originCopy}>
+            <div className={`${styles.originCopy} tileHeading`}>
               <h3>{chapter.title}</h3>
               {chapter.body.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
