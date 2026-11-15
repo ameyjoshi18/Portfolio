@@ -1,9 +1,2 @@
-# OS / editor cruft
 .DS_Store
-*.pem
-
-# vercel local state
 .vercel
-
-# session-local tool state
-.claude/scheduled_tasks.lock
