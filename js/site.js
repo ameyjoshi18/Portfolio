@@ -8,6 +8,8 @@
   const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const narrow = matchMedia('(max-width: 820px)');
 
+  let pluck = () => {};
+
   /* ---------- 1. wipes ---------- */
   const wipes = [...d.querySelectorAll('.split:not(.hero) > .l > *, .split:not(.hero) > .r > *, .end > *')];
   wipes.forEach(el => el.classList.add('w'));
@@ -18,7 +20,7 @@
     const line = innerHeight * 0.93;
     pending = pending.filter(el => {
       const r = el.getBoundingClientRect();
-      if (r.top < line && r.bottom > -40) { el.classList.add('in'); return false; }
+      if (r.top < line && r.bottom > -40) { el.classList.add('in'); pluck(r.top + r.height / 2, el.parentElement.classList.contains('l') ? -9 : 9); return false; }
       if (r.bottom <= -40) { el.classList.add('in'); return false; }
       return true;
     });
@@ -39,6 +41,78 @@
     kick(300);
   };
   picks.forEach(b => b.addEventListener('click', () => showRail(b.dataset.pick)));
+
+
+  /* ---------- 2b. hero: what people say crosses over and comes out ordered ---------- */
+  const says = [...d.querySelectorAll('.chatter li')], outs = [...d.querySelectorAll('.ordered li')];
+  let sayI = 0;
+  const cross = i => {
+    const li = says[i]; if (!li || li.classList.contains('fly')) return;
+    li.classList.add('fly');
+    const o = outs[i % outs.length];
+    setTimeout(() => {
+      if (o) { o.classList.add('hit'); const r = o.getBoundingClientRect(); pluck(r.top + r.height / 2, 22); setTimeout(() => o.classList.remove('hit'), 1100); }
+    }, 520);
+    setTimeout(() => li.classList.remove('fly'), 1500);
+  };
+  says.forEach((li, i) => { li.addEventListener('pointerenter', () => cross(i)); li.addEventListener('click', () => cross(i)); });
+  if (says.length && !RM) setInterval(() => { if (scrollY < innerHeight && !d.hidden) cross(sayI++ % says.length); }, 2600);
+
+  /* ---------- 2c. rows light up as a pair ---------- */
+  d.querySelectorAll('.l.row').forEach(l => {
+    const r = l.nextElementSibling; if (!r || !r.classList.contains('row')) return;
+    const on = () => { l.classList.add('hot'); r.classList.add('hot'); const b = l.getBoundingClientRect(); pluck(b.top + b.height / 2, 16); };
+    const off = () => { l.classList.remove('hot'); r.classList.remove('hot'); };
+    [l, r].forEach(el => { el.addEventListener('pointerenter', on); el.addEventListener('pointerleave', off); });
+  });
+
+  /* ---------- 2d. route: a packet travels the rail and comes back ---------- */
+  const route = d.getElementById('route');
+  const ROUTES = {
+    dmt:  { n: ['Customer', 'Agent', 'Bank', 'NPCI', 'Other bank'], cap: 'Request out, confirmation back' },
+    aeps: { n: ['Customer', 'Agent', 'Bank', 'NPCI', 'Customer’s bank'], up: 'UIDAI', cap: 'Fingerprint checked on the way' },
+    matm: { n: ['Customer', 'Agent', 'Bank', 'NPCI', 'Card’s bank'], cap: 'Card and PIN, no UIDAI leg' }
+  };
+  let routeKey = 'dmt', way = [], nodes = [], pk = null, routeT0 = 0, routeOn = false, routeRaf = 0;
+  const buildRoute = () => {
+    if (!route) return;
+    const R = ROUTES[routeKey];
+    const s = parseFloat(getComputedStyle(route).getPropertyValue('--s')) || 50;
+    const xs = [s * 0.26, s * 0.72, s + (100 - s) * 0.16, s + (100 - s) * 0.5, s + (100 - s) * 0.84];
+    let h = `<i class="ln" style="left:${xs[0]}%;width:${s - xs[0]}%;background:var(--ink)"></i><i class="ln" style="left:${s}%;width:${xs[4] - s}%;background:var(--white)"></i>`;
+    R.n.forEach((t, i) => { h += `<i class="nd ${i < 2 ? 'dark' : 'lite'}${i === 1 ? ' hi' : ''}${i === 4 ? ' end' : ''}" style="left:${xs[i]}%;top:50%"><span>${t}</span></i>`; });
+    way = xs.map((x, i) => ({ x, y: 50, n: i }));
+    if (R.up) {
+      h += `<i class="up" style="left:${xs[3]}%;top:18%;height:32%"></i><i class="nd lite hi" style="left:${xs[3]}%;top:18%"><span>${R.up}</span></i>`;
+      way.splice(4, 0, { x: xs[3], y: 18, n: 5 }, { x: xs[3], y: 50, n: 3 });
+    }
+    way = way.concat(way.slice(0, -1).reverse().filter(p => p.y === 50));
+    h += `<i class="pk"></i><span class="cap">${R.cap}</span>`;
+    route.innerHTML = h;
+    nodes = [...route.querySelectorAll('.nd')]; pk = route.querySelector('.pk');
+    pk.style.left = way[0].x + '%'; pk.style.top = '50%';
+    routeT0 = performance.now();
+  };
+  const routeFrame = now => {
+    routeRaf = 0;
+    if (!routeOn || !pk) return;
+    const per = 620, total = (way.length - 1) * per + 900;
+    const t = (now - routeT0) % total, seg = Math.min(way.length - 2, Math.floor(t / per));
+    const f = Math.min(1, (t - seg * per) / per), e = f * f * (3 - 2 * f);
+    const a = way[seg], b = way[seg + 1];
+    pk.style.left = (a.x + (b.x - a.x) * e) + '%'; pk.style.top = (a.y + (b.y - a.y) * e) + '%';
+    const at = f > 0.6 ? b.n : a.n;
+    nodes.forEach((n, i) => n.classList.toggle('on', i === at));
+    routeRaf = requestAnimationFrame(routeFrame);
+  };
+  if (route) {
+    buildRoute();
+    addEventListener('resize', buildRoute);
+    if (!RM && 'IntersectionObserver' in window) {
+      new IntersectionObserver(es => { routeOn = es[0].isIntersecting; if (routeOn && !routeRaf) routeRaf = requestAnimationFrame(routeFrame); }).observe(route);
+    }
+    picks.forEach(b => b.addEventListener('click', () => { routeKey = b.dataset.pick; buildRoute(); }));
+  }
 
   /* ---------- 3. cutover ---------- */
   const cut = d.getElementById('cutover');
@@ -80,6 +154,7 @@
   const ptr = { x: 0, y: 0, on: false };
   let grabbed = false, bow = 0;
   const waves = [];
+  pluck = (y, a) => { if (RM) return; if (waves.length > 5) waves.shift(); waves.push({ y: y + scrollY, a, t: performance.now() }); kick(); };
 
   const size = () => {
     const dpr = Math.min(devicePixelRatio || 1, 2);
