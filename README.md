@@ -1,14 +1,13 @@
-# ameyjoshi.in — X-Ray
+# ameyjoshi.in — Downstream
 
-Static site. No build step, no dependencies.
+Static site. No build step, no dependencies, no image files.
 
     index.html      the whole site
     css/site.css    all styles
-    js/site.js      the WebGL stage (lens, dive, cutover wipe) and interactions
-    img/            working copies of the four pictures; sharper copies load from Cloudinary (folder xray/)
-    fonts/          self-hosted Syne and Figtree (SIL Open Font License)
+    js/scene.js     draws the landscape and runs the page
+    fonts/          self-hosted Fraunces and Figtree (SIL Open Font License)
     favicon.svg
     vercel.json     static deploy
 
-The pictures were generated for this site. No real brand, person or card appears in them.
+The landscape is drawn in code on a canvas. To change the colours of the day, edit KEYS at the top of js/scene.js.
 To preview locally: `python3 -m http.server` in this folder, then open http://localhost:8000
