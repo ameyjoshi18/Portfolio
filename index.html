@@ -4,246 +4,180 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Amey Joshi</title>
-<meta name="description" content="Amey Joshi is a business analyst in banking and payments. He works on the line between what people ask for and what systems have to do.">
-<meta name="theme-color" content="#FFC629">
+<meta name="description" content="Amey Joshi is a business analyst in banking and payments. You see a payment; he sees everything inside it.">
+<meta name="theme-color" content="#060A14">
 <meta property="og:title" content="Amey Joshi">
-<meta property="og:description" content="Complexity in. Clarity out. Business analyst, banking and payments.">
+<meta property="og:description" content="You see a payment. I see everything inside it. Business analyst, banking and payments.">
 <meta property="og:type" content="website">
+<meta property="og:image" content="https://res.cloudinary.com/lkt6kwju/image/upload/c_fill,w_1200,h_630,q_auto,f_jpg/v1794883350/xray/surface.jpg">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="preload" href="fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/rozha.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/syne.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="img/surface.jpg" as="image">
 <link rel="stylesheet" href="css/site.css">
-<script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<canvas id="thread" aria-hidden="true"></canvas>
+
+<img class="still" src="img/surface.jpg" alt="">
+<canvas id="stage" role="img" aria-label="A customer's finger on the fingerprint sensor of a payment terminal at a shop counter. A circle of light shows the same scene as glass, circuitry and streams of light."></canvas>
+
+<header class="bar">
+  <a class="me" href="#top">Amey Joshi</a>
+  <nav aria-label="Main">
+    <a class="opt" href="#rails">Rails</a>
+    <a class="opt" href="#cutover">Cutover</a>
+    <a class="opt" href="#builds">Builds</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
 
 <main id="main">
 
-<!-- ============ HERO ============ -->
-<section class="split hero" data-s="50" style="--s:50%" aria-label="Introduction">
-  <h1 class="vh">Amey Joshi</h1>
-  <div class="l h-nav"><a class="mark" href="./" aria-label="Amey Joshi, home">AJ</a></div>
-  <nav class="r h-nav" aria-label="Main">
-    <a class="opt" href="#rails">Rails</a>
-    <a class="opt" href="#cutover">Cutover</a>
-    <a class="opt" href="#after">Projects</a>
-    <a href="#contact">Contact</a>
-  </nav>
-
-  <div class="l h-top">
-    <p class="side">What people say</p>
-    <ul class="chatter" aria-label="Things people say in meetings">
-      <li style="--t:-5deg;--y:6px;--z:9;--d:1">“can we just…”</li>
-      <li style="--t:3deg;--y:-4px;--z:2;--d:3">“same as last time, but different”</li>
-      <li style="--t:-2deg;--y:5px;--z:13;--d:5">“it worked yesterday”</li>
-      <li style="--t:6deg;--y:-6px;--z:4;--d:2">“by Friday?”</li>
-      <li style="--t:-4deg;--y:4px;--z:7;--d:4">“the vendor says no”</li>
-      <li style="--t:2deg;--y:-5px;--z:0;--d:6">“it’s only a small change”</li>
-    </ul>
+<section class="hero" id="top">
+  <div class="wrap">
+    <p class="tag">Business analyst · Banking and payments</p>
+    <h1>You see a payment. <em>I see everything inside it.</em></h1>
+    <p class="lead">A finger on a shop terminal looks like one moment. Underneath, it’s a chain of systems that all have to agree. I’m Amey Joshi, and at Fino Payments Bank in Navi Mumbai my job is making sure they do.</p>
+    <p class="hint"><i></i><span class="mouse-only">Move the light to look inside. Scroll to go in.</span><span class="touch-only">Drag a finger to look inside. Scroll to go in.</span></p>
   </div>
-  <div class="r h-top">
-    <p class="side">What gets built</p>
-    <ol class="ordered">
-      <li><b>01</b>Requirements nobody has to guess at</li>
-      <li><b>02</b>System boundaries, mapped</li>
-      <li><b>03</b>Acceptance that can be tested</li>
-      <li><b>04</b>Release decisions, coordinated</li>
+</section>
+
+<section id="requirement">
+  <div class="wrap">
+    <p class="tag">Inside a requirement</p>
+    <h2>One sentence in. <em>Five changes of state.</em></h2>
+    <p class="lead">An example: letting a customer withdraw cash with a fingerprint at an agent’s shop. What someone says, and what it has to become.</p>
+    <ol class="grid">
+      <li class="glass reveal"><h3><span class="num">1</span>Intent</h3><p class="said">“Customers should be able to take out cash with just their fingerprint.”</p><p>One sentence everyone agrees on. Who the customer is, what they get, and what counts as done.</p></li>
+      <li class="glass reveal"><h3><span class="num">2</span>Constraints</h3><p class="said">“Should be simple. The device is already there.”</p><p>The fingerprint has to be verified by UIDAI. The agent’s device, the acquiring bank, NPCI and the customer’s own bank each have their own rules and time-outs. Every boundary gets mapped first.</p></li>
+      <li class="glass reveal"><h3><span class="num">3</span>Specification</h3><p class="said">“Just tell the developers what to build.”</p><p>Who sends what to whom, in what order, and what happens when a leg fails. Written so business, engineering and the vendor all read it the same way.</p></li>
+      <li class="glass reveal"><h3><span class="num">4</span>Acceptance</h3><p class="said">“It worked in the demo.”</p><p>Test cases for the clean path and the ugly ones: a fingerprint that doesn’t match, a time-out after the account is debited, the same request sent twice.</p></li>
+      <li class="glass reveal"><h3><span class="num">5</span>Production</h3><p class="said">“So we’re live on Friday?”</p><p>Sign-offs, a release note, and a way back if it goes wrong. Then watching the first real transactions go through.</p></li>
     </ol>
   </div>
-
-  <div class="l h-wire" aria-hidden="true"><svg viewBox="0 0 600 90" preserveAspectRatio="none"><path d="M0 60 C40 10,80 80,60 40 S20 20,110 30 S170 85,150 50 S120 10,210 25 S290 90,260 55 S230 15,330 30 S400 80,380 48 S360 20,450 40 S520 70,540 45 S570 45,600 45"/></svg></div>
-  <div class="r h-wire" aria-hidden="true"><svg viewBox="0 0 600 90" preserveAspectRatio="none"><path class="base" d="M0 45 H600"/><path class="flow" d="M0 45 H600"/></svg></div>
-
-  <div class="l h-name" aria-hidden="true"><span>Amey</span></div>
-  <div class="r h-name" id="seam0" aria-hidden="true"><span>Joshi</span></div>
-
-  <div class="l h-bot"><p class="big">Complexity in.</p></div>
-  <div class="r h-bot">
-    <p class="big">Clarity out.</p>
-    <p class="lede">I’m a business analyst in banking and payments, at Fino Payments Bank in Navi Mumbai. My work happens on the line down the middle of this page: people on one side, systems on the other.</p>
-  </div>
 </section>
 
-<div class="band" style="--a:50%;--b:42%"></div>
-
-<!-- ============ TRANSLATION ============ -->
-<section class="split" id="translation" data-s="42" style="--s:42%" aria-labelledby="t-h">
-  <div class="l top"><p class="side">Said</p><h2 id="t-h">One requirement.</h2></div>
-  <div class="r top"><p class="side">Built</p><p class="h">Five changes of state.</p><p class="note">An example: letting a customer withdraw cash with a fingerprint at an agent’s shop.</p></div>
-
-  <div class="l row"><p class="said">“Customers should be able to take out cash with just their fingerprint.”</p></div>
-  <div class="r row"><h3><span class="n">1</span>Intent</h3><p>One sentence everyone agrees on. Who the customer is, what they get, and what counts as done.</p></div>
-
-  <div class="l row"><p class="said">“Should be simple. The device is already there.”</p></div>
-  <div class="r row"><h3><span class="n">2</span>Constraints</h3><p>The fingerprint has to be verified by UIDAI. The agent’s device, the acquiring bank, NPCI and the customer’s own bank each have their own rules and time-outs. Every boundary gets mapped before anyone writes code.</p></div>
-
-  <div class="l row"><p class="said">“Just tell the developers what to build.”</p></div>
-  <div class="r row"><h3><span class="n">3</span>Specification</h3><p>Who sends what to whom, in what order, and what happens when a leg fails. Written so business, engineering and the vendor all read it the same way.</p></div>
-
-  <div class="l row"><p class="said">“It worked in the demo.”</p></div>
-  <div class="r row"><h3><span class="n">4</span>Acceptance</h3><p>Test cases for the clean path and the ugly ones: a fingerprint that doesn’t match, a time-out after the account is debited, the same request sent twice.</p></div>
-
-  <div class="l row bot"><p class="said">“So we’re live on Friday?”</p></div>
-  <div class="r row bot"><h3><span class="n">5</span>Production</h3><p>Sign-offs, a release note, and a way back if it goes wrong. Then watching the first real transactions go through.</p></div>
-</section>
-
-<div class="band" style="--a:42%;--b:56%"></div>
-
-<!-- ============ RAILS ============ -->
-<section class="split" id="rails" data-s="56" style="--s:56%" aria-labelledby="r-h">
-  <div class="l top">
-    <p class="side">The customer sees</p>
-    <h2 id="r-h">A result.</h2>
+<section id="rails">
+  <div class="wrap">
+    <p class="tag">Inside a payment</p>
+    <h2>The customer sees a result. The system sees <em>every leg.</em></h2>
     <div class="pick" role="group" aria-label="Choose a payment rail">
       <button type="button" data-pick="dmt" aria-pressed="true">Money transfer</button>
       <button type="button" data-pick="aeps" aria-pressed="false">AePS</button>
       <button type="button" data-pick="matm" aria-pressed="false">Micro-ATM</button>
     </div>
-    <ol class="sees" data-rail="dmt">
-      <li>Hands cash to the agent.</li>
-      <li>Gives the account number back home.</li>
-      <li>Gets a confirmation. The family gets the money.</li>
-    </ol>
-    <ol class="sees" data-rail="aeps" hidden>
-      <li>Gives an Aadhaar number and a bank name.</li>
-      <li>Puts a finger on the scanner.</li>
-      <li>Takes the cash and a receipt.</li>
-    </ol>
-    <ol class="sees" data-rail="matm" hidden>
-      <li>Hands over a debit card.</li>
-      <li>Types a PIN.</li>
-      <li>Takes the cash and a receipt.</li>
-    </ol>
-  </div>
-  <div class="r top">
-    <p class="side">The system sees</p>
-    <p class="h">Every leg.</p>
-    <div class="legwrap" aria-live="polite">
-      <ol class="legs go" data-rail="dmt">
-        <li style="--i:0"><span><b>Agent app</b> takes the sender, the beneficiary and the amount.</span></li>
-        <li style="--i:1"><span><b>Checks</b> on the sender’s KYC and transfer limits.</span></li>
-        <li style="--i:2"><span><b>Cash-in</b> is booked against the agent at the bank.</span></li>
-        <li style="--i:3"><span><b>IMPS request</b> leaves the bank for NPCI.</span></li>
-        <li style="--i:4"><span><b>NPCI</b> switches it to the beneficiary’s bank.</span></li>
-        <li style="--i:5"><span><b>Beneficiary bank</b> credits the account and answers.</span></li>
-        <li style="--i:6"><span><b>Confirmation</b> travels back to the agent and the customer.</span></li>
-        <li style="--i:7"><span><b>Settlement and reconciliation</b> close it out, including the ones that timed out.</span></li>
-      </ol>
-      <ol class="legs" data-rail="aeps" hidden>
-        <li style="--i:0"><span><b>Agent’s device</b> captures Aadhaar number, bank, amount and the fingerprint.</span></li>
-        <li style="--i:1"><span><b>Acquiring bank’s switch</b> builds the request.</span></li>
-        <li style="--i:2"><span><b>NPCI</b> receives it and routes it.</span></li>
-        <li style="--i:3"><span><b>UIDAI</b> authenticates the fingerprint.</span></li>
-        <li style="--i:4"><span><b>Customer’s bank</b> checks the balance and debits the account.</span></li>
-        <li style="--i:5"><span><b>Response</b> returns along the same path.</span></li>
-        <li style="--i:6"><span><b>Agent</b> pays out the cash.</span></li>
-        <li style="--i:7"><span><b>Settlement</b> between the banks, and a reversal when a response is lost after the debit.</span></li>
-      </ol>
-      <ol class="legs" data-rail="matm" hidden>
-        <li style="--i:0"><span><b>Micro-ATM</b> reads the card and takes the PIN, encrypted at the device.</span></li>
-        <li style="--i:1"><span><b>Acquiring bank’s switch</b> builds the request.</span></li>
-        <li style="--i:2"><span><b>NPCI</b> routes it over the ATM network to the card’s bank.</span></li>
-        <li style="--i:3"><span><b>Issuing bank</b> checks the card and PIN and debits the account.</span></li>
-        <li style="--i:4"><span><b>Response</b> returns along the same path.</span></li>
-        <li style="--i:5"><span><b>Agent</b> pays out the cash.</span></li>
-        <li style="--i:6"><span><b>Settlement</b> between the banks. No UIDAI leg on this one.</span></li>
-      </ol>
-    </div>
-  </div>
-  <div class="route" id="route" aria-hidden="true"></div>
-</section>
-
-<div class="band" style="--a:56%;--b:86%"></div>
-
-<!-- ============ CUTOVER ============ -->
-<section class="cut" id="cutover" data-s="86" aria-labelledby="c-h">
-  <div class="cut-pin">
-    <div class="cut-layer old">
-      <div class="cut-in">
-        <div class="cut-ends"><span class="side">Old core · FIS</span><span class="side">New core · Finacle</span></div>
-        <div class="cut-mid"><h2 id="c-h">Replace the engine while it’s running.</h2>
-        <p class="cut-p">At Fino Payments Bank I worked on moving the bank’s core from FIS to Finacle. No maintenance window is big enough to take a live bank offline, so the bank kept running while its core was changed underneath it. Five tracks had to be ready. Then one decision.</p></div>
-        <ol class="trks">
-          <li class="trk" data-i="0">Business</li>
-          <li class="trk" data-i="1">Engineering</li>
-          <li class="trk" data-i="2">QA</li>
-          <li class="trk" data-i="3">Infrastructure</li>
-          <li class="trk" data-i="4">Vendors</li>
-          <li class="trk go" data-i="5">Release decision</li>
+    <div class="glass route reveal" id="route" aria-hidden="true"></div>
+    <div class="two" aria-live="polite">
+      <div class="glass reveal">
+        <h3>The customer sees</h3>
+        <ol class="sees" data-rail="dmt"><li>Hands cash to the agent.</li><li>Gives the account number back home.</li><li>Gets a confirmation. The family gets the money.</li></ol>
+        <ol class="sees" data-rail="aeps" hidden><li>Gives an Aadhaar number and a bank name.</li><li>Puts a finger on the scanner.</li><li>Takes the cash and a receipt.</li></ol>
+        <ol class="sees" data-rail="matm" hidden><li>Hands over a debit card.</li><li>Types a PIN.</li><li>Takes the cash and a receipt.</li></ol>
+      </div>
+      <div class="glass reveal">
+        <h3>The system sees</h3>
+        <ol class="legs" data-rail="dmt">
+          <li><span><b>Agent app</b> takes the sender, the beneficiary and the amount.</span></li>
+          <li><span><b>Checks</b> on the sender’s KYC and transfer limits.</span></li>
+          <li><span><b>Cash-in</b> is booked against the agent at the bank.</span></li>
+          <li><span><b>IMPS request</b> leaves the bank for NPCI.</span></li>
+          <li><span><b>NPCI</b> switches it to the beneficiary’s bank.</span></li>
+          <li><span><b>Beneficiary bank</b> credits the account and answers.</span></li>
+          <li><span><b>Confirmation</b> travels back to the agent and the customer.</span></li>
+          <li><span><b>Settlement and reconciliation</b> close it out, including the ones that timed out.</span></li>
+        </ol>
+        <ol class="legs" data-rail="aeps" hidden>
+          <li><span><b>Agent’s device</b> captures Aadhaar number, bank, amount and the fingerprint.</span></li>
+          <li><span><b>Acquiring bank’s switch</b> builds the request.</span></li>
+          <li><span><b>NPCI</b> receives it and routes it.</span></li>
+          <li><span><b>UIDAI</b> authenticates the fingerprint.</span></li>
+          <li><span><b>Customer’s bank</b> checks the balance and debits the account.</span></li>
+          <li><span><b>Response</b> returns along the same path.</span></li>
+          <li><span><b>Agent</b> pays out the cash.</span></li>
+          <li><span><b>Settlement</b> between the banks, and a reversal when a response is lost after the debit.</span></li>
+        </ol>
+        <ol class="legs" data-rail="matm" hidden>
+          <li><span><b>Micro-ATM</b> reads the card and takes the PIN, encrypted at the device.</span></li>
+          <li><span><b>Acquiring bank’s switch</b> builds the request.</span></li>
+          <li><span><b>NPCI</b> routes it over the ATM network to the card’s bank.</span></li>
+          <li><span><b>Issuing bank</b> checks the card and PIN and debits the account.</span></li>
+          <li><span><b>Response</b> returns along the same path.</span></li>
+          <li><span><b>Agent</b> pays out the cash.</span></li>
+          <li><span><b>Settlement</b> between the banks. No UIDAI leg on this one.</span></li>
         </ol>
       </div>
     </div>
   </div>
 </section>
 
-<div class="band" style="--a:14%;--b:38%"></div>
-
-<!-- ============ WHAT I KNOW ============ -->
-<section class="split" id="know" data-s="38" style="--s:38%" aria-labelledby="k-h">
-  <div class="l top"><p class="side">Area</p><h2 id="k-h">What I know,</h2></div>
-  <div class="r top"><p class="side">Depth</p><p class="h">deepest first.</p></div>
-
-  <div class="l row"><p class="area">Domestic money transfer</p></div>
-  <div class="r row"><p class="depth">Agent cash-in, the IMPS leg, NPCI switching, reconciliation.</p></div>
-  <div class="l row"><p class="area">AePS</p></div>
-  <div class="r row"><p class="depth">UIDAI authentication, the hop from acquirer to NPCI to issuer, what happens when a biometric fails, settlement.</p></div>
-  <div class="l row"><p class="area">Cards and EMV</p></div>
-  <div class="r row"><p class="depth">Contactless, NCMC, EMV 3DS, PIN encryption.</p></div>
-  <div class="l row"><p class="area">UPI, NACH, POS, micro-ATM</p></div>
-  <div class="r row"><p class="depth">The other rails a payments bank runs on, and how they route and settle.</p></div>
-  <div class="l row"><p class="area">Core banking</p></div>
-  <div class="r row"><p class="depth">FIS, Finacle, TCS BaNCS.</p></div>
-  <div class="l row bot"><p class="area">Delivery governance</p></div>
-  <div class="r row bot"><p class="depth">BRD and FRD, UAT governance, release management, vendors.</p></div>
-</section>
-
-<div class="band" style="--a:38%;--b:60%"></div>
-
-<!-- ============ BY DAY / AFTER HOURS ============ -->
-<section class="split" id="after" data-s="60" style="--s:60%" aria-labelledby="a-h">
-  <div class="l top bot">
-    <p class="side">By day</p>
-    <h2 id="a-h">The bank.</h2>
-    <p class="prose">Since January 2025 I’ve been at Fino Payments Bank. After the core migration, the work has been AePS, domestic money transfer, eKYC, micro-ATM certification, EMV 3DS, and contactless and NCMC cards.</p>
-    <p class="prose">Before that, IDFC FIRST Bank, in wealth management technology: NRI-PIS, ASBA, Demat and API integrations.</p>
-    <ul class="kit" aria-label="Everyday tools" style="justify-content:flex-end">
-      <li>Excel</li><li>Jira</li><li>Postman</li><li>REST APIs</li><li>SQL</li>
-    </ul>
-  </div>
-  <div class="r top bot">
-    <p class="side">After hours</p>
-    <p class="h">My own builds.</p>
-    <article class="proj">
-      <h3>RegLens AI</h3>
-      <p><span class="chip">In development</span></p>
-      <p>Reads regulatory circulars and answers questions about them in plain language, then maps which systems and processes each new change touches. Every answer retrieves from the source document, so it traces back to the text it came from.</p>
-      <p class="stack">FastAPI · Ollama · PostgreSQL</p>
-    </article>
-    <article class="proj">
-      <h3>Node Factory</h3>
-      <p><span class="chip">Not launched yet</span></p>
-      <p>Ready-made n8n automation workflows for small businesses. The workflows are built. The shop isn’t open.</p>
-      <p class="stack">n8n</p>
-    </article>
+<section class="cut" id="cutover" aria-labelledby="c-h">
+  <div class="cut-pin">
+    <div class="wrap">
+      <p class="tag">Inside a bank</p>
+      <h2 id="c-h">Replace the engine while it’s <em>running.</em></h2>
+      <div class="glass">
+        <p>At Fino Payments Bank I worked on moving the bank’s core from FIS to Finacle. No maintenance window is big enough to take a live bank offline, so the bank kept running while its core was changed underneath it.</p>
+        <ul class="trks" aria-label="Five tracks that had to be ready"><li>Business</li><li>Engineering</li><li>QA</li><li>Infrastructure</li><li>Vendors</li></ul>
+        <p class="go">Then one release decision.</p>
+      </div>
+    </div>
+    <div class="cores" aria-hidden="true">
+      <span id="core-new" style="opacity:0"><small>New core</small>Finacle</span>
+      <span id="core-old" style="text-align:right"><small>Old core</small>FIS</span>
+    </div>
   </div>
 </section>
 
-<div class="band open" style="--a:60%"></div>
+<section id="know">
+  <div class="wrap">
+    <p class="tag">What I can see into</p>
+    <h2>What I know, <em>deepest first.</em></h2>
+    <ol class="grid know">
+      <li class="glass reveal"><b>Domestic money transfer</b>Agent cash-in, the IMPS leg, NPCI switching, reconciliation.</li>
+      <li class="glass reveal"><b>AePS</b>UIDAI authentication, the hop from acquirer to NPCI to issuer, what happens when a biometric fails, settlement.</li>
+      <li class="glass reveal"><b>Cards and EMV</b>Contactless, NCMC, EMV 3DS, PIN encryption.</li>
+      <li class="glass reveal"><b>UPI, NACH, POS, micro-ATM</b>The other rails a payments bank runs on, and how they route and settle.</li>
+      <li class="glass reveal"><b>Core banking</b>FIS, Finacle, TCS BaNCS.</li>
+      <li class="glass reveal"><b>Delivery governance</b>BRD and FRD, UAT governance, release management, vendors.</li>
+    </ol>
+  </div>
+</section>
+
+<section id="builds">
+  <div class="wrap">
+    <p class="tag">After hours</p>
+    <h2>By day, the bank. At night, <em>my own builds.</em></h2>
+    <p class="lead">Since January 2025 the day job has been AePS, money transfer, eKYC, micro-ATM certification, EMV 3DS, and contactless and NCMC cards at Fino. Before that, wealth management technology at IDFC FIRST Bank: NRI-PIS, ASBA, Demat and API integrations.</p>
+    <div class="grid">
+      <article class="glass reveal">
+        <h3>RegLens AI <span class="chip">In development</span></h3>
+        <p>Reads regulatory circulars and answers questions about them in plain language, then maps which systems and processes each new change touches. Every answer retrieves from the source document, so it traces back to the text it came from.</p>
+        <p class="stack">FastAPI · Ollama · PostgreSQL</p>
+      </article>
+      <article class="glass reveal">
+        <h3>Node Factory <span class="chip">Not launched yet</span></h3>
+        <p>Ready-made n8n automation workflows for small businesses. The workflows are built. The shop isn’t open.</p>
+        <p class="stack">n8n</p>
+      </article>
+    </div>
+    <ul class="kit" aria-label="Everyday tools"><li>Excel</li><li>Jira</li><li>Postman</li><li>REST APIs</li><li>SQL</li></ul>
+  </div>
+</section>
+
+<section class="end" id="contact">
+  <div class="wrap">
+    <p class="tag">Back at the counter</p>
+    <h2>Bring me the <em>complicated</em> version.</h2>
+    <p class="lead">From out here it’s just a payment again. If you have something with too many systems, too many teams and no clear owner, I’d like to look inside it.</p>
+    <div class="glass ways">
+      <a href="mailto:ameyjoshi1881@gmail.com">ameyjoshi1881@gmail.com</a>
+      <a href="https://www.linkedin.com/in/ameyjoshi180696" rel="noopener">LinkedIn</a>
+    </div>
+    <p class="foot">Amey Joshi · Navi Mumbai · 2026</p>
+  </div>
+</section>
+
 </main>
-
-<!-- ============ CONTACT ============ -->
-<footer class="end" id="contact">
-  <h2>Bring me the complicated version.</h2>
-  <p>If something has too many systems, too many teams and no clear owner, I’d like to hear about it.</p>
-  <div class="ways">
-    <a href="mailto:ameyjoshi1881@gmail.com">ameyjoshi1881@gmail.com</a>
-    <a href="https://www.linkedin.com/in/ameyjoshi180696" rel="noopener">LinkedIn</a>
-  </div>
-  <small>Amey Joshi · Navi Mumbai · 2026</small>
-</footer>
-
 <script src="js/site.js" defer></script>
 </body>
 </html>
